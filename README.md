@@ -1,6 +1,6 @@
 # rcaap-dspace-additions
 
-Este projeto trata-se de todos os incrementos necessários a tornar um DSpace num SARI.
+Este projeto consiste nos incrementos necessários a tornar um DSpace num SARI.
 
 ## ANTES DA MIGRAÇÃO - Curadoria prévia na migração DSpace5++ - DSpace7++
 
