@@ -70,7 +70,6 @@ null,
 INSERT INTO "resourcepolicy" ( "policy_id", "resource_type_id", "resource_id", "action_id", "epersongroup_id") 
 VALUES ( nextval('resourcepolicy_seq'), 4, currval('community_seq'), 0, 0 );
 
-
 -- CRIAR HANDLE
 INSERT INTO "public"."handle" ( "handle_id", "handle", "resource_type_id", "resource_id") 
 VALUES ( nextval('handle_seq'), (select substring(handle from 0 for position('/' in handle)) from handle order by handle_id DESC limit 1) || '/' || currval('handle_seq'), 4, currval('community_seq') );
@@ -102,6 +101,9 @@ VALUES ( nextval('resourcepolicy_seq'), 3, currval('collection_seq'), 0, 0 );
 -- action_id = 10 is DEFAULT ITEM READ
 INSERT INTO "resourcepolicy" ( "policy_id", "resource_type_id", "resource_id", "action_id", "epersongroup_id") 
 VALUES ( nextval('resourcepolicy_seq'), 3, currval('collection_seq'), 10, 0 );
+-- action_id = 9 is DEFAULT BITSTREAM READ
+INSERT INTO "resourcepolicy" ( "policy_id", "resource_type_id", "resource_id", "action_id", "epersongroup_id") 
+VALUES ( nextval('resourcepolicy_seq'), 3, currval('collection_seq'), 9, 0 );
 
 -- CRIAR HANDLE
 INSERT INTO "public"."handle" ( "handle_id", "handle", "resource_type_id", "resource_id") 
