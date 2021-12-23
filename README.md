@@ -20,3 +20,31 @@ Por inconsistencias, poderá existir duplicação de `item_id` para o workspacei
 ```
 select item_id, count (*) from workspaceitem group by item_id having count(*)>1;
 ```
+
+# Configuração
+
+## Configuraração Ciência Vitae
+Será necessário adicionar as seguintes configurações ao local.cfg para suporte da API do CV:
+```
+# cienciavitae api
+cienciavitae.url = https://qa.cienciavitae.pt
+
+cienciavitae.api.url = ${cienciavitae.url}/api/v1.1
+cienciavitae.api.username = USER
+cienciavitae.api.password = PASS
+```
+
+O ficheiro pom.xml dos additions deve adicionar (já está incluido no source) como dependência a biblioteca (na versão correta):
+```
+<dependencies>
+....
+      <dependency>
+      	<groupId>pt.rcaap</groupId>
+      	<artifactId>cienciavitae.model</artifactId>
+      	<version>0.0.1-SNAPSHOT</version>
+      </dependency>
+....
+   </dependencies>
+```
+
+O ficheiro spring com a configuração do external source CienciaVitae: `src/main/resources/spring/external-cienciavitae.xml` deve ser copiado para: `[DSPACE]/config/spring/api`
