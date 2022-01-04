@@ -125,7 +125,7 @@ public class CienciaVitaeCurriculumDataProvider extends AbstractExternalDataProv
             SearchRestClient searchPerson = new SearchRestClient(connector);
             try {
                 // search person by id (first row)
-                Search result = searchPerson.searchPerson(id, true, null, 1, 1, 0, null);
+                Search result = searchPerson.searchPerson(id, false, null, 0, 0, 1, null);
 
                 if (result == null && result.getTotal() > 0) {
                     return Optional.empty();

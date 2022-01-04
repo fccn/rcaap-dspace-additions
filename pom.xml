@@ -299,9 +299,9 @@
          <scope>test</scope>
       </dependency>
       <dependency>
-      	<groupId>pt.rcaap</groupId>
-		<artifactId>cienciavitae.model</artifactId>
-		<version>1.0.0</version>
+         <groupId>pt.rcaap</groupId>
+         <artifactId>cienciavitae.model</artifactId>
+         <version>1.0.0</version>
       </dependency>
    </dependencies>
 
