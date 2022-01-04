@@ -1,5 +1,4 @@
 -- . Adicionar o suporte do campo "relation.isAuthorOfPublication" schema e "relation.isPublicationOfAuthor"
--- . Adicionar o suporte do campo "dspace.entity.type" schema: dspace http://dspace.org/dspace
 -- . Iremos ignorar os bitstreams do authorprofile
 -- Para cada registo de authorprofile
 -- . adicionar um nova metadata "dspace.entity.type = Person"
@@ -15,9 +14,6 @@ BEGIN;
 
 -- Criar schema para relacoes "relation.isAuthorOfPublication" e "relation.isPublicationOfAuthor"
 
-INSERT INTO "metadataschemaregistry" ( "metadata_schema_id", "namespace", "short_id") 
-VALUES (nextval('metadataschemaregistry_seq'), 'http://dspace.org/relation', 'relation' );
-
 INSERT INTO "metadatafieldregistry" ( "metadata_field_id","metadata_schema_id", "element") 
 VALUES (nextval('metadatafieldregistry_seq'), (SELECT metadata_schema_id FROM "metadataschemaregistry" WHERE "short_id" = 'relation'), 'isAuthorOfPublication');
 
@@ -30,20 +26,21 @@ COMMIT;
 
 BEGIN;
 
-INSERT INTO "metadataschemaregistry" ( "metadata_schema_id", "namespace", "short_id") 
-VALUES (nextval('metadataschemaregistry_seq'), 'http://dspace.org/dspace', 'dspace' );
-
-
-INSERT INTO "metadatafieldregistry" ( "metadata_field_id","metadata_schema_id", "element", "qualifier") 
-VALUES (nextval('metadatafieldregistry_seq'), (SELECT metadata_schema_id FROM "metadataschemaregistry" WHERE "short_id" = 'dspace'), 'entity', 'type' );
-
-
-INSERT INTO "metadatavalue" ( "metadata_value_id","resource_id", "metadata_field_id", "text_value", "resource_type_id") 
+-- Create dspace.entity.type = Person for every authorprofile
+INSERT INTO "metadatavalue" ( "resource_id", "metadata_field_id", "text_value", "resource_type_id") 
 SELECT
-	nextval('metadatavalue_seq') as "metadata_value_id",
 	authorprofile.authorprofile_id as "resource_id",
-	(select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'dspace') and metadatafieldregistry.element = 'entity' and metadatafieldregistry.qualifier = 'type') as "metadata_field_id",
+	(select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM metadataschemaregistry as mr WHERE "short_id" = 'dspace') and metadatafieldregistry.element = 'entity' and metadatafieldregistry.qualifier = 'type') as "metadata_field_id",
 	'Person' as "text_value",
+	8 as "resource_type_id"
+from authorprofile;
+
+-- Create dc.description.provenance for every authorprofile
+INSERT INTO "metadatavalue" ( "resource_id", "metadata_field_id", "text_value", "resource_type_id") 
+SELECT
+	authorprofile.authorprofile_id as "resource_id",
+	(select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM metadataschemaregistry as mr WHERE "short_id" = 'dc') and metadatafieldregistry.element = 'description' and metadatafieldregistry.qualifier = 'provenance') as "metadata_field_id",
+	'Person entity created from AuthorProfile uuid:'|| uuid ||' by RCAAP for DS7 migration at:'|| NOW()::timestamp as "text_value",
 	8 as "resource_type_id"
 from authorprofile;
 
@@ -51,29 +48,6 @@ COMMIT;
 
 
 BEGIN;
-
--- #### COMMUNITY ######
--- criar comunidade para Entidades
-INSERT INTO "community" ( "community_id") 
-VALUES ( nextval('community_seq') );
--- Criar metadatos da comunidade
-INSERT INTO metadatavalue (resource_id, resource_type_id, metadata_field_id, text_value, text_lang, place)
-values ( currval('community_seq'), 
- 4,
-(select metadata_field_id from metadatafieldregistry where metadata_schema_id=(select metadata_schema_id from metadataschemaregistry where short_id='dc') and element = 'title' and qualifier is null),
-'Entidades', 
-null, 
-0);
-
-
--- action_id = 0 is READ
-INSERT INTO "resourcepolicy" ( "policy_id", "resource_type_id", "resource_id", "action_id", "epersongroup_id") 
-VALUES ( nextval('resourcepolicy_seq'), 4, currval('community_seq'), 0, 0 );
-
--- CRIAR HANDLE
-INSERT INTO "public"."handle" ( "handle_id", "handle", "resource_type_id", "resource_id") 
-VALUES ( nextval('handle_seq'), (select substring(handle from 0 for position('/' in handle)) from handle order by handle_id DESC limit 1) || '/' || currval('handle_seq'), 4, currval('community_seq') );
-
 
 -- #### COLLECTION ######
 -- criar coleção para pessoas
@@ -87,13 +61,20 @@ values ( currval('collection_seq'), 3,
 'Pessoas', null, 0);
 INSERT INTO metadatavalue (resource_id, resource_type_id, metadata_field_id, text_value, text_lang, place)
 values ( currval('collection_seq'), 3,
-(select metadata_field_id from "metadatafieldregistry" WHERE metadata_schema_id = (SELECT metadata_schema_id FROM "metadataschemaregistry" WHERE "short_id" = 'dspace') and element = 'entity' and qualifier = 'type'),
+(select metadata_field_id from "metadatafieldregistry" WHERE metadata_schema_id = (SELECT metadata_schema_id FROM metadataschemaregistry WHERE "short_id" = 'dspace') and element = 'entity' and qualifier = 'type'),
 'Person', null, 0);
-
+INSERT INTO metadatavalue (resource_id, resource_type_id, metadata_field_id, text_value, text_lang, place)
+values ( currval('collection_seq'), 3,
+(select metadata_field_id from "metadatafieldregistry" WHERE metadata_schema_id = (SELECT metadata_schema_id FROM metadataschemaregistry WHERE "short_id" = 'dc') and element = 'description' and qualifier = 'provenance'),
+'Person Collection created by RCAAP for DS7 migration at ' || NOW()::timestamp, null, 0);
 
 -- relação coleção-comunidade
 INSERT INTO "community2collection" ( "id", "community_id", "collection_id") 
-VALUES ( nextval('community2collection_seq'), currval('community_seq'), currval('collection_seq') );
+VALUES ( 
+  nextval('community2collection_seq'), 
+  ( SELECT resource_id from metadatavalue 
+    WHERE metadata_field_id IN (select metadata_field_id from metadatafieldregistry where metadata_schema_id=(select metadata_schema_id from metadataschemaregistry where short_id='dc') and element = 'description' and qualifier = 'provenance') AND text_value LIKE 'Community created by RCAAP for entities migration%'),
+  currval('collection_seq') );
 
 -- action_id = 0 is READ
 INSERT INTO "resourcepolicy" ( "policy_id", "resource_type_id", "resource_id", "action_id", "epersongroup_id") 
@@ -106,7 +87,7 @@ INSERT INTO "resourcepolicy" ( "policy_id", "resource_type_id", "resource_id", "
 VALUES ( nextval('resourcepolicy_seq'), 3, currval('collection_seq'), 9, 0 );
 
 -- CRIAR HANDLE
-INSERT INTO "public"."handle" ( "handle_id", "handle", "resource_type_id", "resource_id") 
+INSERT INTO "handle" ( "handle_id", "handle", "resource_type_id", "resource_id") 
 VALUES ( nextval('handle_seq'), (select substring(handle from 0 for position('/' in handle)) from handle order by handle_id DESC limit 1) || '/' || currval('handle_seq'), 3, currval('collection_seq') );
 
 -- #### ITEM ######
@@ -147,7 +128,7 @@ SELECT
 FROM authorprofile;
 
 -- CRIAR HANDLE
-INSERT INTO "public"."handle" ( "handle_id", "handle", "resource_type_id", "resource_id")
+INSERT INTO "handle" ( "handle_id", "handle", "resource_type_id", "resource_id")
 SELECT
 	nextval('handle_seq') as "handle_id",
 	(select substring(handle from 0 for position('/' in handle)) from handle order by handle_id DESC limit 1) || '/' || currval('handle_seq') as "handle",
@@ -201,19 +182,6 @@ FROM metadatavalue as mv inner join authorprofile as ap on ap.uuid = authority;
 
 COMMIT;
 
-BEGIN;
--- adicionar tipo de entidade publicação
-INSERT INTO "metadatavalue" ( "metadata_value_id","resource_id", "metadata_field_id", "text_value", "resource_type_id") 
-SELECT
-	nextval('metadatavalue_seq') as "metadata_value_id",
-	item_id as "resource_id",
-	(select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'dspace') and metadatafieldregistry.element = 'entity' and metadatafieldregistry.qualifier = 'type') as "metadata_field_id",
-	'Publication' as "text_value",
-	2 as "resource_type_id"
-FROM author_relationship
-GROUP BY item_id;
-
-COMMIT;
 
 BEGIN;
 DELETE FROM "metadatavalue" WHERE "metadata_value_id" IN (SELECT "metadata_value_id" FROM "author_relationship");

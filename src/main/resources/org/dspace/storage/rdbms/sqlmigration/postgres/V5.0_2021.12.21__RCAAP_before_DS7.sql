@@ -88,9 +88,6 @@ COMMIT;
 
 BEGIN;
 
-INSERT INTO "metadataschemaregistry" ( "metadata_schema_id", "namespace", "short_id") 
-VALUES (nextval('metadataschemaregistry_seq'), 'http://namespace.openaire.eu/schema/oaire/', 'oaire' );
-
 INSERT INTO "metadatafieldregistry" ( "metadata_field_id","metadata_schema_id", "element", "qualifier") 
 VALUES (nextval('metadatafieldregistry_seq'), (SELECT metadata_schema_id FROM "metadataschemaregistry" WHERE "short_id" = 'oaire'), 'citation', 'startPage' );
 
