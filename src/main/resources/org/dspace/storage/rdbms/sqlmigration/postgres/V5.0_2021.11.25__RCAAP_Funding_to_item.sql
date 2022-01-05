@@ -199,6 +199,28 @@ SELECT
 	1 as "place"
 FROM temp_funding;
 
+-- Add metadatavalues dc.title
+INSERT INTO metadatavalue (resource_id, resource_type_id, metadata_field_id, text_value, place)
+SELECT
+  item_id as "resource_id",
+  2 as "resource_type_id",
+  (select metadata_field_id from "metadatafieldregistry" WHERE metadata_schema_id = (SELECT metadata_schema_id FROM metadataschemaregistry WHERE "short_id" = 'dc') and element = 'title' and qualifier IS NULL) as "metadata_field_id",
+  temp_openaire.title as "text_value",
+  1 as "place"
+FROM temp_funding INNER JOIN temp_openaire ON temp_funding.uri = temp_openaire.uri
+WHERE temp_openaire.title IS NOT NULL;
+
+-- Add metadatavalues dc.title
+INSERT INTO metadatavalue (resource_id, resource_type_id, metadata_field_id, text_value, place)
+SELECT
+  item_id as "resource_id",
+  2 as "resource_type_id",
+  (select metadata_field_id from "metadatafieldregistry" WHERE metadata_schema_id = (SELECT metadata_schema_id FROM metadataschemaregistry WHERE "short_id" = 'dc') and element = 'title' and qualifier = 'alternative') as "metadata_field_id",
+  temp_openaire.acronym as "text_value",
+  1 as "place"
+FROM temp_funding INNER JOIN temp_openaire ON temp_funding.uri = temp_openaire.uri
+WHERE temp_openaire.acronym IS NOT NULL;
+
 -- Add metadatavalues dc.identifier.uri
 INSERT INTO metadatavalue (resource_id, resource_type_id, metadata_field_id, text_value, place)
 SELECT
@@ -301,4 +323,10 @@ COMMIT;
 -- apagar metadados dos projetos
 BEGIN;
 DELETE FROM "metadatavalue" WHERE "metadata_value_id" IN (SELECT "metadata_value_id" FROM "temp_funding");
+COMMIT;
+
+
+-- apagar a tabela temporaria do openaire com os projetos
+BEGIN;
+DROP TABLE IF EXISTS "temp_openaire" CASCADE;
 COMMIT;
