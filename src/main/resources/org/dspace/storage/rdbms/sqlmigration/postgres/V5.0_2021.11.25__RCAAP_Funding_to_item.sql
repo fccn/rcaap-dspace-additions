@@ -229,7 +229,8 @@ SELECT
   (select metadata_field_id from "metadatafieldregistry" WHERE metadata_schema_id = (SELECT metadata_schema_id FROM metadataschemaregistry WHERE "short_id" = 'dc') and element = 'identifier' and qualifier = 'uri') as "metadata_field_id",
   uri as "text_value",
   1 as "place"
-FROM temp_funding;
+FROM temp_funding
+WHERE uri IS NOT NULL;
 
 -- Add metadatavalues project.funder.name
 INSERT INTO metadatavalue (resource_id, resource_type_id, metadata_field_id, text_value, place)
@@ -239,7 +240,8 @@ SELECT
   (select metadata_field_id from "metadatafieldregistry" WHERE metadata_schema_id = (SELECT metadata_schema_id FROM metadataschemaregistry WHERE "short_id" = 'project') and element = 'funder' and qualifier = 'name') as "metadata_field_id",
   funder_name as "text_value",
   1 as "place"
-FROM temp_funding;
+FROM temp_funding
+WHERE funder_name IS NOT NULL;
 
 -- Add metadatavalues project.funder.identifier
 INSERT INTO metadatavalue (resource_id, resource_type_id, metadata_field_id, text_value, place)
@@ -260,7 +262,8 @@ SELECT
   (select metadata_field_id from "metadatafieldregistry" WHERE metadata_schema_id = (SELECT metadata_schema_id FROM metadataschemaregistry WHERE "short_id" = 'oaire') and element = 'awardNumber' and qualifier IS NULL) as "metadata_field_id",
   projectid as "text_value",
   1 as "place"
-FROM temp_funding;
+FROM temp_funding
+WHERE projectid IS NOT NULL;
  
 -- Add metadatavalues oaire.fundingStream
 INSERT INTO metadatavalue (resource_id, resource_type_id, metadata_field_id, text_value, place)
@@ -270,7 +273,8 @@ SELECT
   (select metadata_field_id from "metadatafieldregistry" WHERE metadata_schema_id = (SELECT metadata_schema_id FROM metadataschemaregistry WHERE "short_id" = 'oaire') and element = 'fundingStream' and qualifier IS NULL) as "metadata_field_id",
   fundingprogramme as "text_value",
   1 as "place"
-FROM temp_funding;
+FROM temp_funding
+WHERE fundingprogramme IS NOT NULL;
 
 -- Add metadatavalues dc.description.provenance
 INSERT INTO "metadatavalue" ( resource_id, metadata_field_id, text_value, resource_type_id, place) 
@@ -282,15 +286,9 @@ SELECT
 	1 as "place"
 FROM temp_funding;
 
-COMMIT;
-
 -- #### RELATIONSHIPS ######
 
-BEGIN;
 CREATE SEQUENCE "project_relationship_seq";
-COMMIT;
-
-BEGIN;
 
 -- CREATE TABLE "project_relationship" --------------------------------
 CREATE TABLE "project_relationship" ( 
@@ -315,16 +313,12 @@ SELECT
 FROM temp_funding
 INNER JOIN metadatavalue ON temp_funding.uri = metadatavalue.text_value AND metadata_field_id IN (select metadata_field_id from metadatafieldregistry where metadata_schema_id=(select metadata_schema_id from metadataschemaregistry where short_id='dc') and element = 'relation');
 
--- -------------------------------------------------------------
-
 COMMIT;
 
-
--- apagar metadados dos projetos
 BEGIN;
-DELETE FROM "metadatavalue" WHERE "metadata_value_id" IN (SELECT "metadata_value_id" FROM "temp_funding");
+-- apagar metadados authority existentes dos projetos
+DELETE FROM "metadatavalue" WHERE "metadata_value_id" IN (SELECT "metadata_value_id" FROM "project_relationship");
 COMMIT;
-
 
 -- apagar a tabela temporaria do openaire com os projetos
 BEGIN;
