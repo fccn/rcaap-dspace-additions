@@ -52,8 +52,9 @@ BEGIN;
 -- #### COLLECTION ######
 -- criar coleção para pessoas
 
+-- Criar como administrador (1 é o epersongroup_id do administrador)
 INSERT INTO "collection" ( "collection_id", "submitter") 
-VALUES ( nextval('collection_seq'), (select eperson_id from eperson where eperson.email = 'rcaap@sdum.uminho.pt') );
+VALUES ( nextval('collection_seq'), 1 );
 -- Criar metadatos da colecção
 INSERT INTO metadatavalue (resource_id, resource_type_id, metadata_field_id, text_value, text_lang, place)
 values ( currval('collection_seq'), 3,
