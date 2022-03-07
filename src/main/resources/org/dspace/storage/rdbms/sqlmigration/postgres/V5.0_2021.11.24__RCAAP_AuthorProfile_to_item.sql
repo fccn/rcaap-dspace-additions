@@ -53,8 +53,8 @@ BEGIN;
 -- criar coleção para pessoas
 
 -- Criar como administrador (1 é o epersongroup_id do administrador)
-INSERT INTO "collection" ( "collection_id", "submitter") 
-VALUES ( nextval('collection_seq'), 1 );
+INSERT INTO "collection" ( "collection_id") 
+VALUES ( nextval('collection_seq') );
 -- Criar metadatos da colecção
 INSERT INTO metadatavalue (resource_id, resource_type_id, metadata_field_id, text_value, text_lang, place)
 values ( currval('collection_seq'), 3,
