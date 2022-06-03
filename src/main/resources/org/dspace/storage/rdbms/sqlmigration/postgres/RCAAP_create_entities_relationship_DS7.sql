@@ -43,7 +43,7 @@ COMMIT;
 -- FINANCIAMENTO
 
 BEGIN;
--- Criar as relações entre itens - excluindo repetições
+-- Criar as relações entre itens - excluindo repetições (pub -> project)
 INSERT INTO "relationship" ( "id","left_id", "right_id", "left_place", "right_place", "type_id") 
 SELECT 
 	nextval('relationship_id_seq') as "id",
@@ -66,7 +66,30 @@ INNER JOIN item as "item" on pr.item_id = item.item_id;
 COMMIT;
 
 
+-- ORGUNITS
 
+BEGIN;
+-- Criar as relações entre itens - excluindo repetições (Proj -> OrgUnit)
+INSERT INTO "relationship" ( "id","left_id", "right_id", "left_place", "right_place", "type_id") 
+SELECT 
+	nextval('relationship_id_seq') as "id",
+	project.uuid as "left_id", 
+	orgunit.uuid as "right_id", 
+	1 as "left_place",
+	0 as "right_place", 
+	(SELECT id FROM "relationship_type" where leftward_type = 'isFundingAgencyOfProject'
+		AND left_type = (select id from entity_type where label='Project') 
+		AND right_type = (select id from entity_type where label='OrgUnit')) as "type_id"
+FROM (
+	SELECT * FROM project_orgunit_relationship
+	WHERE project_orgunit_relationship_id IN
+		(SELECT MAX(project_orgunit_relationship_id)
+			FROM project_orgunit_relationship
+			GROUP BY org_unit_item_id, project_item_id)) AS pr
+INNER JOIN item as "project" on pr.project_item_id = project.item_id
+INNER JOIN item as "orgunit" on pr.org_unit_item_id = orgunit.item_id;
+
+COMMIT;
 
 
 -- apagar tabelas temporarias das relações
@@ -96,3 +119,20 @@ BEGIN;
 DROP SEQUENCE "project_relationship_seq" CASCADE;
 -- -------------------------------------------------------------
 COMMIT;
+
+
+
+BEGIN;
+-- DROP TABLE "project_orgunit_relationship" ----------------------------
+DROP TABLE IF EXISTS "project_orgunit_relationship" CASCADE;
+-- -------------------------------------------------------------
+COMMIT;
+
+BEGIN;
+-- DROP SEQUENCE "project_orgunit_relationship_seq" ---------------------
+DROP SEQUENCE "project_orgunit_relationship_seq" CASCADE;
+-- -------------------------------------------------------------
+COMMIT;
+
+
+
