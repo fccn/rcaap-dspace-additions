@@ -21,12 +21,6 @@ VALUES (nextval('metadatafieldregistry_seq'), (SELECT metadata_schema_id FROM "m
 INSERT INTO "metadatafieldregistry" ( "metadata_field_id","metadata_schema_id", "element") 
 VALUES (nextval('metadatafieldregistry_seq'), (SELECT metadata_schema_id FROM "metadataschemaregistry" WHERE "short_id" = 'relation'), 'isPublicationOfProject');
 
-INSERT INTO "metadatafieldregistry" ( "metadata_field_id","metadata_schema_id", "element") 
-VALUES (nextval('metadatafieldregistry_seq'), (SELECT metadata_schema_id FROM "metadataschemaregistry" WHERE "short_id" = 'relation'), 'isProjectOfFundingAgency');
-
-INSERT INTO "metadatafieldregistry" ( "metadata_field_id","metadata_schema_id", "element") 
-VALUES (nextval('metadatafieldregistry_seq'), (SELECT metadata_schema_id FROM "metadataschemaregistry" WHERE "short_id" = 'relation'), 'isFundingAgencyOfProject');
-
 COMMIT;
 
 
@@ -80,9 +74,12 @@ values ( currval('collection_seq'), 3,
 'Project', null, 0);
 INSERT INTO metadatavalue (resource_id, resource_type_id, metadata_field_id, text_value, text_lang, place)
 values ( currval('collection_seq'), 3,
+(select metadata_field_id from "metadatafieldregistry" WHERE metadata_schema_id = (SELECT metadata_schema_id FROM metadataschemaregistry WHERE "short_id" = 'dc') and element = 'description' and qualifier = 'abstract'),
+'Trabalhos, projetos com financiamento atribuido por entidade financiadora', null, 0);
+INSERT INTO metadatavalue (resource_id, resource_type_id, metadata_field_id, text_value, text_lang, place)
+values ( currval('collection_seq'), 3,
 (select metadata_field_id from "metadatafieldregistry" WHERE metadata_schema_id = (SELECT metadata_schema_id FROM metadataschemaregistry WHERE "short_id" = 'dc') and element = 'description' and qualifier = 'provenance'),
 'Funding Collection created by RCAAP for DS7 migration at ' || NOW()::timestamp, null, 0);
-
 
 -- relação coleção-comunidade
 INSERT INTO "community2collection" ( "id", "community_id", "collection_id") 
@@ -233,27 +230,27 @@ SELECT
 FROM temp_funding
 WHERE uri IS NOT NULL;
 
--- Add metadatavalues project.funder.name
-INSERT INTO metadatavalue (resource_id, resource_type_id, metadata_field_id, text_value, place)
-SELECT
-  item_id as "resource_id",
-  2 as "resource_type_id",
-  (select metadata_field_id from "metadatafieldregistry" WHERE metadata_schema_id = (SELECT metadata_schema_id FROM metadataschemaregistry WHERE "short_id" = 'project') and element = 'funder' and qualifier = 'name') as "metadata_field_id",
-  funder_name as "text_value",
-  1 as "place"
-FROM temp_funding
-WHERE funder_name IS NOT NULL;
+-- -- Add metadatavalues project.funder.name
+-- INSERT INTO metadatavalue (resource_id, resource_type_id, metadata_field_id, text_value, place)
+-- SELECT
+--   item_id as "resource_id",
+--   2 as "resource_type_id",
+--   (select metadata_field_id from "metadatafieldregistry" WHERE metadata_schema_id = (SELECT metadata_schema_id FROM metadataschemaregistry WHERE "short_id" = 'project') and element = 'funder' and qualifier = 'name') as "metadata_field_id",
+--   funder_name as "text_value",
+--   1 as "place"
+-- FROM temp_funding
+-- WHERE funder_name IS NOT NULL;
 
--- Add metadatavalues project.funder.identifier
-INSERT INTO metadatavalue (resource_id, resource_type_id, metadata_field_id, text_value, place)
-SELECT
-  item_id as "resource_id",
-  2 as "resource_type_id",
-  (select metadata_field_id from "metadatafieldregistry" WHERE metadata_schema_id = (SELECT metadata_schema_id FROM metadataschemaregistry WHERE "short_id" = 'project') and element = 'funder' and qualifier = 'identifier') as "metadata_field_id",
-  funder_identifier as "text_value",
-  1 as "place"
-FROM temp_funding
-WHERE funder_identifier IS NOT NULL;
+-- -- Add metadatavalues project.funder.identifier
+-- INSERT INTO metadatavalue (resource_id, resource_type_id, metadata_field_id, text_value, place)
+-- SELECT
+--   item_id as "resource_id",
+--  2 as "resource_type_id",
+--  (select metadata_field_id from "metadatafieldregistry" WHERE metadata_schema_id = (SELECT metadata_schema_id FROM metadataschemaregistry WHERE "short_id" = 'project') and element = 'funder' and qualifier = 'identifier') as "metadata_field_id",
+--  funder_identifier as "text_value",
+--  1 as "place"
+-- FROM temp_funding
+-- WHERE funder_identifier IS NOT NULL;
 
 -- Add metadatavalues oaire.awardNumber
 INSERT INTO metadatavalue (resource_id, resource_type_id, metadata_field_id, text_value, place)
@@ -314,7 +311,45 @@ SELECT
 FROM temp_funding
 INNER JOIN metadatavalue ON temp_funding.uri = metadatavalue.text_value AND metadata_field_id IN (select metadata_field_id from metadatafieldregistry where metadata_schema_id=(select metadata_schema_id from metadataschemaregistry where short_id='dc') and element = 'relation');
 
+-- CREATE RELATIONS ORGUNIT (funder) <-> PROJ
+
+CREATE SEQUENCE "project_orgunit_relationship_seq";
+
+-- CREATE TABLE "project_orgunit_relationship" --------------------------------
+CREATE TABLE "project_orgunit_relationship" ( 
+	"project_orgunit_relationship_id" Integer DEFAULT nextval('project_orgunit_relationship_seq'::regclass) NOT NULL,
+	"project_item_id" Integer NOT NULL,
+	"org_unit_item_id" Integer NOT NULL,
+	"text_value" Text,
+	PRIMARY KEY ( "project_orgunit_relationship_id" ) );
+
+
+-- Add metadatavalues project.funder.name
+INSERT INTO project_orgunit_relationship (project_item_id, org_unit_item_id, text_value)
+SELECT
+  item_id as "project_item_id",
+  mdv.resource_id as "org_unit_item_id",
+  mdv.text_value2 as "text_value"
+FROM temp_funding
+INNER JOIN 
+(SELECT mdv1.resource_id, mdv1.text_value,  mdv2.text_value as text_value2
+FROM metadatavalue AS mdv1
+INNER JOIN metadatavalue AS mdv2 ON mdv1.resource_id=mdv2.resource_id 
+INNER JOIN metadatavalue AS mdv3 ON mdv1.resource_id=mdv3.resource_id 
+where mdv3.text_value='FundingOrganization'
+AND mdv1.metadata_field_id IN (SELECT metadata_field_id FROM metadatafieldregistry where metadata_schema_id=(SELECT metadata_schema_id from metadataschemaregistry where short_id='dc') and element = 'title' and qualifier = 'alternative')
+AND mdv1.resource_type_id = 2
+AND mdv2.metadata_field_id IN (SELECT metadata_field_id FROM metadatafieldregistry where metadata_schema_id=(SELECT metadata_schema_id from metadataschemaregistry where short_id='dc') and element = 'title' and qualifier IS NULL)
+AND mdv2.resource_type_id = 2
+AND mdv3.metadata_field_id IN (SELECT metadata_field_id FROM metadatafieldregistry where metadata_schema_id=(SELECT metadata_schema_id from metadataschemaregistry where short_id='dc') and element = 'type')
+AND mdv3.resource_type_id = 2
+) as mdv ON mdv.text_value = funder
+WHERE funder IS NOT NULL;
+
+
 COMMIT;
+
+
 
 BEGIN;
 -- apagar metadados authority existentes dos projetos
