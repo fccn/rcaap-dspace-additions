@@ -1,15 +1,44 @@
--- . Executar 
--- relation.isPublicationOfAuthor
-
 -- #########################################
 
---            NOTA: 
---    Antes de executar este script, deverá 
---    ser carregado o modelo de entidades 
---    para a base de dados, bem como garantir
---    os registries
+ -- Carregar modelo de entidades
+BEGIN; 
+INSERT INTO entity_type (id, label) VALUES
+	(NEXTVAL('entity_type_id_seq'), 'none'),
+	(NEXTVAL('entity_type_id_seq'), 'Publication'),
+	(NEXTVAL('entity_type_id_seq'), 'Person'),
+	(NEXTVAL('entity_type_id_seq'), 'OrgUnit'),
+	(NEXTVAL('entity_type_id_seq'), 'Project');
 
+INSERT INTO relationship_type (id, left_type, right_type, leftward_type, rightward_type, left_min_cardinality, left_max_cardinality, right_min_cardinality, right_max_cardinality, copy_to_left, copy_to_right, tilted) VALUES
+	(NEXTVAL('relationship_type_id_seq'), 
+	(SELECT id FROM entity_type WHERE label='Publication' LIMIT 1),
+	(SELECT id FROM entity_type WHERE label='Person' LIMIT 1),
+	'isAuthorOfPublication', 'isPublicationOfAuthor', 0, NULL, 0, NULL, false, false, 0),
+	(NEXTVAL('relationship_type_id_seq'), 
+	(SELECT id FROM entity_type WHERE label='Publication' LIMIT 1),
+	(SELECT id FROM entity_type WHERE label='OrgUnit' LIMIT 1),
+	'isAuthorOfPublication', 'isPublicationOfAuthor', 0, NULL, 0, NULL, false, false, 0),
+	(NEXTVAL('relationship_type_id_seq'), 
+	(SELECT id FROM entity_type WHERE label='Publication' LIMIT 1),
+	(SELECT id FROM entity_type WHERE label='Person' LIMIT 1),
+	'isContributorOfPublication', 'isPublicationOfContributor', 0, NULL, 0, NULL, false, false, 0),
+	(NEXTVAL('relationship_type_id_seq'), 
+	(SELECT id FROM entity_type WHERE label='Publication' LIMIT 1),
+	(SELECT id FROM entity_type WHERE label='OrgUnit' LIMIT 1),
+	'isContributorOfPublication', 'isPublicationOfContributor', 0, NULL, 0, NULL, false, false, 0),
+	(NEXTVAL('relationship_type_id_seq'), 
+	(SELECT id FROM entity_type WHERE label='Publication' LIMIT 1),
+	(SELECT id FROM entity_type WHERE label='Project' LIMIT 1),
+	'isProjectOfPublication', 'isPublicationOfProject', 0, NULL, 0, NULL, false, false, 0),
+	(NEXTVAL('relationship_type_id_seq'),
+	(SELECT id FROM entity_type WHERE label='Project' LIMIT 1),
+	(SELECT id FROM entity_type WHERE label='OrgUnit' LIMIT 1),
+	'isFundingAgencyOfProject', 'isProjectOfFundingAgency', 0, NULL, 0, NULL, false, false, 0);
 
+COMMIT;
+
+-- #########################################
+-- Relações
 -- #########################################
 
 -- PESSOAS
