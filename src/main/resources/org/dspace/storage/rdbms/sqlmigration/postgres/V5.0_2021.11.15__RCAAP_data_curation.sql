@@ -1,7 +1,6 @@
 -- Fix duplicated epersons in groups:
 BEGIN;
-DELETE *
-    FROM epersongroup2eperson
+DELETE FROM epersongroup2eperson
     -- get all the otheres that are duplicated (NOT IN))
     WHERE id NOT IN
     (
@@ -15,8 +14,7 @@ COMMIT;
 
 -- Fix duplicated groups inside groups:
 BEGIN;
-DELETE  *
-    FROM group2group
+DELETE FROM group2group
      -- get all the otheres that are duplicated (NOT IN))
     WHERE id NOT IN
     (

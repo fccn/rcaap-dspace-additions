@@ -66,6 +66,10 @@ values ( currval('collection_seq'), 3,
 'Person', null, 0);
 INSERT INTO metadatavalue (resource_id, resource_type_id, metadata_field_id, text_value, text_lang, place)
 values ( currval('collection_seq'), 3,
+(select metadata_field_id from "metadatafieldregistry" WHERE metadata_schema_id = (SELECT metadata_schema_id FROM metadataschemaregistry WHERE "short_id" = 'dc') and element = 'description' and qualifier = 'abstract'),
+'Pessoas, autores ou contribuidores em trabalhos', null, 0);
+INSERT INTO metadatavalue (resource_id, resource_type_id, metadata_field_id, text_value, text_lang, place)
+values ( currval('collection_seq'), 3,
 (select metadata_field_id from "metadatafieldregistry" WHERE metadata_schema_id = (SELECT metadata_schema_id FROM metadataschemaregistry WHERE "short_id" = 'dc') and element = 'description' and qualifier = 'provenance'),
 'Person Collection created by RCAAP for DS7 migration at ' || NOW()::timestamp, null, 0);
 
