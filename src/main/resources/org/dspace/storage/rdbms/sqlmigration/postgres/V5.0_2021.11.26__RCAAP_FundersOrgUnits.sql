@@ -121,7 +121,7 @@ VALUES (
 INSERT INTO "item" ( "item_id", "submitter_id", "in_archive" , "withdrawn", "last_modified", "owning_collection", "discoverable") 
 SELECT
 	item_id,
-	(SELECT eperson_id FROM eperson WHERE eperson.email = 'rcaap@sdum.uminho.pt') as "submitter_id",
+	(SELECT eperson_id FROM eperson WHERE eperson.email = 'dspace7@rcaap.pt') as "submitter_id",
 	TRUE as "in_archive",
 	FALSE as "withdrawn",
 	NOW() as "last_modified",

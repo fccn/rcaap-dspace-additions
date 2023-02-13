@@ -69,3 +69,17 @@ INSERT INTO "handle" ( "handle_id", "handle", "resource_type_id", "resource_id")
 VALUES ( nextval('handle_seq'), (select substring(handle from 0 for position('/' in handle)) from handle order by handle_id DESC limit 1) || '/' || currval('handle_seq'), 4, currval('community_seq') );
 
 COMMIT;
+
+
+-- #### EPERSON ######
+BEGIN;
+-- Criar USER ADMIN para novo conteudo criado
+
+INSERT INTO "public"."eperson" ( "eperson_id", "email", "can_log_in", "self_registered") 
+VALUES ( nextval('eperson_seq'), 'dspace7@rcaap.pt', FALSE, TRUE );
+
+-- Criar permissoes - administrador (group id:1)
+INSERT INTO "public"."epersongroup2eperson" ( "id", "eperson_group_id", "eperson_id") 
+VALUES ( nextval('epersongroup2eperson_seq'), 1, currval('eperson_seq') );
+
+COMMIT;
