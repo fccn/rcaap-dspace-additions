@@ -54,10 +54,9 @@ Será necessário adicionar as seguintes configurações ao local.cfg para supor
 ```
 # Renates Importer
 renates.api.url = https://renates.dgeec.mec.pt/ws/renatesws.asmx/Tese
-
 ```
 
-O ficheiro spring com a configuração do external source CienciaVitae: `src/main/resources/spring/external-services-renates.xml` deve ser copiado para: `[DSPACE]/config/spring/api`
+O ficheiro spring com a configuração do external source Renates: `src/main/resources/spring/external-services-renates.xml` deve ser copiado para: `[DSPACE]/config/spring/api`
 
 ## Configuraração Tarefas de Curadoria
 Será necessário adicionar as seguintes configurações ao local.cfg para suporte da API do CV:
