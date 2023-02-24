@@ -50,7 +50,7 @@ O ficheiro pom.xml dos additions deve adicionar (já está incluido no source) c
 O ficheiro spring com a configuração do external source CienciaVitae: `src/main/resources/spring/external-cienciavitae.xml` deve ser copiado para: `[DSPACE]/config/spring/api`
 
 ## Configuraração Renates
-Será necessário adicionar as seguintes configurações ao local.cfg para suporte da API do CV:
+Será necessário adicionar as seguintes configurações ao local.cfg para suporte da API do Renates:
 ```
 # Renates Importer
 renates.api.url = https://renates.dgeec.mec.pt/ws/renatesws.asmx/Tese
@@ -59,7 +59,7 @@ renates.api.url = https://renates.dgeec.mec.pt/ws/renatesws.asmx/Tese
 O ficheiro spring com a configuração do external source Renates: `src/main/resources/spring/external-services-renates.xml` deve ser copiado para: `[DSPACE]/config/spring/api`
 
 ## Configuraração Tarefas de Curadoria
-Será necessário adicionar as seguintes configurações ao local.cfg para suporte da API do CV:
+Será necessário adicionar as seguintes configurações ao local.cfg para suporte da API do Renates:
 ```
 # RCAAP Curation tasks
 plugin.named.org.dspace.curate.CurationTask = org.dspace.ctask.general.VerifyTID = VerifyTID
