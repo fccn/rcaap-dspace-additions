@@ -63,8 +63,6 @@ public class CheckDuplicates extends AbstractCurationTask {
     private void formatResults() throws IOException {
         StringBuilder sb = new StringBuilder();
         sb.append("\n");
-        /*sb.append("Number of items: " + itemTable.size());
-        sb.append("\n");*/
         for (Integer it : itemTable.keySet()) {
             if(itemTable.get(it).size() > 1){
                 sb.append("\t")

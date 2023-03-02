@@ -17,6 +17,7 @@ import java.util.List;
 public class PolicyCheck extends Distribute{
 
     private static String RIGHTS = "dc.rights";
+    private String OPEN_ACCESS = "openaccess";
 
 
     @Override
@@ -24,7 +25,7 @@ public class PolicyCheck extends Distribute{
         String rights = itemService.getMetadata(item, RIGHTS);
 
         if (item.isArchived() && !item.isWithdrawn() && rights != null
-                && !rights.equals("openAccess"))  {
+                && !OPEN_ACCESS.equals(rights.replaceAll("\\s*","").toLowerCase()))  {
 
             String handle = item.getHandle();
             boolean isAnonymous = false;

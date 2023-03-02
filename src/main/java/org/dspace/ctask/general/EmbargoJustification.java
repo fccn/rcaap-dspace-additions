@@ -16,7 +16,7 @@ public class EmbargoJustification extends Distribute {
     private String RELATION = "dc.relation";
     private String EMBARGO_FCT = "rcaap.embargofct";
 
-    private String OPEN_ACCESS = "openAccess";
+    private String OPEN_ACCESS = "openaccess";
 
     @Override
     protected void performItem(Item item) throws SQLException, IOException {
@@ -39,7 +39,7 @@ public class EmbargoJustification extends Distribute {
                 res.append(rights);
                 res.append("\n");
             }*/
-            if( rights != null && !OPEN_ACCESS.equals(rights) &&
+            if( rights != null && !OPEN_ACCESS.equals(rights.replaceAll("\\s*","").toLowerCase()) &&
                     (justification == null || justification.isEmpty()) ){
 
                 res.append("\t\t\thttp://hdl.handle.net/");
