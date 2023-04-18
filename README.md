@@ -49,6 +49,35 @@ O ficheiro pom.xml dos additions deve adicionar (já está incluido no source) c
 
 O ficheiro spring com a configuração do external source CienciaVitae: `src/main/resources/spring/external-cienciavitae.xml` deve ser copiado para: `[DSPACE]/config/spring/api`
 
+## Configuraração Sumbissão a partir do CV
+Em primeiro lugar copiar para a pasta `[DSPACE]/config/crosswalks` o ficheiro: `src/main/resources/crosswalks/mods-rcaap_cienciavitae-submission.xslt`
+
+Será necessário colocar no local.cfg a seguinte configuração:
+
+```
+# CV Importer
+crosswalk.submission.MODS.stylesheet = mods-rcaap_cienciavitae-submission.xslt
+```
+
+Nota: Esta versão do xslt usa para o dc.type openaire4. Contudo, para quem não uasr esta versão deve ter a seguinte configuração:
+
+```
+ <!-- **** DC TYPE-->
+        <xsl:template match="*[local-name()='genre']"> 
+                <xsl:element name="dim:field">
+                        <xsl:attribute name="mdschema">dc</xsl:attribute>
+                        <xsl:attribute name="element">type</xsl:attribute>                      
+                        <xsl:attribute name="lang">en_US</xsl:attribute>
+                        <xsl:value-of select="normalize-space(.)"/>
+                </xsl:element>
+        </xsl:template>
+
+        <!--<xsl:template match="*[local-name()='genre']"> 
+                 <xsl:call-template name="dcRights">
+                        </xsl:call-template>
+        </xsl:template>-->
+```
+
 ## Configuraração Renates
 Será necessário adicionar as seguintes configurações ao local.cfg para suporte da API do Renates:
 ```
