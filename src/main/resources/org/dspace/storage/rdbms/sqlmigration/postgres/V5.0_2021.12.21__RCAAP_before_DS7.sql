@@ -108,6 +108,12 @@ VALUES (nextval('metadatafieldregistry_seq'), (SELECT metadata_schema_id FROM "m
 
 COMMIT;
 
+BEGIN;
+
+INSERT INTO "metadatafieldregistry" ( "metadata_field_id","metadata_schema_id", "element", "qualifier") 
+VALUES (nextval('metadatafieldregistry_seq'), (SELECT metadata_schema_id FROM "metadataschemaregistry" WHERE "short_id" = 'datacite'), 'subject', 'fos' );
+
+COMMIT;
 
 -- mover os field type id existentes do esquema degois para o esquema openaire
 BEGIN;
@@ -128,5 +134,17 @@ WHERE metadata_field_id = (select metadata_field_id from "metadatafieldregistry"
 
 UPDATE metadatavalue SET metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'oaire') and metadatafieldregistry.element = 'citation' and metadatafieldregistry.qualifier = 'conferencePlace')
 WHERE metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'degois') and metadatafieldregistry.element = 'publication' and metadatafieldregistry.qualifier = 'location');
+
+COMMIT;
+
+-- mover os dc.subject.fos para o esquema openaire em datacite.subject.fos
+BEGIN;
+
+UPDATE metadatavalue SET metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'datacite') and metadatafieldregistry.element = 'subject' and metadatafieldregistry.qualifier = 'fos')
+WHERE metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'dc') and metadatafieldregistry.element = 'subject' and metadatafieldregistry.qualifier = 'fos');
+
+-- apagar o campo antigo dc.subject.fos (nao pertence ao DC)
+DELETE FROM "metadatafieldregistry" WHERE 
+WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'dc') and metadatafieldregistry.element = 'subject' and metadatafieldregistry.qualifier = 'fos';
 
 COMMIT;
