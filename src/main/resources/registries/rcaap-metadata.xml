@@ -15,16 +15,6 @@
         <namespace>http://www.rcaap.pt/schema</namespace>
     </dc-schema>
 
-    <dc-schema>
-        <name>datacite</name>
-        <namespace>http://datacite.org/schema/kernel-4</namespace>
-    </dc-schema>
-
-    <dc-schema>
-        <name>dc</name>
-        <namespace>http://dublincore.org/documents/dcmi-terms/</namespace>
-    </dc-schema>
-
     <dc-type>
         <schema>rcaap</schema>
         <element>embargofct</element>
