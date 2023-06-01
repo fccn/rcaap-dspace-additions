@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<node id="SDG" label="ODS">
+        <isComposedBy>
+                                <node id="1" label="01:Erradicar a Pobreza"/>
+                                <node id="2" label="02:Erradicar a Fome"/>
+                                <node id="3" label="03:Saúde de Qualidade"/>
+                                <node id="4" label="04:Educação de Qualidade"/>
+                                <node id="5" label="05:Igualdade de Género"/>
+                                <node id="6" label="06:Água Potável e Saneamento"/>
+                                <node id="7" label="07:Energias Renováveis e Acessíveis"/>
+                                <node id="8" label="08:Trabalho Digno e Crescimento Económico"/>
+                                <node id="9" label="09:Indústria, Inovação e Infraestruturas"/>
+                                <node id="10" label="10:Reduzir as Desigualdades"/>
+                                <node id="11" label="11:Cidades e Comunidades Sustentáveis"/>
+                                <node id="12" label="12:Produção e Consumo Sustentáveis"/>
+                                <node id="13" label="13:Ação Climática"/>
+                                <node id="13" label="14:Proteger a Vida Marinha"/>
+                                <node id="15" label="15:Proteger a Vida Terrestre"/>
+                                <node id="16" label="16:Paz, Justiça e Instituições Eficazes"/>
+                                <node id="17" label="17:Parcerias para a Implementação dos Objetivos"/>
+         </isComposedBy>
+</node>
+
