@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<dspace-dc-types>
+    <dspace-header>
+        <title>Metadata Types Registry for RCAAP</title>
+        <contributor.author>RCAAP</contributor.author>
+        <date.created>2019-07-2</date.created>
+        <description>
+            This file contains bibliographic metadata explicitly required by the
+            RCAAP interface for DSpace
+        </description>
+    </dspace-header>
+
+    <dc-schema>
+        <name>rcaap</name>
+        <namespace>http://www.rcaap.pt/schema</namespace>
+    </dc-schema>
+
+    <dc-schema>
+        <name>datacite</name>
+        <namespace>http://datacite.org/schema/kernel-4</namespace>
+    </dc-schema>
+
+    <dc-schema>
+        <name>dc</name>
+        <namespace>http://dublincore.org/documents/dcmi-terms/</namespace>
+    </dc-schema>
+
+    <dc-type>
+        <schema>rcaap</schema>
+        <element>embargofct</element>
+        <qualifier></qualifier>
+        <scope_note>Elemento temporário para a justificação do embargo da FCT</scope_note>
+    </dc-type>
+
+    <dc-type>
+        <schema>rcaap</schema>
+        <element>rights</element>
+        <qualifier></qualifier>
+        <scope_note>Tipo de acesso para o resultado científico (acessos: aberto, restrito, embargado, ...)</scope_note>
+    </dc-type>
+
+    <dc-type>
+        <schema>dc</schema>
+        <element>contributor</element>
+        <qualifier>translator</qualifier>
+        <scope_note></scope_note>
+    </dc-type>
+
+    <!-- Sustainable Development Goals -->
+    <dc-type>
+        <schema>datacite</schema>
+        <element>subject</element>
+        <qualifier>sdg</qualifier>
+        <scope_note>Objetivos de Desenvolvimento Sustentável (Sustainable Development Goals)</scope_note>
+    </dc-type>
+
+    <!-- Metadata to identify depositant from CV -->
+    <dc-type>
+        <schema>rcaap</schema>
+        <element>cv</element>
+        <qualifier>cienciaid</qualifier>
+        <scope_note>Elemento que indica o depositante a partir do CV e respetivo CienciaID</scope_note>
+    </dc-type>
+
+    <!-- identifiers to map id provided from a CV deposit-->
+    <dc-type>
+        <schema>dc</schema>
+        <element>identifier</element>
+        <qualifier>arxiv</qualifier>
+        <scope_note>arXiv.org identifier</scope_note>
+    </dc-type>
+
+    <dc-type>
+        <schema>dc</schema>
+        <element>identifier</element>
+        <qualifier>bibcode</qualifier>
+        <scope_note>Astrophysics Data System bibliographic codes</scope_note>
+    </dc-type>
+
+    <dc-type>
+        <schema>dc</schema>
+        <element>identifier</element>
+        <qualifier>eissn</qualifier>
+        <scope_note>International Standard Serial Number (electronic Version)</scope_note>
+    </dc-type>
+
+    <dc-type>
+        <schema>dc</schema>
+        <element>identifier</element>
+        <qualifier>eid</qualifier>
+        <scope_note>Identificador Scopus</scope_note>
+    </dc-type>
+
+    <dc-type>
+        <schema>dc</schema>
+        <element>identifier</element>
+        <qualifier>ethos</qualifier>
+        <scope_note></scope_note>
+    </dc-type>
+
+    <dc-type>
+        <schema>dc</schema>
+        <element>identifier</element>
+        <qualifier>pmc</qualifier>
+        <scope_note>Identificar de artigo da PubMed</scope_note>
+    </dc-type>
+
+    <dc-type>
+        <schema>dc</schema>
+        <element>identifier</element>
+        <qualifier>pmid</qualifier>
+        <scope_note>Identificador da PubMed</scope_note>
+    </dc-type>
+
+    <dc-type>
+        <schema>dc</schema>
+        <element>identifier</element>
+        <qualifier>source-work-id</qualifier>
+        <scope_note>Identificador interno do CienciaVitae</scope_note>
+    </dc-type>
+
+    <dc-type>
+        <schema>dc</schema>
+        <element>identifier</element>
+        <qualifier>urn</qualifier>
+        <scope_note></scope_note>
+    </dc-type>
+
+    <dc-type>
+        <schema>dc</schema>
+        <element>identifier</element>
+        <qualifier>wos</qualifier>
+        <scope_note>Identificador de Web Of Science</scope_note>
+    </dc-type>
+
+    <dc-type>
+        <schema>dc</schema>
+        <element>identifier</element>
+        <qualifier>cienciaiul</qualifier>
+        <scope_note>Identificador do Ciencia-iul</scope_note>
+    </dc-type>
+
+    <dc-type>
+        <schema>dc</schema>
+        <element>identifier</element>
+        <qualifier>authenticusid</qualifier>
+        <scope_note>Identificador do Authenticus</scope_note>
+    </dc-type>
+
+</dspace-dc-types>
