@@ -115,6 +115,20 @@ VALUES (nextval('metadatafieldregistry_seq'), (SELECT metadata_schema_id FROM "m
 
 COMMIT;
 
+BEGIN;
+
+INSERT INTO "metadatafieldregistry" ( "metadata_field_id","metadata_schema_id", "element", "qualifier") 
+VALUES (nextval('metadatafieldregistry_seq'), (SELECT metadata_schema_id FROM "metadataschemaregistry" WHERE "short_id" = 'datacite'), 'subject', 'sdg' );
+
+COMMIT;
+
+BEGIN;
+
+INSERT INTO "metadatafieldregistry" ( "metadata_field_id","metadata_schema_id", "element") 
+VALUES (nextval('metadatafieldregistry_seq'), (SELECT metadata_schema_id FROM "metadataschemaregistry" WHERE "short_id" = 'rcaap'), 'rights' );
+
+COMMIT;
+
 -- mover os field type id existentes do esquema degois para o esquema openaire
 BEGIN;
 UPDATE metadatavalue SET metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'oaire') and metadatafieldregistry.element = 'citation' and metadatafieldregistry.qualifier = 'startPage')
@@ -137,7 +151,7 @@ WHERE metadata_field_id = (select metadata_field_id from "metadatafieldregistry"
 
 COMMIT;
 
--- mover os dc.subject.fos para o esquema openaire em datacite.subject.fos
+-- mover os dc.subject.fos (do esquema RCAAP) para o esquema openaire em datacite.subject.fos
 BEGIN;
 
 UPDATE metadatavalue SET metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'datacite') and metadatafieldregistry.element = 'subject' and metadatafieldregistry.qualifier = 'fos')
@@ -146,5 +160,28 @@ WHERE metadata_field_id = (select metadata_field_id from "metadatafieldregistry"
 -- apagar o campo antigo dc.subject.fos (nao pertence ao DC)
 DELETE FROM "metadatafieldregistry" WHERE 
 WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'dc') and metadatafieldregistry.element = 'subject' and metadatafieldregistry.qualifier = 'fos';
+
+COMMIT;
+
+-- mover os metadados dc.rights do tipo item para um campo específico RCAAP
+BEGIN;
+
+UPDATE metadatavalue SET metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'rcaap') and metadatafieldregistry.element = 'rights' and metadatafieldregistry.qualifier is NULL)
+WHERE metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'dc') and metadatafieldregistry.element = 'rights' and metadatafieldregistry.qualifier is NULL)
+AND resource_type_id = 2
+AND LOWER(text_value) LIKE '%access';
+
+COMMIT;
+
+
+-- mover os dc.subject.ods (do esquema RCAAP) para o esquema openaire em datacite.subject.sdg
+BEGIN;
+
+UPDATE metadatavalue SET metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'datacite') and metadatafieldregistry.element = 'subject' and metadatafieldregistry.qualifier = 'sdg')
+WHERE metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'dc') and metadatafieldregistry.element = 'subject' and metadatafieldregistry.qualifier = 'ods');
+
+-- apagar o campo antigo dc.subject.ods (nao pertence ao DC)
+DELETE FROM "metadatafieldregistry" WHERE 
+WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'dc') and metadatafieldregistry.element = 'subject' and metadatafieldregistry.qualifier = 'ods';
 
 COMMIT;
