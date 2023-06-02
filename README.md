@@ -38,7 +38,7 @@ Depois deste processo, seguir os passos normais de instalação do DSpace. Ver: 
 
 # Configuração
 
-## Configuraração Ciência Vitae
+## Configuração Ciência Vitae
 Será necessário adicionar as seguintes configurações ao local.cfg para suporte da API do CV:
 ```
 # cienciavitae api
@@ -49,7 +49,7 @@ cienciavitae.api.username = USER
 cienciavitae.api.password = PASS
 ```
 
-O ficheiro pom.xml dos additions deve adicionar (já está incluido no source) como dependência a biblioteca (na versão correta):
+O ficheiro pom.xml nos `additions`, depois de seguir os passos da instalação, deverá já incluir a dependência necessária da biblioteca (neste caso, **não é necessário alterar**):
 ```
 <dependencies>
 ....
@@ -62,19 +62,20 @@ O ficheiro pom.xml dos additions deve adicionar (já está incluido no source) c
    </dependencies>
 ```
 
-O ficheiro spring com a configuração do external source CienciaVitae: `src/main/resources/spring/external-cienciavitae.xml` deve ser copiado para: `[DSPACE]/config/spring/api`
+Depois de seguir os passos de instalação, deverá também existir um ficheiro na diretoria `[DSpace]/config/spring/api/external-cienciavitae.xml` com a configuração do serviço. Caso contrário, o ficheiro a usar estará disponível em: https://github.com/fccn/rcaap-dspace-additions/blob/main/src/main/resources/config/spring/api/external-cienciavitae.xml
 
-## Configuraração Sumbissão a partir do CV
-Em primeiro lugar copiar para a pasta `[DSPACE]/config/crosswalks` o ficheiro: `src/main/resources/crosswalks/mods-rcaap_cienciavitae-submission.xslt`
+## Configuração Submissão a partir do Ciência Vitae
 
 Será necessário colocar no local.cfg a seguinte configuração:
-
 ```
-# CV Importer
+# Ciencia Vitae specific SWORD import mapping stylesheet
 crosswalk.submission.MODS.stylesheet = mods-rcaap_cienciavitae-submission.xslt
 ```
 
-Nota: Esta versão do xslt usa para o dc.type openaire4. Contudo, para quem não uasr esta versão deve ter a seguinte configuração:
+Depois de seguir os passos de instalação, deverá também existir um ficheiro na diretoria `[DSpace]/config/crosswalks/mods-rcaap_cienciavitae-submission.xsl` com a configuração do serviço. Caso contrário, o ficheiro a usar estará disponível em: https://github.com/fccn/rcaap-dspace-additions/blob/main/src/main/resources/config/crosswalks/mods-rcaap_cienciavitae-submission.xsl
+
+
+Nota: Esta versão do xslt usa para o dc.type openaire4. Contudo, para quem não estiver a usar esta versão, deve optar por incluir a seguinte configuração:
 
 ```
  <!-- **** DC TYPE-->
@@ -96,14 +97,16 @@ Nota: Esta versão do xslt usa para o dc.type openaire4. Contudo, para quem não
 ## Configuraração Renates
 Será necessário adicionar as seguintes configurações ao local.cfg para suporte da API do Renates:
 ```
-# Renates Importer
+# Renates (TID) API configurations
 renates.api.url = https://renates.dgeec.mec.pt/ws/renatesws.asmx/Tese
 ```
 
-O ficheiro spring com a configuração do external source Renates: `src/main/resources/spring/external-services-renates.xml` deve ser copiado para: `[DSPACE]/config/spring/api`
+Depois de seguir os passos de instalação, deverá também existir um ficheiro na diretoria `[DSpace]/config/spring/api/external-services-renates.xml` com a configuração do serviço. Caso contrário, o ficheiro a usar estará disponível em: https://github.com/fccn/rcaap-dspace-additions/blob/main/src/main/resources/config/spring/api/external-services-renates.xml
+
 
 ## Configuraração Tarefas de Curadoria
-Será necessário adicionar as seguintes configurações ao local.cfg para suporte da API do Renates:
+
+Será necessário adicionar as seguintes configurações ao local.cfg para suporte das tarefas de curadoria específicas RCAAP:
 ```
 # RCAAP Curation tasks
 plugin.named.org.dspace.curate.CurationTask = org.dspace.ctask.general.VerifyTID = VerifyTID
