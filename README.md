@@ -24,7 +24,7 @@ git clone git@github.com:fccn/rcaap-dspace-additions.git additions
 
 Depois, colocar as nossas configurações default:
 ```
-mv additions/src/main/resources/config/ ../config
+rsync -r --remove-source-files  additions/src/main/resources/config/ ../config
 ```
 
 Definir o esquema de **virtual metadata** do OpenAIRE como sendo o default
