@@ -40,6 +40,8 @@ mv config/spring/api/virtual-metadata.xml config/spring/api/virtual-metadata.xml
 mv config/spring/api/virtual-metadata.xml.openaire4 config/spring/api/virtual-metadata.xml
 ```
 
+## Para instalação usando o Docker
+
 Caso se use o Docker, será necessário alterar as dependências no Dockerfile e Dockerfile.cli para usar as imagens alojadas no Docker Hub do RCAAP:
 ```
 sed -i 's/FROM dspace\/dspace-dependencies/FROM rcaap\/dspace-dependencies/g' Dockerfile
