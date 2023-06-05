@@ -27,6 +27,12 @@ Depois, colocar as nossas configurações default:
 rsync -r --remove-source-files  additions/src/main/resources/config/ ../config
 ```
 
+Colocar também os ficheiros executáveis que estão no additions:
+```
+rsync -r --remove-source-files --chmod=Fu=rwx,Fg=rx,Fo=rx  additions/src/main/resources/bin/ ../bin
+```
+
+
 Definir o esquema de **virtual metadata** do OpenAIRE como sendo o default
 ```
 cd ..
