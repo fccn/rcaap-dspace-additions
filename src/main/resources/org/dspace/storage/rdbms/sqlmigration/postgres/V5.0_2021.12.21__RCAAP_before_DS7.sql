@@ -158,7 +158,7 @@ UPDATE metadatavalue SET metadata_field_id = (select metadata_field_id from "met
 WHERE metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'dc') and metadatafieldregistry.element = 'subject' and metadatafieldregistry.qualifier = 'fos');
 
 -- apagar o campo antigo dc.subject.fos (nao pertence ao DC)
-DELETE FROM "metadatafieldregistry" WHERE 
+DELETE FROM "metadatafieldregistry" 
 WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'dc') and metadatafieldregistry.element = 'subject' and metadatafieldregistry.qualifier = 'fos';
 
 COMMIT;
@@ -181,7 +181,7 @@ UPDATE metadatavalue SET metadata_field_id = (select metadata_field_id from "met
 WHERE metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'dc') and metadatafieldregistry.element = 'subject' and metadatafieldregistry.qualifier = 'ods');
 
 -- apagar o campo antigo dc.subject.ods (nao pertence ao DC)
-DELETE FROM "metadatafieldregistry" WHERE 
+DELETE FROM "metadatafieldregistry"
 WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'dc') and metadatafieldregistry.element = 'subject' and metadatafieldregistry.qualifier = 'ods';
 
 COMMIT;
