@@ -19,7 +19,7 @@ mv additions /tmp/
 
 Fazer clone do projeto para a diretoria additions em `/home/DSpace-7.6/dspace/modules/`:
 ```
-git clone git@github.com:fccn/rcaap-dspace-additions.git additions
+git clone https://github.com/fccn/rcaap-dspace-additions.git additions
 ```
 
 Depois, colocar as nossas configurações default:
