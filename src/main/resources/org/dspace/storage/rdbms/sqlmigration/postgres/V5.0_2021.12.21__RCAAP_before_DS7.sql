@@ -4,7 +4,7 @@
 
 BEGIN;
 
-CREATE TABLE "handle_audit_ds7" ( 
+CREATE TABLE IF NOT EXISTS "handle_audit_ds7" ( 
 	"operation" Character( 1 ) NOT NULL,
 	"stamp" Timestamp Without Time Zone NOT NULL,
 	"userid" Text NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE "handle_audit_ds7" (
 COMMIT;
 
 BEGIN;
-CREATE TABLE "item_audit_ds7" ( 
+CREATE TABLE IF NOT EXISTS "item_audit_ds7" ( 
 	"operation" Character( 1 ) NOT NULL,
 	"stamp" Timestamp Without Time Zone NOT NULL,
 	"userid" Text NOT NULL,
