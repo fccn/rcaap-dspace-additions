@@ -95,5 +95,4 @@ plugin.named.org.dspace.curate.CurationTask = org.dspace.ctask.general.VerifyTID
 plugin.named.org.dspace.curate.CurationTask = org.dspace.ctask.general.CheckDuplicates = CheckDuplicates
 plugin.named.org.dspace.curate.CurationTask = org.dspace.ctask.general.EmbargoJustification = JustificationEmbargo
 plugin.named.org.dspace.curate.CurationTask = org.dspace.ctask.general.DoiValidator = DoiValidator
-plugin.named.org.dspace.curate.CurationTask = org.dspace.ctask.general.PolicyCheck = PolicyCheck
 ```
