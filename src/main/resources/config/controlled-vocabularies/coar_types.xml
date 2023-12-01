@@ -131,6 +131,6 @@
         </node>
         <node id="c_e059" label="learning object"/>
         <node id="c_cb28" label="clinical trial"/>
-        <node id="c_cb28" label="clinical study"/>
+        <node id="c_7877" label="clinical study"/>
     </isComposedBy>
 </node>
