@@ -211,7 +211,7 @@ CREATE TEMPORARY TABLE temp_dctype(
 -- inserir valores de mapeamento
 INSERT INTO temp_dctype ("text_value_out", "text_value_in")
 VALUES
-   ('text::periodical::journal::contribution to journal::journal article::research article','article'),
+   ('text::periodical::journal::contribution to journal::journal article','article'),
    ('text::thesis::bachelor thesis','bachelorThesis'),
    ('text::thesis::master thesis','masterThesis'),
    ('text::thesis::doctoral thesis','doctoralThesis'),
