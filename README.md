@@ -6,7 +6,7 @@
 
 # Instalação DSpace 7++
 
-Obter o código DSpace versão 7.6
+Obter o código DSpace versão 7.6.
 ```
 git clone --branch dspace-7.6 https://github.com/DSpace/DSpace.git /home/DSpace-7.6
 ```
