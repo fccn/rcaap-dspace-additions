@@ -197,7 +197,7 @@ BEGIN;
 UPDATE metadatavalue SET metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'rcaap') and metadatafieldregistry.element = 'type' and metadatafieldregistry.qualifier is NULL)
 WHERE metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'dc') and metadatafieldregistry.element = 'type' and metadatafieldregistry.qualifier is NULL)
 AND resource_type_id = 2
-AND LOWER(text_value) IN ('article','bachelorThesis','masterThesis','doctoralThesis','book','bookPart','review','conferenceObject','lecture','workingPaper','preprint','report','annotation','contributionToPeriodical','patent','other','dataset');
+AND LOWER(text_value) IN ('article','bachelorThesis','masterThesis','doctoralThesis','book','bookPart','review','conferenceObject','lecture','workingPaper','preprint','report','annotation','contributionToPeriodical','patent','other','dataset','pedagogicalPublication');
 COMMIT;
 
 -- corrigir os dc types - para nova solução
@@ -224,10 +224,11 @@ VALUES
    ('text::preprint','preprint'),
    ('text::report','report'),
    ('text::annotation','annotation'),
-   ('text::periodical::journal::contribution to journal','contributionToPeriodical'),
+   ('text::periodical','contributionToPeriodical'),
    ('text::patent','patent'),
    ('other','other'),
-   ('dataset','dataset');
+   ('dataset','dataset'),
+   ('learning object','pedagogicalPublication');
 
 
 -- mapear valores existentes rcaap.type
