@@ -197,7 +197,7 @@ BEGIN;
 UPDATE metadatavalue SET metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'rcaap') and metadatafieldregistry.element = 'type' and metadatafieldregistry.qualifier is NULL)
 WHERE metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'dc') and metadatafieldregistry.element = 'type' and metadatafieldregistry.qualifier is NULL)
 AND resource_type_id = 2
-AND LOWER(text_value) IN ('article','bachelorThesis','masterThesis','doctoralThesis','book','bookPart','review','conferenceObject','lecture','workingPaper','preprint','report','annotation','contributionToPeriodical','patent','other','dataset','pedagogicalPublication');
+AND LOWER(text_value) IN ('article','bachelorthesis','masterthesis','doctoralthesis','book','bookpart','review','conferenceobject','lecture','workingpaper','preprint','report','annotation','contributiontoperiodical','patent','other','dataset','pedagogicalpublication');
 COMMIT;
 
 -- corrigir os dc types - para nova solução
@@ -211,24 +211,24 @@ CREATE TEMPORARY TABLE temp_dctype(
 -- inserir valores de mapeamento
 INSERT INTO temp_dctype ("text_value_out", "text_value_in")
 VALUES
-   ('text::periodical::journal::contribution to journal::journal article','article'),
-   ('text::thesis::bachelor thesis','bachelorThesis'),
-   ('text::thesis::master thesis','masterThesis'),
-   ('text::thesis::doctoral thesis','doctoralThesis'),
-   ('text::book','book'),
-   ('text::book::book part','bookPart'),
-   ('text::review','review'),
-   ('text::conference object','conferenceObject'),
-   ('text::lecture','lecture'),
-   ('text::working paper','workingPaper'),
-   ('text::preprint','preprint'),
-   ('text::report','report'),
-   ('text::annotation','annotation'),
-   ('text::periodical','contributionToPeriodical'),
-   ('text::patent','patent'),
+   ('journal article','article'),
+   ('bachelor thesis','bachelorthesis'),
+   ('master thesis','masterthesis'),
+   ('doctoral thesis','doctoralthesis'),
+   ('book','book'),
+   ('book part','bookpart'),
+   ('review','review'),
+   ('conference object','conferenceobject'),
+   ('lecture','lecture'),
+   ('working paper','workingpaper'),
+   ('preprint','preprint'),
+   ('report','report'),
+   ('annotation','annotation'),
+   ('periodical','contributiontoperiodical'),
+   ('patent','patent'),
    ('other','other'),
    ('dataset','dataset'),
-   ('learning object','pedagogicalPublication');
+   ('learning object','pedagogicalpublication');
 
 
 -- mapear valores existentes rcaap.type
@@ -242,7 +242,7 @@ SELECT
 	mdv.resource_type_id as "resource_type_id"
 
 FROM metadatavalue AS mdv 
-LEFT JOIN temp_dctype ON mdv.text_value = text_value_in
+LEFT JOIN temp_dctype ON LOWER(mdv.text_value) = text_value_in
 WHERE mdv.metadata_field_id IN (SELECT metadata_field_id FROM "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'rcaap') AND metadatafieldregistry.element = 'type' AND metadatafieldregistry.qualifier is NULL);
 
 
