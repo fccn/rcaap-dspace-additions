@@ -108,12 +108,13 @@ for file in ${SCRIPTPATH}/export_addon*.sql; do
 
         if [ "$ALL_CHANGED" -eq 1 ]; then
             # obtain start date and end date from stats.view
-            read -r -a START_END_YEARS <<< "$(su - postgres -c "psql -d ${DB_NAME} -At -A -c 'SELECT TO_CHAR(MIN(date), ''YYYY''), TO_CHAR(MAX(date), ''YYYY'') FROM stats.view'")"
+            IFS="|" read -r -a START_END_YEARS <<< "$(su - postgres -c "psql -d ${DB_NAME} -At -A -c \"SELECT TO_CHAR(MIN(date), 'YYYY'), TO_CHAR(MAX(date), 'YYYY') FROM stats.view\"")"
+
 
             start_year="${START_END_YEARS[0]}"
             end_year="${START_END_YEARS[1]}"
 
-            for ((year=start_year; year<=end_year; year++)); do
+            for ((year=start_year; year<end_year; year++)); do
                 YEARS+=" $year"
             done
         fi
