@@ -5,8 +5,8 @@
 
 	<bean id="CienciaVitaeRestConnector" class="pt.rcaap.cienciavitae.curriculum.client.RestConnector">
 		<constructor-arg index="0"  value="${cienciavitae.api.url:https://qa.cienciavitae.pt/api/v1.1}"/>
-		<constructor-arg index="1"  value="${cienciavitae.api.username}"/>
-		<constructor-arg index="2"  value="${cienciavitae.api.password}"/>
+		<constructor-arg index="1"  value="${cienciavitae.api.username:MYUSERNAME}"/>
+		<constructor-arg index="2"  value="${cienciavitae.api.password:MYPASSWORD}"/>
 	</bean>
 
 	<bean
