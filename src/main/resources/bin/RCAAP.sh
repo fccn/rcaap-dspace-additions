@@ -1,19 +1,17 @@
-#!/bin/bash
+#!/bin/sh
 
 # pgraca: paulo.graca@fccn.pt
 # this script executes other SHELL scripts
 # it will receive a parameter corresponding with the command to execute
 
 # Current script dir
-pushd `dirname $0` > /dev/null
-SCRIPTPATH=`pwd`
-popd > /dev/null
+SCRIPTPATH=$(dirname "$0")
 
 usage()
 {
 cat <<EOF
-Usage: $(basename $0) [options]
- 
+Usage: $(basename "$0") [options]
+
 This shell script executes filter media from dspace
 in an incremental way for all recently changed records.
 
@@ -28,8 +26,8 @@ Options:
 
 Example:
 
-   $(basename $0) --script /dspace/bin/RCAAP-filter-media --n-days 10
- 
+   $(basename "$0") --script /dspace/bin/RCAAP-filter-media --n-days 10
+
 EOF
 }
 
@@ -44,25 +42,25 @@ case "$1" in
         exit 0
         ;;
     *)
-        echo "$(basename $0): invalid option $1" >&2
+        echo "$(basename "$0"): invalid option $1" >&2
         echo "see --help for usage"
         exit 1
-          ;;
+        ;;
 esac
 shift
 
 
 # if name is called
-if [[ ! -f "$SCRIPT" ]]; then
+if [ ! -f "$SCRIPT" ]; then
   SCRIPT="${SCRIPTPATH}/RCAAP-${SCRIPT}.sh"
 fi
 
 # Verify if script exists as a file
-if [[ ! -f "$SCRIPT" ]]; then
+if [ ! -f "$SCRIPT" ]; then
     echo "Error executing ${SCRIPT}"
     usage
     exit 1
 fi
 
 echo "Executing $SCRIPT $@"
-$SCRIPT $@
+"$SCRIPT" "$@"
