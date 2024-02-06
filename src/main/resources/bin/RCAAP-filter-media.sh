@@ -34,6 +34,8 @@ Example:
 EOF
 } 
 
+N_DAYS="5"
+
 while [ "$1" ]; do
   case "$1" in
         --n-days)
@@ -75,7 +77,8 @@ NUMBER_ITEMS=0
 for HANDLE in $HANDLES
 do
   #Filter media execution - /dspace/bin/dspace filter-media
-  "${SCRIPTPATH}/dspace filter-media" -v -i "${HANDLE}" >> "${LOG_FILE}"
+  echo "... processing ${HANDLE}" >> "${LOG_FILE}"
+  "${SCRIPTPATH}/dspace" filter-media -v -i "${HANDLE}" >> "${LOG_FILE}"
   #first, retrieve the number of archived items processed
   NUMBER_ITEMS=$((NUMBER_ITEMS+1))
 done

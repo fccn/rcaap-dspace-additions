@@ -12,7 +12,7 @@ export JAVA_OPTS="-Xmx2048M -Xms512M -Dfile.encoding=UTF-8"
 SCRIPTPATH=$(dirname "$0")
 
 # Default values
-LOG_FILE="${SCRIPTPATH}/../log/rcaap_aip_export.log"
+LOG_FILE="${SCRIPTPATH}/../log/rcaap_aip_packager.log"
 N_DAYS="3"
 
 usage()
@@ -122,7 +122,7 @@ if [ "${N_DAYS}" -ge "0" ]; then
     for HANDLE in $HANDLES
     do
       # export AIP packages
-      "${SCRIPTPATH}/dspace packager" -d -a -u -t AIP -e "${EMAIL}" -i "${HANDLE}" "${BACKUP_DIR}/ITEM@${HANDLE//\//-}.zip" >> "${LOG_FILE}"
+      "${SCRIPTPATH}/dspace" packager -d -a -u -t AIP -e "${EMAIL}" -i "${HANDLE}" "${BACKUP_DIR}/ITEM@${HANDLE//\//-}.zip" >> "${LOG_FILE}"
       # first, retrieve the number of archived items processed
       NUMBER_ITEMS=$((NUMBER_ITEMS+1))
     done
@@ -138,7 +138,7 @@ else
     before="$(date +%s)"
 
     # export AIP packages
-    "${SCRIPTPATH}/dspace packager" -d -a -u -t AIP -e "${EMAIL}" -i "${HANDLE_PREFIX}/0" "${BACKUP_DIR}/${HANDLE_PREFIX}-aip.zip" >> "${LOG_FILE}"
+    "${SCRIPTPATH}/dspace" packager -d -a -u -t AIP -e "${EMAIL}" -i "${HANDLE_PREFIX}/0" "${BACKUP_DIR}/${HANDLE_PREFIX}-aip.zip" >> "${LOG_FILE}"
 
     # minutes difference between begin and end of process
     diff=$(perl -w -e "use POSIX; print ceil(($(date +%s)-$before)/60.0), qq{\n}")
