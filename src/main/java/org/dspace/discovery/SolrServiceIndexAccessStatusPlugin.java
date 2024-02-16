@@ -38,8 +38,8 @@ public class SolrServiceIndexAccessStatusPlugin implements SolrServiceIndexPlugi
 
             // _keyword and _filter because
             // they are needed in order to work as a facet and filter.
-            document.addField("access-status_keyword", accessStatus);
-            document.addField("access-status_filter", accessStatus);
+            document.addField("access_status_keyword", accessStatus);
+            document.addField("access_status_filter", accessStatus);
 
         }
     }
