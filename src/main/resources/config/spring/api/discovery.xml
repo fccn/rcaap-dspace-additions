@@ -44,6 +44,9 @@
     <!-- Additional indexing plugin enables searching by supervised (true,false) -->
     <bean id="solrServiceSupervisionOrderIndexingPlugin" class="org.dspace.discovery.SolrServiceSupervisionOrderIndexingPlugin"/>
 
+    <!-- Additional indexing plugin that enables filtering by access status -->
+    <bean id="solrServiceIndexAccessStatusPlugin" class="org.dspace.discovery.SolrServiceIndexAccessStatusPlugin" scope="prototype"/>
+
     <!--Bean that is used for mapping communities/collections to certain discovery configurations.-->
     <bean id="org.dspace.discovery.configuration.DiscoveryConfigurationService" class="org.dspace.discovery.configuration.DiscoveryConfigurationService">
         <property name="map">
@@ -168,6 +171,7 @@
                 <ref bean="searchFilterEntityType"/>
                 <ref bean="searchFilterAuthor" />
                 <ref bean="searchFilterType"/>
+                <ref bean="searchFilterAccessStatus" />
                 <ref bean="searchFilterSubject" />
                 <ref bean="searchFilterLanguage"/>
                 <ref bean="searchFilterIssued" />
@@ -192,6 +196,7 @@
                 <ref bean="searchFilterIsPublicationOfJournalIssueRelation"/>
                 <ref bean="searchFilterIsJournalOfPublicationRelation"/>
                 <ref bean="searchFilterType" />
+                <ref bean="searchFilterAccessStatus" />
                 <ref bean="searchFilterLanguage"/>
             </list>
         </property>
@@ -2400,6 +2405,13 @@
             <list>
                 <value>dc.type</value>
             </list>
+        </property>
+    </bean>
+
+    <bean id="searchFilterAccessStatus" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="access_status" />
+        <property name="metadataFields">
+            <list/>
         </property>
     </bean>
 
