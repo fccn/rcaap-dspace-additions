@@ -1258,6 +1258,7 @@
         <property name="sidebarFacets">
             <list>
                 <ref bean="searchFilterJobtitle"/>
+                <ref bean="searchFilterAffiliation"/>
                 <ref bean="searchFilterKnowsLanguage"/>
                 <ref bean="searchFilterBirthdate"/>
             </list>
@@ -1268,6 +1269,7 @@
                 <ref bean="searchFilterFamilyName"/>
                 <ref bean="searchFilterGivenName"/>
                 <ref bean="searchFilterJobtitle"/>
+                <ref bean="searchFilterAffiliation"/>
                 <ref bean="searchFilterKnowsLanguage"/>
                 <ref bean="searchFilterBirthdate"/>
                 <ref bean="searchFilterIsOrgUnitOfPersonRelation"/>
@@ -1320,6 +1322,7 @@
         <property name="sidebarFacets">
             <list>
                 <ref bean="searchFilterJobtitle"/>
+                <ref bean="searchFilterAffiliation"/>
                 <ref bean="searchFilterKnowsLanguage"/>
                 <ref bean="searchFilterBirthdate"/>
             </list>
@@ -1330,6 +1333,7 @@
                 <ref bean="searchFilterFamilyName"/>
                 <ref bean="searchFilterGivenName"/>
                 <ref bean="searchFilterJobtitle"/>
+                <ref bean="searchFilterAffiliation"/>
                 <ref bean="searchFilterKnowsLanguage"/>
                 <ref bean="searchFilterBirthdate"/>
                 <ref bean="searchFilterIsOrgUnitOfPersonRelation"/>
@@ -1983,6 +1987,7 @@
             <list>
                 <ref bean="searchFilterOrganizationAddressCountry"/>
                 <ref bean="searchFilterJobtitle"/>
+                <ref bean="searchFilterAffiliation"/>
                 <ref bean="searchFilterEntityType"/>
             </list>
         </property>
@@ -1997,6 +2002,7 @@
                 <ref bean="searchFilterFamilyName"/>
                 <ref bean="searchFilterGivenName"/>
                 <ref bean="searchFilterJobtitle"/>
+                <ref bean="searchFilterAffiliation"/>
                 <ref bean="searchFilterIsPersonOfOrgUnitRelation"/>
                 <ref bean="searchFilterIsProjectOfOrgUnitRelation"/>
                 <ref bean="searchFilterIsPublicationOfOrgUnitRelation"/>
@@ -2450,6 +2456,21 @@
         <property name="metadataFields">
             <list>
                 <value>person.jobTitle</value>
+            </list>
+        </property>
+        <property name="facetLimit" value="5"/>
+        <property name="sortOrderSidebar" value="COUNT"/>
+        <property name="sortOrderFilterPage" value="COUNT"/>
+        <property name="isOpenByDefault" value="true"/>
+        <property name="pageSize" value="10"/>
+        <property name="exposeMinAndMaxValue" value="true"/>
+    </bean>
+
+    <bean id="searchFilterAffiliation" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="affiliationName"/>
+        <property name="metadataFields">
+            <list>
+                <value>person.affiliation.name</value>
             </list>
         </property>
         <property name="facetLimit" value="5"/>
