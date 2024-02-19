@@ -324,7 +324,6 @@
                 <ref bean="searchFilterAuthor" />
                 <ref bean="searchFilterSubject" />
                 <ref bean="searchFilterIssued" />
-                <ref bean="searchFilterContentInOriginalBundle"/>
                 <ref bean="searchFilterEntityType"/>
             </list>
         </property>
@@ -1117,10 +1116,11 @@
         <property name="sidebarFacets">
             <list>
                 <ref bean="searchFilterAuthor" />
+                <ref bean="searchFilterType"/>
+                <ref bean="searchFilterAccessStatus" />
                 <ref bean="searchFilterSubject" />
+                <ref bean="searchFilterLanguage"/>
                 <ref bean="searchFilterIssued" />
-                <ref bean="searchFilterContentInOriginalBundle"/>
-                <ref bean="searchFilterEntityType"/>
             </list>
         </property>
         <!-- Set TagCloud configuration per discovery configuration -->
@@ -1132,6 +1132,7 @@
                 <ref bean="searchFilterAuthor" />
                 <ref bean="searchFilterSubject" />
                 <ref bean="searchFilterIssued" />
+                <ref bean="searchFilterType"/>
                 <ref bean="searchFilterContentInOriginalBundle"/>
                 <ref bean="searchFilterFileNameInOriginalBundle" />
                 <ref bean="searchFilterFileDescriptionInOriginalBundle" />
@@ -1141,6 +1142,8 @@
                 <ref bean="searchFilterIsOrgUnitOfPublicationRelation"/>
                 <ref bean="searchFilterIsPublicationOfJournalIssueRelation"/>
                 <ref bean="searchFilterIsJournalOfPublicationRelation"/>
+                <ref bean="searchFilterAccessStatus" />
+                <ref bean="searchFilterLanguage"/>
             </list>
         </property>
         <!--The sort filters for the discovery search-->
@@ -1187,10 +1190,11 @@
         <property name="sidebarFacets">
             <list>
                 <ref bean="searchFilterAuthor" />
+                <ref bean="searchFilterType"/>
+                <ref bean="searchFilterAccessStatus" />
                 <ref bean="searchFilterSubject" />
+                <ref bean="searchFilterLanguage"/>
                 <ref bean="searchFilterIssued" />
-                <ref bean="searchFilterContentInOriginalBundle"/>
-                <ref bean="searchFilterEntityType"/>
             </list>
         </property>
         <!-- Set TagCloud configuration per discovery configuration -->
@@ -1211,6 +1215,9 @@
                 <ref bean="searchFilterIsOrgUnitOfPublicationRelation"/>
                 <ref bean="searchFilterIsPublicationOfJournalIssueRelation"/>
                 <ref bean="searchFilterIsJournalOfPublicationRelation"/>
+                <ref bean="searchFilterType"/>
+                <ref bean="searchFilterAccessStatus" />
+                <ref bean="searchFilterLanguage"/>
             </list>
         </property>
         <!--The sort filters for the discovery search-->
