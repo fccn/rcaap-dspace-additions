@@ -40,17 +40,6 @@ mv config/spring/api/virtual-metadata.xml config/spring/api/virtual-metadata.xml
 mv config/spring/api/virtual-metadata.xml.openaire4 config/spring/api/virtual-metadata.xml
 ```
 
-## Para instalação usando o Docker
-
-Caso se use o Docker, será necessário correr todos os passos da instalação e, de seguida, será necessário alterar as dependências no Dockerfile e Dockerfile.cli para usar as imagens alojadas no Docker Hub do RCAAP:
-```
-cd ..
-sed -i 's/FROM dspace\/dspace-dependencies/FROM rcaap\/dspace-dependencies/g' Dockerfile
-sed -i 's/FROM dspace\/dspace-dependencies/FROM rcaap\/dspace-dependencies/g' Dockerfile.cli
-```
-
-Depois deste processo, seguir os passos normais de instalação do DSpace. Ver: https://wiki.lyrasis.org/display/DSDOC7x/Installing+DSpace
-
 # Configuração
 
 ## Configuração Ciência Vitae
@@ -156,17 +145,9 @@ select item_id, count (*) from workspaceitem group by item_id having count(*)>1;
 
 # Docker
 
-Primeiro seguir os passos referidos no tópico de **Instalação**.
-
-Fazer o build da imagem Docker (dspace dependencies) (na raiz do DSpace):
+Fazer clone do projeto:
 ```
-cd /home/DSpace-7X
-docker build -t rcaap/dspace-dependencies -f Dockerfile.dependencies .
-```
-
-Agora disponibiliza-se essa imagem no Docker Hub porque será necessária para continuar o processo:
-```
-docker push rcaap/dspace-dependencies
+git clone https://github.com/fccn/rcaap-dspace-additions.git
 ```
 
 Fazer o build da imagem Docker (dspace):
@@ -180,9 +161,6 @@ docker build -t rcaap/dspace-cli -f Dockerfile.cli .
 ```
 
 E fazer o push das imagens para o Docker Hub para poder ser instalado em qualquer local:
-```
-docker push rcaap/dspace-dependencies
-```
 ```
 docker push rcaap/dspace
 ```
