@@ -6,14 +6,14 @@
 
 # Instalação DSpace 7++
 
-Obter o código DSpace versão 7.6.1.
+Obter o código DSpace versão 7.6.1. (nas instruções abaixo, substituir [dspace-7X] por dspace-7.6.1)
 ```
-git clone --branch dspace-7X https://github.com/DSpace/DSpace.git /home/DSpace-7X
+git clone --branch [dspace-7X] https://github.com/DSpace/DSpace.git /home/DSpace
 ```
 
 Depois, garantir que o DSpace não tem os `additions` default.
 ```
-cd /home/DSpace-7X/dspace/modules/
+cd /home/DSpace/dspace/modules/
 mv additions /tmp/
 ```
 
