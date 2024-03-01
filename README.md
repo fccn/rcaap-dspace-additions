@@ -8,16 +8,16 @@
 
 Obter o código DSpace versão 7.6.1. (nas instruções abaixo, substituir [dspace-7X] por dspace-7.6.1)
 ```
-git clone --branch [dspace-7X] https://github.com/DSpace/DSpace.git /home/DSpace
+git clone --branch [dspace-7X] https://github.com/DSpace/DSpace.git DSpace
 ```
 
 Depois, garantir que o DSpace não tem os `additions` default.
 ```
-cd /home/DSpace/dspace/modules/
+cd DSpace/dspace/modules/
 mv additions /tmp/
 ```
 
-Fazer clone do projeto para a diretoria additions em `/home/DSpace-7X/dspace/modules/`:
+Fazer clone do projeto para a diretoria additions em `DSpace/dspace/modules/`:
 ```
 git clone https://github.com/fccn/rcaap-dspace-additions.git additions
 ```
