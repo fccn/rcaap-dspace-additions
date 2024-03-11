@@ -2030,14 +2030,14 @@
             
             <row>
                 <field>
-	                <dc-schema>dc</dc-schema>
-	                <dc-element>relation</dc-element>
-	                <dc-qualifier></dc-qualifier>
-	                <repeatable>true</repeatable>
-	                <label>Projeto(s) ou bolsa(s)</label>
-	                <input-type>onebox</input-type>
-	                <hint>Caso a publicação resulte de projeto(s) financiado(s) pela Comissão Europeia (FP7, H2020, ERC), Fundação para a Ciência e Tecnologia ou Wellcome Trust, identifique esse(s) projeto(s) aqui. Essa identificação é geralmente um requisito dos financiadores. Para identificar o(s) projeto(s) insira um dos seus elementos identificativos (número, nome, acrónimo ou referência) e clique na lupa para pesquisar.</hint>
-	             </field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>relation</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Projeto(s) ou bolsa(s)</label>
+                    <input-type>onebox</input-type>
+                    <hint>Caso a publicação resulte de projeto(s) financiado(s) pela Comissão Europeia (FP7, H2020, ERC), Fundação para a Ciência e Tecnologia ou Wellcome Trust, identifique esse(s) projeto(s) aqui. Essa identificação é geralmente um requisito dos financiadores. Para identificar o(s) projeto(s) insira um dos seus elementos identificativos (número, nome, acrónimo ou referência) e clique na lupa para pesquisar.</hint>
+                 </field>
             </row>
             
             <row>
