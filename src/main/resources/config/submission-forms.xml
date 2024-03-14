@@ -1,0 +1,3735 @@
+<?xml version="1.0"?>
+<!-- REX template based file - please check rex DSpace module - https://github.com/fccn/rcaap-rex-rcaap-dspace-module -->
+<!DOCTYPE input-forms SYSTEM "submission-forms.dtd">
+
+<input-forms>
+
+    <!-- The form-definitions map lays out the detailed definition of all the -->
+    <!-- submission forms. Each separate form set has a unique name as an     -->
+    <!-- attribute. This name matches one of the names in the form-map. One   -->
+    <!-- named form set has the name "traditional"; as this name suggests,    -->
+    <!-- it is the old style and is also the default, which gets used when    -->
+    <!-- the specified collection has no correspondingly-named form set.      -->
+    <!--                                                                      -->
+    <!-- Each form set contains an ordered set of pages; each page defines    -->
+    <!-- one submission metadata entry screen. Each page has an ordered list  -->
+    <!-- of field definitions, Each field definition corresponds to one       -->
+    <!-- metadata entry (a so-called row), which has a DC element name, a     -->
+    <!-- displayed label, a text string prompt which is called a hint, and    -->
+    <!-- an input-type. Each field also may hold optional elements: DC        -->
+    <!-- qualifier name, a repeatable flag, and a text string whose presence  -->
+    <!-- serves as a 'this field is required' flag.                           -->
+
+    <form-definitions>
+        
+        <!-- Form used for entering in Bitstream/File metadata after uploading a file -->
+        <!-- RCAAP CHANGED!!! -->
+        
+        <form name="bitstream-metadata">
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>title</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Nome do(s) ficheiro(s)</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o(s) nome do(s) ficheiro(s) que está a carregar.</hint>
+                    <required>Tem de introduzir o(s) nome(s) dos ficheiro(s)</required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>description</dc-element>
+                    <repeatable>true</repeatable>
+                    <label>Descrição breve</label>
+                    <input-type>textarea</input-type>
+                    <hint>Pode introduzir aqui uma pequena descrição do(s) ficheiro(s) que está a carregar.</hint>
+                    <required></required>
+                </field>
+            </row>
+
+            <row>
+                 <field>
+                    <dc-schema>rcaap</dc-schema>
+                    <dc-element>embargofct</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Justificação para prolongamento de embargo </label>
+                    <input-type>textarea</input-type>
+                    <hint>Caso este item tenha obtido financiamento FCT e de ter indicado um período de embargo superior a 12 meses (nas ciências sociais e humanidades) ou 6 meses para as restantes áreas indique as razões.</hint>
+                </field>
+            </row>
+
+            <row>            
+                <field>
+                    <dc-schema>rcaap</dc-schema>
+                    <dc-element>contributor</dc-element>
+                    <dc-qualifier>authoremail</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Contacto do autor(a) para envio de pedido(s) de cópia </label>
+                    <input-type>onebox</input-type>
+                    <hint>Se o registo for de acesso restrito ou embargado, insira aqui o e-mail do autor(a) correspondente preferencial, para posterior envio de resposta a eventuais pedidos de cópia ou de acesso.</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+        </form>
+
+       
+
+       <!-- Form which defines the first page/section of the "TRADITIONAL" DSpace submission process, 
+        often used when depositing normal Items (i.e. Items which are not Entities). -->
+        <form name="traditionalpageone">
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>contributor</dc-element>
+                    <dc-qualifier>author</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Author</label>
+                    <input-type>onebox</input-type>
+                    <hint>Enter the author's name (Family name, Given names).</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>title</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Title</label>
+                    <input-type>onebox</input-type>
+                    <hint>Enter the main title of the item.</hint>
+                    <required>You must enter a main title for this item.</required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>title</dc-element>
+                    <dc-qualifier>alternative</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Other Titles</label>
+                    <input-type>onebox</input-type>
+                    <hint>If the item has any alternative titles, please enter them here.</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>date</dc-element>
+                    <dc-qualifier>issued</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Date of Issue</label>
+                    <style>col-sm-4</style>
+                    <input-type>date</input-type>
+                    <hint>Please give the date of previous publication or public distribution.
+                        You can leave out the day and/or month if they aren't applicable.
+                    </hint>
+                    <required>You must enter at least the year.</required>
+                </field>
+                  
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>publisher</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Publisher</label>
+                    <style>col-sm-8</style>
+                    <input-type>onebox</input-type>
+                    <hint>Enter the name of the publisher of the previously issued instance of this item.</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>identifier</dc-element>
+                    <dc-qualifier>citation</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Citation</label>
+                    <input-type>onebox</input-type>
+                    <hint>Enter the standard citation for the previously issued instance of this item.</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>relation</dc-element>
+                    <dc-qualifier>ispartofseries</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Series/Report No.</label>
+                    <input-type>series</input-type>
+                    <hint>Enter the series and number assigned to this item by your community.</hint>
+                    <required></required>
+                </field>
+            </row>
+              <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>identifier</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <!-- An input-type of qualdrop_value MUST be marked as repeatable -->
+                    <repeatable>true</repeatable>
+                    <label>Identifiers</label>
+                    <input-type value-pairs-name="common_identifiers">qualdrop_value</input-type>
+                    <hint>If the item has any identification numbers or codes associated with
+                        it, please enter the types and the actual numbers or codes.
+                    </hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>type</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Type</label>
+                    <input-type value-pairs-name="common_types">dropdown</input-type>
+                    <hint>Select the type of content of the item.
+                    </hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>language</dc-element>
+                    <dc-qualifier>iso</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Language</label>
+                    <input-type value-pairs-name="common_iso_languages">dropdown</input-type>
+                    <hint>Select the language of the main content of the item. If the language does not appear in the
+                        list, please select 'Other'. If the content does not really have a language (for example, if it
+                        is a dataset or an image) please select 'N/A'.
+                    </hint>
+                    <required></required>
+                </field>
+            </row>
+        </form>
+
+        <!-- Form which defines the second page/section of the "traditional" DSpace submission process,
+             often used when depositing normal Items. -->
+        <form name="traditionalpagetwo">
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <!-- An input-type of tag MUST be marked as repeatable -->
+                    <repeatable>true</repeatable>
+                    <label>Subject Keywords</label>
+                    <input-type>tag</input-type>
+                    <hint>Enter appropriate subject keywords or phrases.</hint>
+                    <required></required>
+                    <vocabulary>srsc</vocabulary>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>description</dc-element>
+                    <dc-qualifier>abstract</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Abstract</label>
+                    <input-type>textarea</input-type>
+                    <hint>Enter the abstract of the item.</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>description</dc-element>
+                    <dc-qualifier>sponsorship</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Sponsors</label>
+                    <input-type>textarea</input-type>
+                    <hint>Enter the names of any sponsors and/or funding codes in the box.</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>description</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Description</label>
+                    <input-type>textarea</input-type>
+                    <hint>Enter any other description or comments in this box.</hint>
+                    <required></required>
+                </field>
+            </row>
+        </form>
+
+               
+        <!-- RCAAP FORMS REVISON 19-02-2024 -->
+     
+        <!-- RCAAP 'PERSON' form --> 
+
+        <form name="RCAAP_Person_Form">
+            
+            <row>
+                
+                <field>
+                    <dc-schema>person</dc-schema>
+                    <dc-element>familyName</dc-element>
+                    <label>Apelido</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o sobrenome ou último nome da pessoa.</hint>
+                    <required>Tem que introduzir um sobrenome de autor!</required>
+                </field>
+                
+                <field>
+                    <dc-schema>person</dc-schema>
+                    <dc-element>givenName</dc-element>
+                    <label>Nome</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o nome ou primeiro nome da pessoa.</hint>
+                    <required>Tem que introduzir um nome de autor!</required>
+                </field>
+                
+            </row>
+            
+            <!-- 15-01-2024! RS consider changing this row/field to another schema/element e.g 'person.preferredName' to avoid unwanted 'titles'!!! -->
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>title</dc-element>
+                    <label>Nome preferencial</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o nome preferencia da pessoa em termos de 'autoridade' ou 'nome científico'.</hint>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>person</dc-schema>
+                    <dc-element>affiliation</dc-element>
+                    <dc-qualifier>name</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Afiliação</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza afiliação organizacional ou institucional da pessoa.</hint>
+                </field>
+            </row>
+            
+            <!-- 16-02-2023 - RCAAP! ADD -->
+            <row>
+                <field>
+                    <dc-schema>person</dc-schema>
+                    <dc-element>jobTitle</dc-element>
+                    <repeatable>false</repeatable>
+                    <label>Posição ou cargo</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza a posição ou cargo desempenhado pela pessoa.</hint>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>person</dc-schema>
+                    <dc-element>email</dc-element>
+                    <repeatable>true</repeatable>
+                    <label>Correio eletrónico</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza endereço(s) de correio eletrónico da pessoa.</hint>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>person</dc-schema>
+                    <dc-element>identifier</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <!-- An input-type of qualdrop_value MUST be marked as repeatable -->
+                    <repeatable>true</repeatable>
+                    <label>Idenficador(es) de autor</label>
+                    <input-type value-pairs-name="openaire_author_identifier_types">qualdrop_value</input-type>
+                    <hint>Se a pessoa tiver identificadores de autor associados, indique segundo a sua tipologia, os seus números ou IDs atuais.</hint>
+                    <required>Tem que introduzir um identificador de autor!</required>
+                </field>
+            </row>
+            
+            <!-- 12-06-2023 - RCAAP! For internal identifiers... to consider ???  
+            
+            <row>
+                <field>
+                    <dc-schema>person</dc-schema>
+                    <dc-element>identifier</dc-element>
+                    <dc-qualifier>staffid</dc-qualifier>
+                    <label>Identificador intitucional</label>
+                    <input-type>onebox</input-type>
+                    <hint>Caso se aplique, introduza aqui identificador institucional. [Exemplo: N.º mecanográfico interno]</hint>
+                </field>
+            </row>
+            
+            -->
+            
+            <!-- 12-06-2023 - RCAAP! For birth date... not for use ???
+            
+            <row>
+                <field>
+                    <dc-schema>person</dc-schema>
+                    <dc-element>birthDate</dc-element>
+                    <label>Birth date</label>
+                    <input-type>date</input-type>
+                    <hint>Enter the birth date of the person</hint>
+                </field>
+            </row>
+            
+            -->
+            
+        </form>
+        <!-- RCAAP 'PERSON' END -->
+        
+              
+        <!-- RCAAP 'PROJECT' form --> 
+
+        <form name="RCAAP_Project_Form">
+            
+            <!-- 15-01-2024! RS consider changing this row/field to another schema/element e.g 'project.name' to avoid unwanted 'titles' -->
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>title</dc-element>
+                    <label>Nome do projeto</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o nome do projeto.</hint>
+                    <required>Tem que introduzir o nome do projeto!</required>
+                </field>
+            </row>
+            
+            <!-- 10-06-2023 - RCAAP! ADD -->
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>title</dc-element>
+                    <dc-qualifier>alternative</dc-qualifier>
+                    <label>Nome alternativo ou acrónimo</label>
+                    <input-type>onebox</input-type>
+                    <hint>Se aplicável, introduza um nome alternativo ou acrónimo do projeto.</hint>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>identifier</dc-element>
+                    <dc-qualifier>uri</dc-qualifier>
+                    <label>Página Web do projeto</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o URL da página Web do projeto.</hint>
+                </field>
+            </row>
+            
+            <row>
+                <relation-field>
+                    <relationship-type>isFundingAgencyOfProject</relationship-type>
+                    <search-configuration>openAIREFundingAgency</search-configuration>
+                    <repeatable>false</repeatable>
+                    <name-variants>false</name-variants>
+                    <label>Financiador</label>
+                    <hint>Introduza o nome do financiador.</hint>
+                    <linked-metadata-field>
+                        <dc-schema>project</dc-schema>
+                        <dc-element>funder</dc-element>
+                        <dc-qualifier>name</dc-qualifier>
+                        <input-type>onebox</input-type>
+                    </linked-metadata-field>
+                    <externalsources></externalsources>
+                    <required>Tem que introduzir uma entidade/organização de financiamento!</required>
+                </relation-field>
+            </row>
+            
+            <!-- 12-06-2023 - RCAAP! To consider ???? 
+            <row>
+                <relation-field>
+                    <relationship-type>isProjectOfPerson</relationship-type>
+                    <search-configuration>person</search-configuration>
+                    <repeatable>true</repeatable>
+                    <label>Investigator(es)</label>
+                    <hint>Introduza o(s) nome(s) do(s) investigador(es) (apelido, nome próprio).</hint>
+                    <linked-metadata-field>
+                        <dc-schema>project</dc-schema>
+                        <dc-element>investigator</dc-element>
+                        <input-type>onebox</input-type>
+                    </linked-metadata-field>
+                    <externalsources>orcid,CienciaVitaeCurriculum</externalsources>
+                </relation-field>
+            </row>
+            
+            -->
+            
+            <row>
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>fundingStream</dc-element>
+                    <label>Programa de financiamento</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o nome do programa de financiamento do projeto.</hint>
+                </field>
+                
+                <field>
+                    <dc-schema>oaire</dc-schema><!-- 10-06-2023 - RCAAP! revised -->
+                    <dc-element>awardNumber</dc-element><!-- 10-06-2023 - RCAAP! revised -->
+                    <label>Número de atribuição</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o número de atribuição do projeto.</hint>
+                </field>
+            </row>
+            
+            <!-- 10-06-2023 - RCAAP! ADD futher metadata fileds related to projects for optional usage -->
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>description</dc-element>
+                    <label>Descrição</label>
+                    <input-type>textarea</input-type>
+                    <hint>Introduza um descritivo do projeto.</hint>
+                    <language value-pairs-name="common_iso_languages">true</language>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>project</dc-schema>
+                    <dc-element>funder</dc-element>
+                    <dc-qualifier>identifier</dc-qualifier>
+                    <label>Identificador do projeto</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza identificador do projeto.</hint>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>project</dc-schema>
+                    <dc-element>startDate</dc-element>
+                    <label>Data de início</label>
+                    <input-type>date</input-type>
+                    <hint>Introduza a data em que o projeto inicia ou vai iniciar.</hint>
+                </field>
+                
+                <field>
+                    <dc-schema>project</dc-schema>
+                    <dc-element>endDate</dc-element>
+                    <label>Data de término</label>
+                    <input-type>date</input-type>
+                    <hint>Introduza a data em que o projeto termina ou vai terminar.</hint>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>project</dc-schema>
+                    <dc-element>amount</dc-element>
+                    <label>Valor financiamento</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o valor total de financiamento do projeto.</hint>
+                </field>
+            </row>
+            
+            <!-- 10-06-2023 - RCAAP! ADD to insert free keywords 
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Palavras-chave</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza aqui palavras-chave ou assuntos pertinentes relacionados com o projeto.</hint>
+                    <required></required>
+                    <language value-pairs-name="common_iso_languages">true</language>
+                </field>
+            </row>
+            -->
+            
+            <!-- 25-01-2024 - RCAAP! ADD to insert free keywords -->
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <!-- An input-type of tag MUST be marked as repeatable -->
+                    <repeatable>true</repeatable>
+                    <label>Palavras-chave</label>
+                    <input-type>tag</input-type>
+                    <hint>Introduza aqui palavras-chave ou assuntos pertinentes relacionados com o item de "forma livre". &lt;b&gt;Nota importante&lt;/b&gt;: Para guardar e inserir mais ocorrências clique na tecla 'Enter'.</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            
+            <!-- 10-06-2023 - RCAAP! ADD futher metadata fileds related to projects for optional usage --> <!-- END -->
+            
+        </form>
+        <!-- RCAAP 'PROJECT' END -->        
+        
+       
+        <!-- RCAAP 'ORGANIZATION' form --> 
+
+        <form name="RCAAP_Organization_Form">
+            
+            <row>
+                <field>
+                    <dc-schema>organization</dc-schema>
+                    <dc-element>legalName</dc-element>
+                    <label>Nome da organização</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o nome da organização.</hint>
+                    <required>Tem que introduzir um nome/designação da organização!</required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>organization</dc-schema>
+                    <dc-element>identifier</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <!-- An input-type of qualdrop_value MUST be marked as repeatable -->
+                    <repeatable>true</repeatable>
+                    <label>Identificador(es) da organização</label>
+                    <input-type value-pairs-name="openaire_organization_identifier_types">qualdrop_value</input-type>
+                    <hint>Se a organização tiver identificadores associados, indique segundo a sua tipologia, os seus números ou IDs atuais.</hint>
+                    <required>Tem que introduzir um identificador da organização!</required>
+                </field>
+            </row>
+            
+            <!-- 15-01-2024! Consider changing schema to 'organization' to avoid unwanted 'resource types'???? Hide if not needed!!! -->
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>type</dc-element>
+                    <label>Tipo de organização</label>
+                    <input-type value-pairs-name="openaire_organization_types">dropdown</input-type>
+                    <hint>Selecione o tipo de organização.</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>organization</dc-schema>
+                    <dc-element>foundingDate</dc-element>
+                    <label>Data de criação</label>
+                    <input-type>date</input-type>
+                    <hint>Introduza a data de criação da organização.</hint>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>organization</dc-schema>
+                    <dc-element>address</dc-element>
+                    <dc-qualifier>addressLocality</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Cidade</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza a(s) cidade(s) da organização.</hint>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>organization</dc-schema>
+                    <dc-element>address</dc-element>
+                    <dc-qualifier>addressCountry</dc-qualifier>
+                    <label>País</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o país origem da organização.</hint>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>description</dc-element>
+                    <label>Descrição</label>
+                    <input-type>textarea</input-type>
+                    <hint>Introduza um descritivo da organização.</hint>
+                </field>
+            </row>
+            
+        </form>
+        <!-- RCAAP 'ORGANIZATION' END --> 
+    
+     
+        <!-- RCAAP 'PUBLICATION' form --> 
+        
+        <!-- Upload section -->  <!-- Section 1 -->
+        
+        <form name="RCAAP_Publication_Page_One_Form">  <!-- Section 2 -->
+        
+        <!-- 09-06-2023 - RCAAP change place! Indicate first the type of content in order to modify the subsequent presented field forms        
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>type</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Tipo</label>
+                    <input-type value-pairs-name="openaire_types">dropdown</input-type>
+                    <hint>Indique o tipo de item que vai depositar</hint>
+                    <required>Tem que indicar o tipo de item que vai depositar!</required>
+                </field>
+            </row>
+            -->  
+            
+            <!-- 06-12-2023 - RCAAP change place! Input 'dc.type' by controlled vocabulary: 'coar_types'  -->
+            <row>   
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>type</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Tipo</label>
+                    <input-type>onebox</input-type>
+                    <hint>Indique o tipo de item que vai depositar</hint>
+                    <required>Tem que indicar o tipo de item que vai depositar!</required>
+                    <vocabulary>coar_types</vocabulary>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>title</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Título</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o título principal do item.</hint>
+                    <required>Tem que introduzir o título principal do item!</required>
+                    <language value-pairs-name="common_iso_languages">true</language>
+                </field>
+            </row>
+           
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>title</dc-element>
+                    <dc-qualifier>alternative</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Outro(s) título(s)</label>
+                    <input-type>onebox</input-type>
+                    <hint>Se aplicável, introduza aqui título(s) alternativo(s) ou noutro(s) idioma(s).</hint>
+                    <required></required>
+                    <language value-pairs-name="common_iso_languages">true</language>
+                </field>
+            </row>
+            
+            <row>
+                <relation-field>
+                    <relationship-type>isAuthorOfPublication</relationship-type>
+                    <search-configuration>personOrOrgunit</search-configuration>
+                    <repeatable>true</repeatable>
+                    <name-variants>true</name-variants>
+                    <label>Autor(es)</label>
+                    <hint>Introduza os nome(s) do(s) autor(es). Preencha por favor primeiro o apelido seguido do nome. [Exemplo: "Silva, António"]</hint>
+                    <linked-metadata-field>
+                        <dc-schema>dc</dc-schema>
+                        <dc-element>contributor</dc-element>
+                        <dc-qualifier>author</dc-qualifier>
+                        <input-type>onebox</input-type>
+                    </linked-metadata-field>
+                    <externalsources>orcid,CienciaVitaeCurriculum</externalsources>
+                    <required>Tem que introduzir pelo menos um autor (pode ser o nome textual ou criar relacionamento com uma entidade 'pessoa')!</required>
+                </relation-field>
+            </row>
+
+            <!-- 29-06-2023 - RCAAP! ADD 'dc.contributor.editor' for EDITOR -->
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>contributor</dc-element>
+                    <dc-qualifier>editor</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Editor(es)</label>
+                    <input-type>name</input-type>
+                    <hint>Introduza os nome(s) do(s) editor(es). Preencha por favor primeiro o apelido seguido do nome. [Exemplo: "Silva, António"]</hint>
+                    <required></required>
+                    <type-bind></type-bind>  <!-- 14-02-2024 - No 'type-bind' due to 'dc.type' 'input-type' --> 
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>date</dc-element>
+                    <dc-qualifier>issued</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Data</label>
+                    <input-type>date</input-type>
+                    <hint>Introduza a data da publicação ou distribuição pública (pode deixar o mês e/ou o dia em branco se não se aplicar). Se o item não tiver sido publicado ou distribuído publicamente coloque a data de depósito.</hint>
+                    <required>Tem que introduzir pelo menos o ano!</required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>description</dc-element>
+                    <dc-qualifier>abstract</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Resumo(s)</label>
+                    <input-type>textarea</input-type>
+                    <hint>Introduza aqui resumo(s) (abstract) associados ao item. Caso tenha resumos noutros idiomas clique em 'Adicionar mais'.</hint>
+                    <required></required>
+                    <language value-pairs-name="common_iso_languages">true</language>
+                </field>
+            </row>
+            
+            <!-- 27-07-2023 - RCAAP! ADD to insert free keywords -->
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <!-- An input-type of tag MUST be marked as repeatable -->
+                    <repeatable>true</repeatable>
+                    <label>Palavras-chave</label>
+                    <input-type>tag</input-type>
+                    <hint>Introduza aqui palavras-chave ou assuntos pertinentes relacionados com o item de "forma livre". &lt;b&gt;Nota importante&lt;/b&gt;: Para guardar e inserir mais ocorrências clique na tecla 'Enter'.</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <!-- 27-07-2023 - RCAAP! Not in use!!!
+            <row>
+                <field>
+                    <dc-schema>datacite</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier>srsc</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Classificação SRSC</label>
+                    <input-type>onebox</input-type>
+                    <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste trabalho de acordo com a classificação 'Swedish Research Subject Categories' (SRSC).</hint>
+                    <required></required>
+                    <vocabulary>srsc</vocabulary>
+                </field>
+            </row>
+            -->
+            
+            <!-- Additional Subject with specific taxonomy (like mesh, fos, ...) -->
+            
+            <!-- 09-06-2023 - RCAAP! ADD for Field of Science and Technology (FOS) classification -->
+            <row>
+                <field>
+                    <dc-schema>datacite</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier>fos</dc-qualifier> 
+                    <!-- An input-type of tag MUST be marked as repeatable -->
+                    <repeatable>true</repeatable>
+                    <label>Áreas do conhecimento (FOS/OCDE)</label>
+                    <input-type>onebox</input-type>
+                    <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste item de acordo com a classificação 'Field of Science and Technology' (FOS) &lt;a href="https://www.oecd.org/science/inno/38235147.pdf" target="_blank" &gt;(https://www.oecd.org/science/inno/38235147.pdf)&lt;/a&gt;.</hint>
+                    <required></required>
+                    <vocabulary>fos</vocabulary>
+                </field>
+            </row>
+            
+            <!-- 09-06-2023 - RCAAP! ADD for Sustainable Development Goals (SDG) classification -->
+            <row>   
+                <field>
+                    <dc-schema>datacite</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier>sdg</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Objetivos de Desenvolvimento Sustentável (ODS)</label>
+                    <input-type>onebox</input-type>
+                    <hint>Identifique aqui 'Objetivos de Desenvolvimento Sustentável' (ODS) com os quais o item se alinha. Mais informações: &lt;a href="https://www.ods.pt/ods/#17objetivos" target="_blank" &gt;17 objectivos do desenvolvimento sustentável&lt;/a&gt;</hint>
+                    <required></required>
+                    <vocabulary>sdg</vocabulary>
+                </field>
+            </row> 
+            
+            <!-- 09-06-2023 - RCAAP CHECK! Add 'dc.peerreviewed' to indicate peer-review. Consider changing metadaata schema to 'rccap'???? --> 
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>peerreviewed</dc-element>
+                    <label>Revisão por pares</label>
+                    <style>col-sm-8</style>
+                    <input-type value-pairs-name="yes_no">dropdown</input-type>
+                    <hint>Indique se a versão que está a depositar foi revista por pares especialistas (peer review). Caso não se aplique ou desconhecer pode selecionar a opção 'Não aplicável (N/A)'.</hint>
+                    <required>Tem que selecionar uma das opções apresentadas!</required>
+                    <type-bind></type-bind> <!-- 14-02-2024 - No 'type-bind' due to 'dc.type' 'input-type' --> 
+                </field> 
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>language</dc-element>
+                    <dc-qualifier>iso</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Idioma</label>
+                    <style>col-sm-8</style>
+                    <input-type value-pairs-name="common_iso_languages">dropdown</input-type>
+                    <hint>Indique o idioma predominante no trabalho. Se o idioma principal não aparecer listado selecione a opção "Indeterminado".</hint>
+                    <required>Tem que selecionar uma das opções apresentadas!</required>
+                </field>
+            </row>
+            
+        </form>
+               
+        <form name="RCAAP_Publication_Page_Two_Form">  <!-- Section 3 -->
+            
+           <!-- 09-06-2023 - RCAAP! Add 'dc.identifier.citation' for inserting human-readable standard bibliographic citation  -->
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>identifier</dc-element>
+                    <dc-qualifier>citation</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Citação</label>
+                    <input-type>onebox</input-type>
+                    <hint>Se aplicável, introduza aqui uma referência bibliográfica normalizada (citação) deste item. [Exemplos: "NP 405", "APA", "IEEE",...]</hint>
+                    <required></required>
+                </field>
+            </row> 
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>publisher</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Editora</label>
+                    <style>col-sm-8</style>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o nome da entidade responsável pela publicação ou impressão deste item.</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <!-- 09-06-2023 - RCAAP! Moved here 'oaire.citation.title' for journal, conferences -->
+            <row>
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>title</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Título da revista, periódico, monografia ou evento</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o nome da revista, periódico, monografia ou evento na qual o item foi publicado ou apresentado.</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>conferenceDate</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Data do evento/conferência</label>
+                    <input-type>date</input-type>
+                    <hint>Introduza a data em que o evento se realizou.</hint>
+                    <required></required>
+                    <type-bind>conference object,conference proceedings,conference paper,conference poster,conference paper not in proceedings,conference poster not in proceedings</type-bind>
+                </field>
+            
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>conferencePlace</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Local do evento/conferência</label>
+                    <style>col-sm-8</style>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o nome do local onde o evento se realizou. [Exemplo: "Braga, Portugal"]</hint>
+                    <required></required>
+                    <type-bind>conference object,conference proceedings,conference paper,conference poster,conference paper not in proceedings,conference poster not in proceedings</type-bind>
+                </field>
+            </row>
+            
+            <!-- 09-06-2023 - RCAAP! Moved here 'dc.identifier' -->
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>identifier</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <!-- An input-type of qualdrop_value MUST be marked as repeatable -->
+                    <repeatable>true</repeatable> <!-- 09-06-2023 - RCAAP! Mod to true -->
+                    <label>Identificadores</label>
+                    <input-type value-pairs-name="common_identifiers">qualdrop_value</input-type>
+                    <hint>Se este item tiver identificador(es) associado(s), selecione(-os) e identifique(-os) na seguinte lista. &lt;b&gt;Nota importante&lt;/b&gt;: Sugerimos que nesta fase clique no botão 'Guardar' para que, quando aplicável, seja apresentada ajuda em contexto do serviço SHERPA!</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <!-- 09-06-2023 - RCAAP! ADD single row for DOI -->
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>identifier</dc-element>
+                    <dc-qualifier>doi</dc-qualifier>
+                    <repeatable></repeatable>
+                    <label>DOI</label>
+                    <input-type>onebox</input-type>
+                    <hint>Se este item tiver algum identificador DOI associado, introduza aqui. [Exemplo: 10.1234/9876]</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>volume</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Volume</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o número do volume da publicação.</hint>
+                    <required></required>
+                </field>
+            
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>issue</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Número</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o número da edição ou fascículo da publicação. </hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>relation</dc-element>
+                    <dc-qualifier>ispartofseries</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Coleção / Série</label>
+                    <input-type>series</input-type>
+                    <hint>Se aplicável, introduza a referência da coleção e/ou série da publicação.</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>edition</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Número da edição</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o número da edição da obra. [Exemplo: "2 edição"].</hint>
+                    <required></required>
+                    <type-bind>book,book part</type-bind>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>startPage</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Primeira página</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza aqui (caso tenha) o número da primeira página associada a este item.</hint>
+                    <required></required>
+                </field>
+                
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>endPage</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Última página</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza aqui (caso tenha) o número da última página associada a este item.</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <!-- 09-06-2023 - RCAAP CHECK!!!!! Metadata qualifier ???? RCAAP currently uses 'dc.relation.publisherversion' --> 
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>relation</dc-element>
+                    <dc-qualifier>hasversion</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Ligação para a versão da editora</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza aqui um endereço eletrónico (URL) para a versão publicada deste item. Algumas editoras exigem a colocação de uma referência para a sua versão. Exemplo: The original publication is available at www.springerlink.com</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>description</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Outras informações</label>
+                    <input-type>textarea</input-type>
+                    <hint>Pode introduzir aqui mais alguma informação útil relativamente ao recurso não contemplada noutro(s) campo(s).</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>rights</dc-element>
+                    <dc-qualifier>uri</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Licença Creative Commons (CC)</label>
+                    <input-type value-pairs-name="openaire_license_types">dropdown</input-type>
+                    <hint>Associe uma licença Creative Commons 4.0 Internacional &lt;a href="https://creativecommons.org/licenses/" target="_blank" &gt;(https://creativecommons.org/licenses/)&lt;/a&gt; a este item. &lt;b&gt;Nota importante&lt;/b&gt;: No caso de trabalhos financiados pela FCT o uso da licença CC-BY é recomendado, mas torna-se obrigatório caso tenha usufruido de 'Custos de Processamento da Publicação' (vulgo CPP ou APC) suportados por verbas da FCT. Saiba mais em &lt;a href="https://www.fct.pt/sobre/politicas-e-estrategias/politicas-de-ciencia-aberta/acesso-aberto-a-publicacoes-cientificas/" target="_blank" &gt;(https://www.fct.pt/sobre/politicas-e-estrategias/politicas-de-ciencia-aberta/acesso-aberto-a-publicacoes-cientificas/)&lt;/a&gt;</hint>
+                    <required>Tem que indicar uma licença Creative Commons! Caso não se aplique ou desconhecer pode selecionar a opção 'Não aplicável (N/A)'.</required>
+                </field>
+            </row>
+            
+            <!-- 17-11-2023 - RCAAP! Change place 'oire.version' -->
+            <row>
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>version</dc-element>
+                    <repeatable>false</repeatable>
+                    <label>Versão do item</label>
+                    <input-type value-pairs-name="openaire_version_types">dropdown</input-type>
+                    <hint>Indique qual é a versão correspondente à publicação que (vai ou já) carregou neste depósito. &lt;b&gt;Nota importante&lt;/b&gt;: Para uma decisão mais informada sugerimos a leitura da ajuda em contexto, quando disponível, na secção seguinte [Sherpa]'".</hint>
+                    <required>Tem que indicar qual é a versão que vai utilizar neste depósito! Caso não se aplique ou desconheça pode selecionar a opção 'Não aplicável (N/A)'.</required>
+                </field>
+            </row>
+            
+        </form>
+
+        <!-- SHERPA/RoMEO section help -->  <!-- Section 4 -->        
+        
+        <form name="RCAAP_Publication_Page_Three_Form"> <!-- Section 5 -->
+        
+            <row>
+                <relation-field>
+                    <relationship-type>isProjectOfPublication</relationship-type>
+                    <search-configuration>project</search-configuration>
+                    <repeatable>true</repeatable>
+                    <name-variants>false</name-variants>
+                    <label>Projeto(s) ou bolsa(s)</label>
+                    <hint>Caso a publicação resulte de projeto(s) financiado(s) pela Comissão Europeia (FP7, H2020, ERC), Fundação para a Ciência e Tecnologia ou Wellcome Trust, identifique esse(s) projeto(s) aqui. Essa identificação é geralmente um requisito dos financiadores. Para identificar o(s) projeto(s) insira um dos seus elementos identificativos (número, nome, acrónimo ou referência) e clique na lupa para pesquisar.</hint>
+                    <linked-metadata-field>
+                        <dc-schema>dc</dc-schema>
+                        <dc-element>relation</dc-element>
+                        <input-type>onebox</input-type>
+                    </linked-metadata-field>
+                    <externalsources>openAIREFunding</externalsources>
+                    <required></required>
+                </relation-field>
+            </row>
+            
+            <!-- 09-06-2023 - RCAAP! ADD 'dc.description.sponsorship' for inserting human-readable information about funding projects, grants,... -->
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>description</dc-element>
+                    <dc-qualifier>sponsorship</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Outros financiadores ou patrocinadores</label>
+                    <input-type>textarea</input-type>
+                    <hint>Se aplicável, introduza aqui informação sobre outro(s) financiador(es), patrocinador(es) ou outras fontes de financiamento. Exemplo: Quadro de Referência Estratégica Nacional (QREN)</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <!-- 09-06-2023 - RCAAP element for linking datasets! -->
+            <row>
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>references</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Ligação para datasets (dados científicos)</label>
+                    <input-type>onebox</input-type>
+                    <hint>Caso este documento tenha dados científicos (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <!-- 09-06-2023 - RCAAP! Not for use! Access type will be exposed automatically via OAI-PMH ???
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>rights</dc-element>
+                    <repeatable>false</repeatable>
+                    <label>Access Type</label>
+                    <input-type value-pairs-name="openaire_rights">dropdown</input-type>
+                    <hint>Select the access type of the resource.</hint>
+                    <required></required>
+                </field>
+            </row>
+            -->
+            
+            <!-- Non-Exclusive License section --> <!-- Section 6 -->    
+            
+        </form>
+        <!-- RCAAP 'PUBLICATION' END --> 
+        
+        
+        <!-- RCAAP 'THESIS' form --> 
+        
+        <!-- Section 1 -->
+
+        <form name="RCAAP_Thesis_Page_One_Form">
+            
+            <!-- 09-06-2023 - RCAAP change place! Indicate first the type of content in order to modify the subsequent presented field forms -->         
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>type</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Tipo</label>
+                    <input-type value-pairs-name="thesis_types">dropdown</input-type>
+                    <hint>Indique se vai depositar uma tese de doutoramento ou uma dissertação de mestrado.</hint>
+                    <required>Tem que indicar o tipo de item que vai depositar!</required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>title</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Título</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o título principal da tese de doutoramento ou dissertação de mestrado.</hint>
+                    <required>Tem que introduzir o título principal do trabalho!</required>
+                    <language value-pairs-name="common_iso_languages">true</language>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>title</dc-element>
+                    <dc-qualifier>alternative</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Outro(s) título(s)</label>
+                    <input-type>onebox</input-type>
+                    <hint>Se aplicável, introduza aqui título(s) alternativo(s) ou noutro(s) idioma(s).</hint>
+                    <required></required>
+                    <language value-pairs-name="common_iso_languages">true</language>
+                </field>
+            </row>
+            
+            <!--
+            <row>
+                <relation-field>
+                    <relationship-type>isAuthorOfPublication</relationship-type>
+                    <search-configuration>personOrOrgunit</search-configuration>
+                    <repeatable>true</repeatable>
+                    <name-variants>true</name-variants>
+                    <label>Autor(es)</label>
+                    <hint>Introduza os nome(s) do(s) autor(es). Preencha por favor primeiro o apelido seguido do nome. [Exemplo: "Silva, António"]</hint>
+                    <linked-metadata-field>
+                        <dc-schema>dc</dc-schema>
+                        <dc-element>contributor</dc-element>
+                        <dc-qualifier>author</dc-qualifier>
+                        <input-type>onebox</input-type>
+                    </linked-metadata-field>
+                    <externalsources>orcid,CienciaVitaeCurriculum</externalsources>
+                    <required>Tem que introduzir pelo menos um autor (pode ser o nome textual ou criar relacionamento com uma entidade 'pessoa')!</required>
+                </relation-field>
+            </row> 
+            -->
+
+            <!-- 11-01-2024 - RCAAP! Mod 'dc.contributor.auhor' for AUTHOR -->
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>contributor</dc-element>
+                    <dc-qualifier>author</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Autor</label>
+                    <input-type>name</input-type>
+                    <hint>Introduza o nome do autor da tese ou dissertação. Preencha por favor primeiro o apelido seguido do nome. [Exemplo: "Fictício, João"]</hint>
+                    <required>Tem que introduzir o nome do autor!</required>
+                </field>
+            </row>
+            
+            
+            <!-- 29-06-2023 - RCAAP! ADD 'dc.contributor.advisor' for ADVISOR -->
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>contributor</dc-element>
+                    <dc-qualifier>advisor</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Orientador(es)</label>
+                    <input-type>name</input-type>
+                    <hint>Introduza os nome(s) do(s) orientador(es) ou revisor(es) do trabalho. Preencha por favor primeiro o apelido seguido do nome. [Exemplo: "Silva, António"]</hint>
+                    <required></required>
+                </field>
+            </row>
+
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>date</dc-element>
+                    <dc-qualifier>issued</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Data de defesa</label>
+                    <input-type>date</input-type>
+                    <hint>Introduza a data em que o trabalho foi defendido.</hint>
+                    <required>Tem que introduzir pelo menos o ano!</required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>date</dc-element>
+                    <dc-qualifier>submitted</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Data de submissão</label>
+                    <input-type>date</input-type>
+                    <hint>Se aplicável, introduza a data em que o trabalho foi submetido para defesa.</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>identifier</dc-element>
+                    <dc-qualifier>tid</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Identificador do Trabalho (TID)</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza aqui o identificador do trabalho atribuído pelo RENATES</hint>
+                    <!-- <required>Tem que indicar o identificador do trabalho (TID).</required> obrigatório após agosto 2013, mas podem ocorrer depósitos anteriores??? -->
+                </field>
+            </row>
+    
+            <row>
+                <field>
+                    <dc-schema>thesis</dc-schema>
+                    <dc-element>degree</dc-element>
+                    <dc-qualifier>name</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Designação do grau</label>
+                    <input-type>onebox</input-type>
+                    <hint>Designação do grau associado ao trabalho, tal como se encontra apresentado. [Exemplo: "Mestrado em Tecnologias Educativas"]</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>description</dc-element>
+                    <dc-qualifier>abstract</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Resumo(s)</label>
+                    <input-type>textarea</input-type>
+                    <hint>Introduza aqui resumo(s) (abstract) associados ao trabalho. Caso tenha resumos noutros idiomas clique em 'Adicionar mais'.</hint>
+                    <required></required>
+                    <language value-pairs-name="common_iso_languages">true</language>
+                </field>
+            </row>
+            
+            <!-- 09-06-2023 - RCAAP! ADD to insert free keywords -->
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <!-- An input-type of tag MUST be marked as repeatable -->
+                    <repeatable>true</repeatable>
+                    <label>Palavras-chave</label>
+                    <input-type>tag</input-type>
+                    <hint>Introduza aqui palavras-chave ou assuntos pertinentes relacionados com o item de "forma livre". &lt;b&gt;Nota importante&lt;/b&gt;: Para guardar e inserir mais ocorrências clique na tecla 'Enter'.</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+               <!-- 09-06-2023 - RCAAP! ADD for Field of Science and Technology (FOS) classification -->
+            <row>
+                <field>
+                    <dc-schema>datacite</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier>fos</dc-qualifier> 
+                    <!-- An input-type of tag MUST be marked as repeatable -->
+                    <repeatable>true</repeatable>
+                    <label>Áreas do conhecimento (FOS/OCDE)</label>
+                    <input-type>onebox</input-type>
+                    <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste trabalho de acordo com a classificação 'Field of Science and Technology' (FOS) &lt;a href="https://www.oecd.org/science/inno/38235147.pdf" target="_blank" &gt;(https://www.oecd.org/science/inno/38235147.pdf)&lt;/a&gt;.</hint>
+                    <required></required>
+                    <vocabulary>fos</vocabulary>
+                </field>
+            </row>
+            
+            <!-- 09-06-2023 - RCAAP! ADD for Sustainable Development Goals (SDG) classification -->
+            <row>   
+                <field>
+                    <dc-schema>datacite</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier>sdg</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Objetivos de Desenvolvimento Sustentável (ODS)</label>
+                    <input-type>onebox</input-type>
+                    <hint>Identifique aqui 'Objetivos de Desenvolvimento Sustentável' (ODS) com os quais o trabalho se alinha. Mais informações: &lt;a href="https://www.ods.pt/ods/#17objetivos" target="_blank" &gt;17 objectivos do desenvolvimento sustentável&lt;/a&gt;</hint>
+                    <required></required>
+                    <vocabulary>sdg</vocabulary>
+                </field>
+            </row>
+                        
+
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>language</dc-element>
+                    <dc-qualifier>iso</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Idioma</label>
+                    <input-type value-pairs-name="common_iso_languages">dropdown</input-type>
+                    <hint>Indique o idioma predominante no trabalho. Se o idioma principal não aparecer listado selecione a opção "Indeterminado".</hint>
+                    <required>Tem que selecionar uma das opções apresentadas!</required>
+                </field>
+            </row>
+
+            
+        </form> 
+        <!-- End Section 1 -->
+
+        <!-- Section 2 -->
+        
+        <form name="RCAAP_Thesis_Page_Two_Form">
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>rights</dc-element>
+                    <dc-qualifier>uri</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Licença Creative Commons (CC)</label>
+                    <input-type value-pairs-name="openaire_license_types">dropdown</input-type>
+                    <hint>Associe uma licença Creative Commons 4.0 Internacional &lt;a href="https://creativecommons.org/licenses/" target="_blank" &gt;(https://creativecommons.org/licenses/)&lt;/a&gt; a este item. &lt;b&gt;Nota importante&lt;/b&gt;: No caso de trabalhos financiados pela FCT o uso da licença CC-BY é recomendado, mas torna-se obrigatório caso tenha usufruido de 'Custos de Processamento da Publicação' (vulgo CPP ou APC) suportados por verbas da FCT. Saiba mais em &lt;a href="https://www.fct.pt/sobre/politicas-e-estrategias/politicas-de-ciencia-aberta/acesso-aberto-a-publicacoes-cientificas/" target="_blank" &gt;(https://www.fct.pt/sobre/politicas-e-estrategias/politicas-de-ciencia-aberta/acesso-aberto-a-publicacoes-cientificas/)&lt;/a&gt;</hint>
+                    <required>Tem que indicar uma licença Creative Commons! Caso não se aplique ou desconhecer pode selecionar a opção 'Não aplicável (N/A)'.</required>
+                </field>
+            </row>
+            
+            <row>
+                <relation-field>
+                    <relationship-type>isProjectOfPublication</relationship-type>
+                    <search-configuration>project</search-configuration>
+                    <repeatable>true</repeatable>
+                    <name-variants>false</name-variants>
+                    <label>Projeto(s) ou bolsa(s)</label>
+                    <hint> Caso este trabalho resulte de projeto(s) financiado(s) pela Comissão Europeia (FP7, H2020, ERC), Fundação para a Ciência e Tecnologia ou Wellcome Trust, identifique esse(s) projeto(s) aqui. Essa identificação é geralmente um requisito dos financiadores. Para identificar o(s) projeto(s) insira um dos seus elementos identificativos (número, nome, acrónimo ou referência) e clique na lupa para pesquisar.</hint>
+                    <linked-metadata-field>
+                        <dc-schema>dc</dc-schema>
+                        <dc-element>relation</dc-element>
+                        <input-type>onebox</input-type>
+                    </linked-metadata-field>
+                    <externalsources>openAIREFunding</externalsources>
+                    <required></required>
+                </relation-field>
+            </row>
+            
+                    
+            <!-- 09-06-2023 - RCAAP! ADD 'dc.description.sponsorship' for inserting human-readable information about funding projects, grants,...  -->
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>description</dc-element>
+                    <dc-qualifier>sponsorship</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Outros financiadores ou patrocinadores</label>
+                    <input-type>textarea</input-type>
+                    <hint>Se aplicável, introduza aqui informação sobre outro(s) financiador(es), patrocinador(es) ou outras fontes de financiamento. Exemplo: Quadro de Referência Estratégica Nacional (QREN)</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <!-- 09-06-2023 - RCAAP! Not for use! Access type will be exposed automatically via OAI-PMH ???
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>rights</dc-element>
+                    <repeatable>false</repeatable>
+                    <label>Access Type</label>
+                    <input-type value-pairs-name="openaire_rights">dropdown</input-type>
+                    <hint>Select the access type of the resource.</hint>
+                    <required></required>
+                </field>
+            </row>
+            -->
+            
+            <!-- 11-01-2024 - RCAAP! Field already exists in upload section
+            <row>
+                 <field>
+                    <dc-schema>rcaap</dc-schema>
+                    <dc-element>embargofct</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Justificação para prolongamento de embargo </label>
+                    <input-type>textarea</input-type>
+                    <hint>Caso este trabalho tenha obtido financiamento FCT e de ter indicado um período de embargo superior a 12 meses (nas ciências sociais e humanidades) ou 6 meses para as restantes áreas indique as razões.</hint>
+                </field>
+            </row>
+            -->
+            
+            <!-- 09-06-2023 - RCAAP CHECK ELEMENT FOR LINKING DATASETS!!!! -->
+            <row>
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>references</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Ligação para datasets (dados científicos)</label>
+                    <input-type>onebox</input-type>
+                    <hint>Caso este trabalho tenha dados científicos (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <!-- 11-01-2024 - RCAAP! Field already exists in upload section
+            <row>            
+                <field>
+                    <dc-schema>rcaap</dc-schema>
+                    <dc-element>contributor</dc-element>
+                    <dc-qualifier>authoremail</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Contacto do autor(a) para envio de pedido(s) de cópia </label>
+                    <input-type>onebox</input-type>
+                    <hint>Se o registo for de acesso restrito ou embargado, insira aqui o e-mail do autor(a) correspondente preferencial, para posterior envio de resposta a eventuais pedidos de cópia ou de acesso.</hint>
+                    <required></required>
+                </field>
+            </row>
+            -->
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>description</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Descrição</label>
+                    <input-type>textarea</input-type>
+                    <hint>Pode introduzir aqui mais alguma informação útil relativamente ao trabalho não contemplada noutro(s) campo(s).</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+        
+        </form>
+        <!-- RCAAP 'THESIS' form END -->
+        
+        
+        <!-- RCAAP 'ITEM' form --> 
+        
+        <!-- Upload section -->  <!-- Section 1 -->
+        
+        <form name="RCAAP_Item_Page_One_Form">  <!-- Section 2 -->
+        
+        <!-- 09-06-2023 - RCAAP change place! Indicate first the type of content in order to modify the subsequent presented field forms        
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>type</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Tipo</label>
+                    <input-type value-pairs-name="openaire_types">dropdown</input-type>
+                    <hint>Indique o tipo de item que vai depositar</hint>
+                    <required>Tem que indicar o tipo de item que vai depositar!</required>
+                </field>
+            </row>
+            -->  
+            
+            <!-- 06-12-2023 - RCAAP change place! Input 'dc.type' by controlled vocabulary: 'coar_types'  -->
+            <row>   
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>type</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Tipo</label>
+                    <input-type>onebox</input-type>
+                    <hint>Indique o tipo de item que vai depositar</hint>
+                    <required>Tem que indicar o tipo de item que vai depositar!</required>
+                    <vocabulary>coar_types</vocabulary>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>title</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Título</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o título principal do item.</hint>
+                    <required>Tem que introduzir o título principal do item!</required>
+                    <language value-pairs-name="common_iso_languages">true</language>
+                </field>
+           </row>
+           
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>title</dc-element>
+                    <dc-qualifier>alternative</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Outro(s) título(s)</label>
+                    <input-type>onebox</input-type>
+                    <hint>Se aplicável, introduza aqui título(s) alternativo(s) ou noutro(s) idioma(s).</hint>
+                    <required></required>
+                    <language value-pairs-name="common_iso_languages">true</language>
+                </field>
+            </row>
+            
+            <!-- For Entity! Not for use in 'ITEM' form!!!
+            <row>
+                <relation-field>
+                    <relationship-type>isAuthorOfPublication</relationship-type>
+                    <search-configuration>personOrOrgunit</search-configuration>
+                    <repeatable>true</repeatable>
+                    <name-variants>true</name-variants>
+                    <label>Autor(es)</label>
+                    <hint>Introduza os nome(s) do(s) autor(es). Preencha por favor primeiro o apelido seguido do nome. [Exemplo: "Silva, António"]</hint>
+                    <linked-metadata-field>
+                        <dc-schema>dc</dc-schema>
+                        <dc-element>contributor</dc-element>
+                        <dc-qualifier>author</dc-qualifier>
+                        <input-type>onebox</input-type>
+                    </linked-metadata-field>
+                    <externalsources>orcid,CienciaVitaeCurriculum</externalsources>
+                    <required>Tem que introduzir pelo menos um autor (pode ser o nome textual ou criar relacionamento com uma entidade 'pessoa')!</required>
+                </relation-field>
+            </row>
+            -->
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>contributor</dc-element>
+                    <dc-qualifier>author</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Autor(es)</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza os nome(s) do(s) autor(es). Preencha por favor primeiro o apelido seguido do nome. [Exemplo: "Silva, António"]</hint>
+                    <required>Tem que introduzir pelo menos um autor!</required>
+                </field>
+            </row>
+
+            <!-- 29-06-2023 - RCAAP! ADD 'dc.contributor.editor' for EDITOR -->
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>contributor</dc-element>
+                    <dc-qualifier>editor</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Editor(es)</label>
+                    <input-type>name</input-type>
+                    <hint>Introduza os nome(s) do(s) editor(es). Preencha por favor primeiro o apelido seguido do nome. [Exemplo: "Silva, António"]</hint>
+                    <required></required>
+                    <type-bind>book,book part,conference proceedings</type-bind>
+                </field>
+            </row>
+
+            <!-- 29-06-2023 - RCAAP! Other contributors??? - Consider here -->
+        
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>date</dc-element>
+                    <dc-qualifier>issued</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Data</label>
+                    <input-type>date</input-type>
+                    <hint>Introduza a data da publicação ou distribuição pública (pode deixar o mês e/ou o dia em branco se não se aplicar). Se o item não tiver sido publicado ou distribuído publicamente coloque a data de depósito.</hint>
+                    <required>Tem que introduzir pelo menos o ano!</required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>description</dc-element>
+                    <dc-qualifier>abstract</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Resumo(s)</label>
+                    <input-type>textarea</input-type>
+                    <hint>Introduza aqui resumo(s) (abstract) associados ao item. Caso tenha resumos noutros idiomas clique em 'Adicionar mais'.</hint>
+                    <required></required>
+                    <language value-pairs-name="common_iso_languages">true</language>
+                </field>
+            </row>
+            
+            <!-- 27-07-2023 - RCAAP! ADD to insert free keywords -->
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <!-- An input-type of tag MUST be marked as repeatable -->
+                    <repeatable>true</repeatable>
+                    <label>Palavras-chave</label>
+                    <input-type>tag</input-type>
+                    <hint>Introduza aqui palavras-chave ou assuntos pertinentes relacionados com o item de "forma livre". &lt;b&gt;Nota importante&lt;/b&gt;: Para guardar e inserir mais ocorrências clique na tecla 'Enter'.</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <!-- 27-07-2023 - RCAAP! Not in use!!!
+            <row>
+                <field>
+                    <dc-schema>datacite</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier>srsc</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Classificação SRSC</label>
+                    <input-type>onebox</input-type>
+                    <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste trabalho de acordo com a classificação 'Swedish Research Subject Categories' (SRSC).</hint>
+                    <required></required>
+                    <vocabulary>srsc</vocabulary>
+                </field>
+            </row>
+            -->
+            
+            <!-- Additional Subject with specific taxonomy (like mesh, fos, ...) -->
+            
+            <!-- 09-06-2023 - RCAAP! ADD for Field of Science and Technology (FOS) classification -->
+            <row>
+                <field>
+                    <dc-schema>datacite</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier>fos</dc-qualifier> 
+                    <!-- An input-type of tag MUST be marked as repeatable -->
+                    <repeatable>true</repeatable>
+                    <label>Áreas do conhecimento (FOS/OCDE)</label>
+                    <input-type>onebox</input-type>
+                    <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste item de acordo com a classificação 'Field of Science and Technology' (FOS) &lt;a href="https://www.oecd.org/science/inno/38235147.pdf" target="_blank" &gt;(https://www.oecd.org/science/inno/38235147.pdf)&lt;/a&gt;.</hint>
+                    <required></required>
+                    <vocabulary>fos</vocabulary>
+                </field>
+            </row>
+            
+            <!-- 09-06-2023 - RCAAP! ADD for Sustainable Development Goals (SDG) classification -->
+            <row>   
+                <field>
+                    <dc-schema>datacite</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier>sdg</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Objetivos de Desenvolvimento Sustentável (ODS)</label>
+                    <input-type>onebox</input-type>
+                    <hint>Identifique aqui 'Objetivos de Desenvolvimento Sustentável' (ODS) com os quais o item se alinha. Mais informações: &lt;a href="https://www.ods.pt/ods/#17objetivos" target="_blank" &gt;17 objectivos do desenvolvimento sustentável&lt;/a&gt;</hint>
+                    <required></required>
+                    <vocabulary>sdg</vocabulary>
+                </field>
+            </row> 
+            
+            <!-- 09-06-2023 - RCAAP CHECK! Add 'dc.peerreviewed' to indicate peer-review. Consider changing metadaata schema to 'rccap'???? --> 
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>peerreviewed</dc-element>
+                    <label>Revisão por pares</label>
+                    <style>col-sm-8</style>
+                    <input-type value-pairs-name="yes_no">dropdown</input-type>
+                    <hint>Indique se a versão que está a depositar foi revista por pares especialistas (peer review). Caso não se aplique ou desconhecer pode selecionar a opção 'Não aplicável (N/A)'.</hint>
+                    <required>Tem que selecionar uma das opções apresentadas!</required>
+                    <type-bind>journal article, research article, review article</type-bind>
+                </field> 
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>language</dc-element>
+                    <dc-qualifier>iso</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Idioma</label>
+                    <style>col-sm-8</style>
+                    <input-type value-pairs-name="common_iso_languages">dropdown</input-type>
+                    <hint>Indique o idioma predominante no trabalho. Se o idioma principal não aparecer listado selecione a opção "Indeterminado".</hint>
+                    <required>Tem que selecionar uma das opções apresentadas!</required>
+                </field>
+            </row>
+            
+        </form>
+                      
+        <form name="RCAAP_Item_Page_Two_Form">  <!-- Section 3 -->
+            
+           <!-- 09-06-2023 - RCAAP! Add 'dc.identifier.citation' for inserting human-readable standard bibliographic citation  -->
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>identifier</dc-element>
+                    <dc-qualifier>citation</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Citação</label>
+                    <input-type>onebox</input-type>
+                    <hint>Se aplicável, introduza aqui uma referência bibliográfica normalizada (citação) deste item. [Exemplos: "NP 405", "APA", "IEEE",...]</hint>
+                    <required></required>
+                </field>
+            </row> 
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>publisher</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Editora</label>
+                    <style>col-sm-8</style>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o nome da entidade responsável pela publicação ou impressão deste item.</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <!-- 09-06-2023 - RCAAP! Moved here 'oaire.citation.title' for journal, conferences -->
+            <row>
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>title</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Título da revista, periódico, monografia ou evento</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o nome da revista, periódico, monografia ou evento na qual o item foi publicado ou apresentado.</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>conferenceDate</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Data do evento/conferência</label>
+                    <input-type>date</input-type>
+                    <hint>Introduza a data em que o evento se realizou.</hint>
+                    <required></required>
+                    <type-bind>conference object,conference proceedings,conference paper,conference poster,conference paper not in proceedings,conference poster not in proceedings</type-bind>
+                </field>
+            
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>conferencePlace</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Local do evento/conferência</label>
+                    <style>col-sm-8</style>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o nome do local onde o evento se realizou. [Exemplo: "Braga, Portugal"]</hint>
+                    <required></required>
+                    <type-bind>conference object,conference proceedings,conference paper,conference poster,conference paper not in proceedings,conference poster not in proceedings</type-bind>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>identifier</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <!-- An input-type of qualdrop_value MUST be marked as repeatable -->
+                    <repeatable>true</repeatable> <!-- 09-06-2023 - RCAAP! Mod to true -->
+                    <label>Identificadores</label>
+                    <input-type value-pairs-name="common_identifiers">qualdrop_value</input-type>
+                    <hint>Se este item tiver identificador(es) associado(s), selecione(-os) e identifique(-os) na seguinte lista. &lt;b&gt;Nota importante&lt;/b&gt;: Sugerimos que nesta fase clique no botão 'Guardar' para que, quando aplicável, seja apresentada ajuda em contexto do serviço SHERPA!</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <!-- 09-06-2023 - RCAAP! ADD single row for DOI -->
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>identifier</dc-element>
+                    <dc-qualifier>doi</dc-qualifier>
+                    <repeatable></repeatable>
+                    <label>DOI</label>
+                    <input-type>onebox</input-type>
+                    <hint>Se este item tiver algum identificador DOI associado, introduza aqui. [Exemplo: 10.1234/9876]</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>volume</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Volume</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o número do volume da publicação.</hint>
+                    <required></required>
+                </field>
+            
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>issue</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Número</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o número da edição ou fascículo da publicação. </hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>relation</dc-element>
+                    <dc-qualifier>ispartofseries</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Coleção / Série</label>
+                    <input-type>series</input-type>
+                    <hint>Se aplicável, introduza a referência da coleção e/ou série da publicação.</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>edition</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Número da edição</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o número da edição da obra. [Exemplo: "2 edição"].</hint>
+                    <required></required>
+                    <type-bind>book,book part</type-bind>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>startPage</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Primeira página</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza aqui (caso tenha) o número da primeira página associada a este item.</hint>
+                    <required></required>
+                </field>
+                
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>endPage</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Última página</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza aqui (caso tenha) o número da última página associada a este item.</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <!-- 09-06-2023 - RCAAP CHECK!!!!! Metadata qualifier ???? RCAAP currently uses 'dc.relation.publisherversion' --> 
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>relation</dc-element>
+                    <dc-qualifier>hasversion</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Ligação para a versão da editora</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza aqui um endereço eletrónico (URL) para a versão publicada deste item. Algumas editoras exigem a colocação de uma referência para a sua versão. Exemplo: The original publication is available at www.springerlink.com</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>description</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Outras informações</label>
+                    <input-type>textarea</input-type>
+                    <hint>Pode introduzir aqui mais alguma informação útil relativamente ao recurso não contemplada noutro(s) campo(s).</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>rights</dc-element>
+                    <dc-qualifier>uri</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Licença Creative Commons (CC)</label>
+                    <input-type value-pairs-name="openaire_license_types">dropdown</input-type>
+                    <hint>Associe uma licença Creative Commons 4.0 Internacional &lt;a href="https://creativecommons.org/licenses/" target="_blank" &gt;(https://creativecommons.org/licenses/)&lt;/a&gt; a este item. &lt;b&gt;Nota importante&lt;/b&gt;: No caso de trabalhos financiados pela FCT o uso da licença CC-BY é recomendado, mas torna-se obrigatório caso tenha usufruido de 'Custos de Processamento da Publicação' (vulgo CPP ou APC) suportados por verbas da FCT. Saiba mais em &lt;a href="https://www.fct.pt/sobre/politicas-e-estrategias/politicas-de-ciencia-aberta/acesso-aberto-a-publicacoes-cientificas/" target="_blank" &gt;(https://www.fct.pt/sobre/politicas-e-estrategias/politicas-de-ciencia-aberta/acesso-aberto-a-publicacoes-cientificas/)&lt;/a&gt;</hint>
+                    <required>Tem que indicar uma licença Creative Commons! Caso não se aplique ou desconhecer pode selecionar a opção 'Não aplicável (N/A)'.</required>
+                </field>
+            </row>
+            
+            <!-- 17-11-2023 - RCAAP! Change place 'oire.version' -->
+            <row>
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>version</dc-element>
+                    <repeatable>false</repeatable>
+                    <label>Versão do item</label>
+                    <input-type value-pairs-name="openaire_version_types">dropdown</input-type>
+                    <hint>Indique qual é a versão correspondente à publicação que (vai ou já) carregou neste depósito. &lt;b&gt;Nota importante&lt;/b&gt;: Para uma decisão mais informada sugerimos a leitura da ajuda em contexto, quando disponível, na secção seguinte [Sherpa]'".</hint>
+                    <required>Tem que indicar qual é a versão que vai utilizar neste depósito! Caso não se aplique ou desconheça pode selecionar a opção 'Não aplicável (N/A)'.</required>
+                </field>
+            </row>
+            
+        </form>
+
+        <!-- SHERPA/RoMEO section help -->  <!-- Section 4 -->          
+        
+        <form name="RCAAP_Item_Page_Three_Form"> <!-- Section 5 -->
+        
+            <!-- For Entity! Not for use in 'ITEM' form!!!      
+            <row>
+                <relation-field>
+                    <relationship-type>isProjectOfPublication</relationship-type>
+                    <search-configuration>project</search-configuration>
+                    <repeatable>true</repeatable>
+                    <name-variants>false</name-variants>
+                    <label>Projeto(s) ou bolsa(s)</label>
+                    <hint>Caso a publicação resulte de projeto(s) financiado(s) pela Comissão Europeia (FP7, H2020, ERC), Fundação para a Ciência e Tecnologia ou Wellcome Trust, identifique esse(s) projeto(s) aqui. Essa identificação é geralmente um requisito dos financiadores. Para identificar o(s) projeto(s) insira um dos seus elementos identificativos (número, nome, acrónimo ou referência) e clique na lupa para pesquisar.</hint>
+                    <linked-metadata-field>
+                        <dc-schema>dc</dc-schema>
+                        <dc-element>relation</dc-element>
+                        <input-type>onebox</input-type>
+                    </linked-metadata-field>
+                    <externalsources>openAIREFunding</externalsources>
+                    <required></required>
+                </relation-field>
+            </row>
+            -->
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>relation</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Projeto(s) ou bolsa(s)</label>
+                    <input-type>onebox</input-type>
+                    <hint>Caso a publicação resulte de projeto(s) financiado(s) pela Comissão Europeia (FP7, H2020, ERC), Fundação para a Ciência e Tecnologia ou Wellcome Trust, identifique esse(s) projeto(s) aqui. Essa identificação é geralmente um requisito dos financiadores. Para identificar o(s) projeto(s) insira um dos seus elementos identificativos (número, nome, acrónimo ou referência) e clique na lupa para pesquisar.</hint>
+                 </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>description</dc-element>
+                    <dc-qualifier>sponsorship</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Outros financiadores ou patrocinadores</label>
+                    <input-type>textarea</input-type>
+                    <hint>Se aplicável, introduza aqui informação sobre outro(s) financiador(es), patrocinador(es) ou outras fontes de financiamento. Exemplo: Quadro de Referência Estratégica Nacional (QREN)</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>references</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Ligação para datasets (dados científicos)</label>
+                    <input-type>onebox</input-type>
+                    <hint>Caso este documento tenha dados científicos (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <!-- 09-06-2023 - RCAAP! Not for use! Access type will be exposed automatically via OAI-PMH ???
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>rights</dc-element>
+                    <repeatable>false</repeatable>
+                    <label>Access Type</label>
+                    <input-type value-pairs-name="openaire_rights">dropdown</input-type>
+                    <hint>Select the access type of the resource.</hint>
+                    <required></required>
+                </field>
+            </row>
+            -->
+            
+            <!-- Non-Exclusive License section --> <!-- Section 6 -->
+            
+        </form>
+        <!-- RCAAP 'ITEM' form END -->      
+        
+    
+        <!-- RCAAP 'Open Education Resources' (OER) form --> 
+        
+        <!-- Upload section -->  <!-- Section 1 -->
+        
+        <form name="RCAAP_OER_Page_One_Form">  <!-- Section 2 -->
+        
+        <!-- 09-06-2023 - RCAAP change place! Indicate first the type of content in order to modify the subsequent presented field forms        
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>type</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Tipo</label>
+                    <input-type value-pairs-name="openaire_types">dropdown</input-type>
+                    <hint>Indique o tipo de item que vai depositar</hint>
+                    <required>Tem que indicar o tipo de item que vai depositar!</required>
+                </field>
+            </row>
+            -->  
+            
+            <!-- 06-12-2023 - RCAAP change place! Input 'dc.type' by controlled vocabulary: 'coar_types'  
+            <row>   
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>type</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Tipo</label>
+                    <input-type>onebox</input-type>
+                    <hint>Indique o tipo de item que vai depositar</hint>
+                    <required>Tem que indicar o tipo de item que vai depositar!</required>
+                    <vocabulary>coar_types</vocabulary>
+                </field>
+            </row>
+            -->
+            
+            <!-- 11-01-2021 - RCAAP change place! Indicate first the type of OER -->         
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>type</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Tipo</label>
+                    <input-type value-pairs-name="oer_types">dropdown</input-type>
+                    <hint>Indique o tipo de Recurso Educativo Aberto (REA) que vai depositar.</hint>
+                    <required>Tem que indicar o tipo de Recurso Educativo Aberto (REA) que vai depositar! Na falta de tipo correspondente pode selecionar 'outro' e solicitar revisão pós validação.</required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>title</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Título</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o título principal do Recurso Educativo Aberto (REA).</hint>
+                    <required>Tem que introduzir o título principal do REA!</required>
+                    <language value-pairs-name="common_iso_languages">true</language>
+                </field>
+            </row>
+           
+           <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>title</dc-element>
+                    <dc-qualifier>alternative</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Outro(s) título(s)</label>
+                    <input-type>onebox</input-type>
+                    <hint>Se aplicável, introduza aqui título(s) alternativo(s) ou noutro(s) idioma(s).</hint>
+                    <required></required>
+                    <language value-pairs-name="common_iso_languages">true</language>
+                </field>
+            </row>
+            
+            <row>
+                <relation-field>
+                    <relationship-type>isAuthorOfPublication</relationship-type>
+                    <search-configuration>personOrOrgunit</search-configuration>
+                    <repeatable>true</repeatable>
+                    <name-variants>true</name-variants>
+                    <label>Autor(es)</label>
+                    <hint>Introduza os nome(s) do(s) autor(es). Preencha por favor primeiro o apelido seguido do nome. [Exemplo: "Silva, António"]</hint>
+                    <linked-metadata-field>
+                        <dc-schema>dc</dc-schema>
+                        <dc-element>contributor</dc-element>
+                        <dc-qualifier>author</dc-qualifier>
+                        <input-type>onebox</input-type>
+                    </linked-metadata-field>
+                    <externalsources>orcid,CienciaVitaeCurriculum</externalsources>
+                    <required>Tem que introduzir pelo menos um autor (pode ser o nome textual ou criar relacionamento com uma entidade 'pessoa')!</required>
+                </relation-field>
+            </row>
+
+            <!-- 29-06-2023 - RCAAP! ADD 'dc.contributor.editor' for EDITOR -->
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>contributor</dc-element>
+                    <dc-qualifier>editor</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Editor(es)</label>
+                    <input-type>name</input-type>
+                    <hint>Introduza os nome(s) do(s) editor(es). Preencha por favor primeiro o apelido seguido do nome. [Exemplo: "Silva, António"]</hint>
+                    <required></required>
+                    <type-bind>book,book part,conference proceedings</type-bind>
+                </field>
+            </row>
+
+           <!-- 29-06-2023 - RCAAP! Other contributors??? - Consider here -->
+        
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>date</dc-element>
+                    <dc-qualifier>issued</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Data</label>
+                    <input-type>date</input-type>
+                    <hint>Introduza a data da publicação ou distribuição pública (pode deixar o mês e/ou o dia em branco se não se aplicar). Se o item não tiver sido publicado ou distribuído publicamente coloque a data de depósito.</hint>
+                    <required>Tem que introduzir pelo menos o ano!</required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>description</dc-element>
+                    <dc-qualifier>abstract</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Resumo(s)</label>
+                    <input-type>textarea</input-type>
+                    <hint>Introduza aqui resumo(s) (abstract) associados ao item. Caso tenha resumos noutros idiomas clique em 'Adicionar mais'.</hint>
+                    <required></required>
+                    <language value-pairs-name="common_iso_languages">true</language>
+                </field>
+            </row>
+            
+            <!-- 27-07-2023 - RCAAP! ADD to insert free keywords -->
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <!-- An input-type of tag MUST be marked as repeatable -->
+                    <repeatable>true</repeatable>
+                    <label>Palavras-chave</label>
+                    <input-type>tag</input-type>
+                    <hint>Introduza aqui palavras-chave ou assuntos pertinentes relacionados com o item de "forma livre". &lt;b&gt;Nota importante&lt;/b&gt;: Para guardar e inserir mais ocorrências clique na tecla 'Enter'.</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <!-- 27-07-2023 - RCAAP! Not in use!!!
+            <row>
+                <field>
+                    <dc-schema>datacite</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier>srsc</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Classificação SRSC</label>
+                    <input-type>onebox</input-type>
+                    <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste trabalho de acordo com a classificação 'Swedish Research Subject Categories' (SRSC).</hint>
+                    <required></required>
+                    <vocabulary>srsc</vocabulary>
+                </field>
+            </row>
+            -->
+            
+            <!-- Additional Subject with specific taxonomy (like mesh, fos, ...) -->
+            
+            <!-- 09-06-2023 - RCAAP! ADD for Field of Science and Technology (FOS) classification -->
+            <row>
+                <field>
+                    <dc-schema>datacite</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier>fos</dc-qualifier> 
+                    <!-- An input-type of tag MUST be marked as repeatable -->
+                    <repeatable>true</repeatable>
+                    <label>Áreas do conhecimento (FOS/OCDE)</label>
+                    <input-type>onebox</input-type>
+                    <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste item de acordo com a classificação 'Field of Science and Technology' (FOS) &lt;a href="https://www.oecd.org/science/inno/38235147.pdf" target="_blank" &gt;(https://www.oecd.org/science/inno/38235147.pdf)&lt;/a&gt;.</hint>
+                    <required></required>
+                    <vocabulary>fos</vocabulary>
+                </field>
+            </row>
+            
+            <!-- 09-06-2023 - RCAAP! ADD for Sustainable Development Goals (SDG) classification -->
+            <row>   
+                <field>
+                    <dc-schema>datacite</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier>sdg</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Objetivos de Desenvolvimento Sustentável (ODS)</label>
+                    <input-type>onebox</input-type>
+                    <hint>Identifique aqui 'Objetivos de Desenvolvimento Sustentável' (ODS) com os quais o item se alinha. Mais informações: &lt;a href="https://www.ods.pt/ods/#17objetivos" target="_blank" &gt;17 objectivos do desenvolvimento sustentável&lt;/a&gt;</hint>
+                    <required></required>
+                    <vocabulary>sdg</vocabulary>
+                </field>
+            </row> 
+            
+            <!-- TO COMPLY WITH UAB REQUIREMENTS!!! TO  VALIDATE! 11-01-2024! -->
+            <row>     
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>educationLevel</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Contexto educativo</label>
+                    <input-type>onebox</input-type>
+                    <hint>Se aplicável, introduza aqui ligação (URL) para o contexto educativo.</hint>
+                    <required></required>
+                </field>
+            </row> 
+                
+            <row> 
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>instructionalMethod</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Objetivo educacional</label>
+                    <input-type>onebox</input-type>
+                    <hint>Se aplicável, introduza aqui o objectivo educacional.</hint>
+                    <required></required>
+                </field>
+            </row> 
+                
+            <!-- 09-06-2023 - RCAAP CHECK! Add 'dc.peerreviewed' to indicate peer-review. Consider changing metadaata schema to 'rccap'???? --> 
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>peerreviewed</dc-element>
+                    <label>Revisão por pares</label>
+                    <style>col-sm-8</style>
+                    <input-type value-pairs-name="yes_no">dropdown</input-type>
+                    <hint>Indique se a versão que está a depositar foi revista por pares especialistas (peer review). Caso não se aplique ou desconhecer pode selecionar a opção 'Não aplicável (N/A)'.</hint>
+                    <required>Tem que selecionar uma das opções apresentadas!</required>
+                    <type-bind>journal article, research article, review article</type-bind>
+                </field> 
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>language</dc-element>
+                    <dc-qualifier>iso</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Idioma</label>
+                    <style>col-sm-8</style>
+                    <input-type value-pairs-name="common_iso_languages">dropdown</input-type>
+                    <hint>Indique o idioma predominante no trabalho. Se o idioma principal não aparecer listado selecione a opção "Indeterminado".</hint>
+                    <required>Tem que selecionar uma das opções apresentadas!</required>
+                </field>
+            </row>
+            
+        </form>
+               
+        <form name="RCAAP_OER_Page_Two_Form">  <!-- Section 3 -->
+            
+           <!-- 09-06-2023 - RCAAP! Add 'dc.identifier.citation' for inserting human-readable standard bibliographic citation  -->
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>identifier</dc-element>
+                    <dc-qualifier>citation</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Citação</label>
+                    <input-type>onebox</input-type>
+                    <hint>Se aplicável, introduza aqui uma referência bibliográfica normalizada (citação) deste item. [Exemplos: "NP 405", "APA", "IEEE",...]</hint>
+                    <required></required>
+                </field>
+            </row> 
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>publisher</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Editora</label>
+                    <style>col-sm-8</style>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o nome da entidade responsável pela publicação ou impressão deste item.</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>title</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Título da revista, periódico, monografia ou evento</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o nome da revista, periódico, monografia ou evento na qual o item foi publicado ou apresentado.</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>conferenceDate</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Data do evento/conferência</label>
+                    <input-type>date</input-type>
+                    <hint>Introduza a data em que o evento se realizou.</hint>
+                    <required></required>
+                    <type-bind>conference object,conference proceedings,conference paper,conference poster,conference paper not in proceedings,conference poster not in proceedings</type-bind>
+                </field>
+            
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>conferencePlace</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Local do evento/conferência</label>
+                    <style>col-sm-8</style>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o nome do local onde o evento se realizou. [Exemplo: "Braga, Portugal"]</hint>
+                    <required></required>
+                    <type-bind>conference object,conference proceedings,conference paper,conference poster,conference paper not in proceedings,conference poster not in proceedings</type-bind>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>identifier</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <!-- An input-type of qualdrop_value MUST be marked as repeatable -->
+                    <repeatable>true</repeatable> <!-- 09-06-2023 - RCAAP! Mod to true -->
+                    <label>Identificadores</label>
+                    <input-type value-pairs-name="common_identifiers">qualdrop_value</input-type>
+                    <hint>Se este item tiver identificador(es) associado(s), selecione(-os) e identifique(-os) na seguinte lista. &lt;b&gt;Nota importante&lt;/b&gt;: Sugerimos que nesta fase clique no botão 'Guardar' para que, quando aplicável, seja apresentada ajuda em contexto do serviço SHERPA!</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <!-- 09-06-2023 - RCAAP! ADD single row for DOI -->
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>identifier</dc-element>
+                    <dc-qualifier>doi</dc-qualifier>
+                    <repeatable></repeatable>
+                    <label>DOI</label>
+                    <input-type>onebox</input-type>
+                    <hint>Se este item tiver algum identificador DOI associado, introduza aqui. [Exemplo: 10.1234/9876]</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>volume</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Volume</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o número do volume da publicação.</hint>
+                    <required></required>
+                </field>
+            
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>issue</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Número</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o número da edição ou fascículo da publicação. </hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>relation</dc-element>
+                    <dc-qualifier>ispartofseries</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Coleção / Série</label>
+                    <input-type>series</input-type>
+                    <hint>Se aplicável, introduza a referência da coleção e/ou série da publicação.</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>edition</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Número da edição</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o número da edição da obra. [Exemplo: "2 edição"].</hint>
+                    <required></required>
+                    <type-bind>book,book part</type-bind>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>startPage</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Primeira página</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza aqui (caso tenha) o número da primeira página associada a este item.</hint>
+                    <required></required>
+                </field>
+                
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>endPage</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Última página</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza aqui (caso tenha) o número da última página associada a este item.</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <!-- 09-06-2023 - RCAAP CHECK!!!!! Metadata qualifier ???? RCAAP currently uses 'dc.relation.publisherversion' --> 
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>relation</dc-element>
+                    <dc-qualifier>hasversion</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Ligação para a versão da editora</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza aqui um endereço eletrónico (URL) para a versão publicada deste item. Algumas editoras exigem a colocação de uma referência para a sua versão. Exemplo: The original publication is available at www.springerlink.com</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>description</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Outras informações</label>
+                    <input-type>textarea</input-type>
+                    <hint>Pode introduzir aqui mais alguma informação útil relativamente ao recurso não contemplada noutro(s) campo(s).</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>rights</dc-element>
+                    <dc-qualifier>uri</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Licença Creative Commons (CC)</label>
+                    <input-type value-pairs-name="openaire_license_types">dropdown</input-type>
+                    <hint>Associe uma licença Creative Commons 4.0 Internacional &lt;a href="https://creativecommons.org/licenses/" target="_blank" &gt;(https://creativecommons.org/licenses/)&lt;/a&gt; a este item. &lt;b&gt;Nota importante&lt;/b&gt;: No caso de trabalhos financiados pela FCT o uso da licença CC-BY é recomendado, mas torna-se obrigatório caso tenha usufruido de 'Custos de Processamento da Publicação' (vulgo CPP ou APC) suportados por verbas da FCT. Saiba mais em &lt;a href="https://www.fct.pt/sobre/politicas-e-estrategias/politicas-de-ciencia-aberta/acesso-aberto-a-publicacoes-cientificas/" target="_blank" &gt;(https://www.fct.pt/sobre/politicas-e-estrategias/politicas-de-ciencia-aberta/acesso-aberto-a-publicacoes-cientificas/)&lt;/a&gt;</hint>
+                    <required>Tem que indicar uma licença Creative Commons! Caso não se aplique ou desconhecer pode selecionar a opção 'Não aplicável (N/A)'.</required>
+                </field>
+            </row>
+            
+            <!-- 17-11-2023 - RCAAP! Change place 'oire.version' -->
+            <row>
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>version</dc-element>
+                    <repeatable>false</repeatable>
+                    <label>Versão do item</label>
+                    <input-type value-pairs-name="openaire_version_types">dropdown</input-type>
+                    <hint>Indique qual é a versão correspondente à publicação que (vai ou já) carregou neste depósito. &lt;b&gt;Nota importante&lt;/b&gt;: Para uma decisão mais informada sugerimos a leitura da ajuda em contexto, quando disponível, na secção seguinte [Sherpa]'".</hint>
+                    <required>Tem que indicar qual é a versão que vai utilizar neste depósito! Caso não se aplique ou desconheça pode selecionar a opção 'Não aplicável (N/A)'.</required>
+                </field>
+            </row>
+            
+        </form>
+
+        <!-- SHERPA/RoMEO section help -->  <!-- Section 4 -->        
+                
+        <form name="RCAAP_OER_Page_Three_Form"> <!-- Section 5 -->
+        
+            <row>
+                <relation-field>
+                    <relationship-type>isProjectOfPublication</relationship-type>
+                    <search-configuration>project</search-configuration>
+                    <repeatable>true</repeatable>
+                    <name-variants>false</name-variants>
+                    <label>Projeto(s) ou bolsa(s)</label>
+                    <hint>Caso a publicação resulte de projeto(s) financiado(s) pela Comissão Europeia (FP7, H2020, ERC), Fundação para a Ciência e Tecnologia ou Wellcome Trust, identifique esse(s) projeto(s) aqui. Essa identificação é geralmente um requisito dos financiadores. Para identificar o(s) projeto(s) insira um dos seus elementos identificativos (número, nome, acrónimo ou referência) e clique na lupa para pesquisar.</hint>
+                    <linked-metadata-field>
+                        <dc-schema>dc</dc-schema>
+                        <dc-element>relation</dc-element>
+                        <input-type>onebox</input-type>
+                    </linked-metadata-field>
+                    <externalsources>openAIREFunding</externalsources>
+                    <required></required>
+                </relation-field>
+            </row>
+            
+            <!-- 09-06-2023 - RCAAP! ADD 'dc.description.sponsorship' for inserting human-readable information about funding projects, grants,...  -->
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>description</dc-element>
+                    <dc-qualifier>sponsorship</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Outros financiadores ou patrocinadores</label>
+                    <input-type>textarea</input-type>
+                    <hint>Se aplicável, introduza aqui informação sobre outro(s) financiador(es), patrocinador(es) ou outras fontes de financiamento. Exemplo: Quadro de Referência Estratégica Nacional (QREN)</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <!-- 09-06-2023 - RCAAP element for linking datasets! -->
+            <row>
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>references</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Ligação para datasets (dados científicos)</label>
+                    <input-type>onebox</input-type>
+                    <hint>Caso este documento tenha dados científicos (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
+                    <required></required>
+                </field>
+            </row>
+            
+            <!-- 09-06-2023 - RCAAP! Not for use! Access type will be exposed automatically via OAI-PMH ???
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>rights</dc-element>
+                    <repeatable>false</repeatable>
+                    <label>Access Type</label>
+                    <input-type value-pairs-name="openaire_rights">dropdown</input-type>
+                    <hint>Select the access type of the resource.</hint>
+                    <required></required>
+                </field>
+            </row>
+            -->
+            
+        <!-- Non-Exclusive License section --> <!-- Section 6 -->    
+            
+        </form>
+        <!-- RCAAP 'OER' END -->    
+        
+    
+    </form-definitions>
+
+
+    <!-- form-value-pairs populate dropdown and qualdrop-value lists.          -->
+    <!-- The form-value-pairs element holds child elements named 'value-pairs' -->
+    <!-- A 'value-pairs' element has a value-pairs-name and a dc-term          -->
+    <!-- attribute. The dc-term attribute specifies which to which Dublin Core -->
+    <!-- Term this set of value-pairs applies.                                 -->
+    <!--     Current dc-terms are: identifier-pairs, type-pairs, and           -->
+    <!--     language_iso-pairs. The name attribute matches a name             -->
+    <!--     in the form-map, above.                                           -->
+    <!-- A value-pair contains one 'pair' for each value displayed in the list -->
+    <!-- Each pair contains a 'displayed-value' element and a 'stored-value'   -->
+    <!-- element. A UI list displays the displayed-values, but the program     -->
+    <!-- stores the associated stored-values in the database.                  -->
+
+    <form-value-pairs>
+    
+        <!-- 09-06-2023 - RCAAP change place! Addition of other 'identifiers' accordingly to 'old' forms -->  
+        <value-pairs value-pairs-name="common_identifiers" dc-term="identifier">
+            
+            <pair>
+                <displayed-value>ISSN</displayed-value>
+                <stored-value>issn</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>EISSN</displayed-value>
+                <stored-value>eissn</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>ISMN</displayed-value>
+                <stored-value>ismn</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>ISBN</displayed-value>
+                <stored-value>isbn</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>EISBN</displayed-value>
+                <stored-value>eisbn</stored-value>
+            </pair>
+            
+              <pair>
+                <displayed-value>PMC</displayed-value>
+                <stored-value>pmc</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>PMID</displayed-value>
+                <stored-value>pmid</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>arXiv</displayed-value>
+                <stored-value>arxiv</stored-value>
+            </pair>
+    
+            <pair>
+                <displayed-value>URI</displayed-value>
+                <stored-value>uri</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>URN</displayed-value>
+                <stored-value>urn</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>Documento Governamental</displayed-value>
+                <stored-value>govdoc</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>bibcode</displayed-value>
+                <stored-value>bibcode</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>ETHOS</displayed-value>
+                <stored-value>ethos</stored-value>
+            </pair>
+        
+            <pair>
+                <displayed-value>EID</displayed-value>
+                <stored-value>eid</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>WOS</displayed-value>
+                <stored-value>wos</stored-value>
+            </pair>
+            
+             <pair>
+                <displayed-value>CienciaVitae</displayed-value>
+                <stored-value>source-work-id</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>CienciaIUL</displayed-value>
+                <stored-value>cienciaiul</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>Authenticus</displayed-value>
+                <stored-value>authenticusid</stored-value>
+            </pair>
+        
+            <pair>
+                <displayed-value>Identificador SWORD</displayed-value>
+                <stored-value>slug</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>Other</displayed-value>
+                <stored-value>other</stored-value>
+            </pair>
+            
+        </value-pairs>
+
+
+        <!-- OLD TYPES!!! Not in use -->  
+        <value-pairs value-pairs-name="common_types" dc-term="type">
+            <pair>
+                <displayed-value>Animation</displayed-value>
+                <stored-value>Animation</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Article</displayed-value>
+                <stored-value>Article</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Book</displayed-value>
+                <stored-value>Book</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Book chapter</displayed-value>
+                <stored-value>Book chapter</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Dataset</displayed-value>
+                <stored-value>Dataset</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Learning Object</displayed-value>
+                <stored-value>Learning Object</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Image</displayed-value>
+                <stored-value>Image</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Image, 3-D</displayed-value>
+                <stored-value>Image, 3-D</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Map</displayed-value>
+                <stored-value>Map</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Musical Score</displayed-value>
+                <stored-value>Musical Score</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Plan or blueprint</displayed-value>
+                <stored-value>Plan or blueprint</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Preprint</displayed-value>
+                <stored-value>Preprint</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Presentation</displayed-value>
+                <stored-value>Presentation</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Recording, acoustical</displayed-value>
+                <stored-value>Recording, acoustical</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Recording, musical</displayed-value>
+                <stored-value>Recording, musical</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Recording, oral</displayed-value>
+                <stored-value>Recording, oral</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Software</displayed-value>
+                <stored-value>Software</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Technical Report</displayed-value>
+                <stored-value>Technical Report</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Thesis</displayed-value>
+                <stored-value>Thesis</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Video</displayed-value>
+                <stored-value>Video</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Working Paper</displayed-value>
+                <stored-value>Working Paper</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Other</displayed-value>
+                <stored-value>Other</stored-value>
+            </pair>
+        </value-pairs>
+
+        
+        <!-- 09-06-2023 - RCAAP change place! Modified Language 'stored-value' accordingly to ISO 639-3 -->  
+        
+        <!-- Default language order: (from dspace 1.2.1) "en_US", "en", "es", "de", "fr", "it", "ja", "zh", "other", "" -->
+        <value-pairs value-pairs-name="common_iso_languages" dc-term="language_iso">
+            
+            <!--
+            <pair>
+                <displayed-value>Selecione o idioma</displayed-value>
+                <stored-value></stored-value>
+            </pair>
+            -->
+            
+            <pair>
+                <displayed-value>Português</displayed-value>
+                <stored-value>por</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>Inglês</displayed-value>
+                <stored-value>eng</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>Espanhol</displayed-value>
+                <stored-value>spa</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>Alemão</displayed-value>
+                <stored-value>deu</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>Francês</displayed-value>
+                <stored-value>fra</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>Italiano</displayed-value>
+                <stored-value>ita</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>Mirandês</displayed-value>
+                <stored-value>mwl</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>Japonês</displayed-value>
+                <stored-value>jpn</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>Chinês</displayed-value>
+                <stored-value>cmn</stored-value>
+            </pair>
+            
+            <!-- 09-06-2023 - RCAAP change place! Added -->
+            <pair>
+                <displayed-value>Múltiplos idiomas</displayed-value>
+                <stored-value>mul</stored-value>
+            </pair>
+            
+            <!-- 09-06-2023 - RCAAP change place! Added -->
+            <pair>
+                <displayed-value>Indeterminado</displayed-value>
+                <stored-value>und</stored-value>
+            </pair>
+            
+            <!-- 27-07-2023 - RCAAP change place! Hidden
+            
+            <pair>
+                <displayed-value>Outro</displayed-value>
+                <stored-value>other</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>N/A</displayed-value>
+                <stored-value>N/A</stored-value>
+            </pair> 
+            
+            -->
+        
+        </value-pairs>
+        
+
+
+        <!-- OpenAIRE specific value pairs -->
+
+        <!-- 09-06-2023 - RCAAP change place! Translation of 'displayed-values' to pt_PT  -->
+        <value-pairs value-pairs-name="openaire_license_types" dc-term="license">
+
+        <!-- Based on: 
+        http://openaire-guidelines-for-literature-repository-managers.readthedocs.io/en/latest/field_licensecondition.html#dc-rightslicensecondition 
+        -->
+            
+            <pair>
+                <!-- <displayed-value>Attribution (CC-BY)</displayed-value> -->
+                <displayed-value>Atribuição (CC-BY)</displayed-value>
+                <stored-value>http://creativecommons.org/licenses/by/4.0/</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Attribution, Share-alike (CC-BY-SA)</displayed-value> -->
+                <displayed-value>Atribuição-CompartilhaIgual (CC-BY-SA)</displayed-value>
+                <stored-value>http://creativecommons.org/licenses/by-sa/4.0/</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Attribution, No Derivative Works (CC-BY-ND)</displayed-value> -->
+                <displayed-value>Atribuição-SemDerivações (CC-BY-ND)</displayed-value>                
+                <stored-value>http://creativecommons.org/licenses/by-nd/4.0/</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Attribution, Non-commercial (CC-BY-NC)</displayed-value> -->
+                <displayed-value>Atribuição-NãoComercial (CC-BY-NC)</displayed-value>
+                <stored-value>http://creativecommons.org/licenses/by-nc/4.0/</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Attribution, Non-commercial, Share-alike (CC-BY-NC-SA)</displayed-value> -->
+                <displayed-value>Atribuição-NãoComercial-CompartilhaIgual (CC-BY-NC-SA)</displayed-value>
+                <stored-value>http://creativecommons.org/licenses/by-nc-sa/4.0/</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Attribution, Non-commercial, No Derivative Works (CC-BY-NC-ND)</displayed-value> -->
+                <displayed-value>Atribuição-NãoComercial-SemDerivações (CC-BY-NC-ND)</displayed-value>
+                <stored-value>http://creativecommons.org/licenses/by-nc-nd/4.0/</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Without license</displayed-value> -->
+                <displayed-value>Sem licença CC</displayed-value>
+                <stored-value>N/A</stored-value>
+            </pair>
+            
+            <!-- Add here other licenses 
+            <pair>
+                <displayed-value>Other</displayed-value>
+                <stored-value>other</stored-value>
+            </pair>
+            -->
+            
+        </value-pairs>
+
+        <!-- 10-06-2023 - RCAAP change place! Translation of 'displayed-values' to pt_PT -->
+        
+        <!-- OpenAIRE resource types
+             https://openaire-guidelines-for-literature-repository-managers.readthedocs.io/en/v4.0.0/field_publicationtype.html
+             Based on COAR Vocabularies -> Controlled Vocabulary for Resource Type Genres (Version 2.0):
+             https://vocabularies.coar-repositories.org/resource_types/2.0/
+        -->
+        <value-pairs value-pairs-name="openaire_types" dc-term="type">
+            
+            <pair>
+                <!-- <displayed-value>Interactive Resource</displayed-value> -->
+                <displayed-value>Recurso interativo</displayed-value>
+                <stored-value>interactive resource</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Website</displayed-value> -->
+                <displayed-value>- Sítio web</displayed-value>
+                <stored-value>website</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Dataset</displayed-value> -->
+                <displayed-value>Conjunto de dados</displayed-value>
+                <stored-value>dataset</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Interview</displayed-value> -->
+                <displayed-value>- Entrevista</displayed-value>
+                <stored-value>interview</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Image</displayed-value> -->
+                <displayed-value>Imagem</displayed-value>
+                <stored-value>image</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Moving Image</displayed-value> -->
+                <displayed-value>- Imagem animada</displayed-value>
+                <stored-value>moving image</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Video</displayed-value> -->
+                <displayed-value>-- Vídeo</displayed-value>
+                <stored-value>video</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Still Image</displayed-value> -->
+                <displayed-value>- Still Image</displayed-value>
+                <stored-value>Imagem estática</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Other</displayed-value> -->
+                <displayed-value>Outro</displayed-value>
+                <stored-value>other</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Software</displayed-value> -->
+                <displayed-value>Software</displayed-value>
+                <stored-value>software</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Research Software</displayed-value> -->
+                <displayed-value>- Software de investigação</displayed-value>
+                <stored-value>research software</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Workflow</displayed-value> -->
+                <displayed-value>Fluxo de trabalho</displayed-value>
+                <stored-value>workflow</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Cartographic Material</displayed-value> -->
+                <displayed-value>Material cartográfico</displayed-value>
+                <stored-value>cartographic material</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Map</displayed-value> -->
+                <displayed-value>- Mapa</displayed-value>
+                <stored-value>map</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Sound</displayed-value> -->
+                <displayed-value>Som</displayed-value>
+                <stored-value>sound</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Musical Composition</displayed-value> -->
+                <displayed-value>- Composição musical </displayed-value>
+                <stored-value>musical composition</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Text</displayed-value> -->
+                <displayed-value>Texto</displayed-value>
+                <stored-value>text</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Annotation</displayed-value> -->
+                <displayed-value>- Anotação</displayed-value>
+                <stored-value>annotation</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Bibliography</displayed-value> -->
+                <displayed-value>- Bibliografia</displayed-value>
+                <stored-value>bibliography</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Book</displayed-value> -->
+                <displayed-value>- Livro</displayed-value>
+                <stored-value>book</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Book Part</displayed-value> -->
+                <displayed-value>-- Capítulo de livro</displayed-value>
+                <stored-value>book part</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Conference Object</displayed-value> -->
+                <displayed-value>- Documento de conferência</displayed-value>
+                <stored-value>conference object</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Conference Proceedings</displayed-value> -->
+                <displayed-value>-- Atas de conferência</displayed-value>
+                <stored-value>conference proceedings</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Conference Paper</displayed-value> -->
+                <displayed-value>--- Comunicação em conferência</displayed-value>
+                <stored-value>conference paper</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Conference Poster</displayed-value> -->
+                <displayed-value>--- Póster em conferência</displayed-value>
+                <stored-value>conference poster</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Conference Paper Not In Proceedings</displayed-value> -->
+                <displayed-value>-- Comunicação não publicada nas atas da conferência</displayed-value>
+                <stored-value>conference paper not in proceedings</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Conference Poster Not In Proceedings</displayed-value> -->
+                <displayed-value>-- Póster não publicado nas atas da conferência</displayed-value>
+                <stored-value>conference poster not in proceedings</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Lecture</displayed-value> -->
+                <displayed-value>- Palestra</displayed-value>
+                <stored-value>lecture</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Letter</displayed-value> -->
+                <displayed-value>- Carta</displayed-value>
+                <stored-value>letter</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Periodical</displayed-value> -->
+                <displayed-value>- Publicação periódica</displayed-value>
+                <stored-value>periodical</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Journal</displayed-value> -->
+                <displayed-value>-- Revista científica</displayed-value>
+                <stored-value>journal</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Contribution to Journal</displayed-value> -->
+                <displayed-value>--- Contributo em revista</displayed-value>
+                <stored-value>contribution to journal</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Journal Article</displayed-value> -->
+                <displayed-value>---- Artigo científico</displayed-value>
+                <stored-value>journal article</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Data Paper</displayed-value> -->
+                <displayed-value>----- Artigo de dados</displayed-value>
+                <stored-value>data paper</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Review Article</displayed-value> -->
+                <displayed-value>----- Artigo de revisão</displayed-value>
+                <stored-value>review article</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Research Article</displayed-value> -->
+                <displayed-value>----- Artigo de investigação</displayed-value>
+                <stored-value>research article</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Corrigendum</displayed-value> -->
+                <displayed-value>----- Corrigenda</displayed-value>
+                <stored-value>corrigendum</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Software Paper</displayed-value> -->
+                <displayed-value>----- Artigo de software</displayed-value>
+                <stored-value>software paper</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Editorial</displayed-value> -->
+                <displayed-value>---- Editorial de revista</displayed-value>
+                <stored-value>editorial</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Letter to the Editor</displayed-value> -->
+                <displayed-value>---- Carta ao editor</displayed-value>
+                <stored-value>letter to the editor</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Newspaper</displayed-value> -->
+                <displayed-value>-- Jornal</displayed-value>
+                <stored-value>newspaper</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Newspaper Article</displayed-value> -->
+                <displayed-value>--- Artigo de jornal</displayed-value>
+                <stored-value>newspaper article</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Magazine</displayed-value> -->
+                <displayed-value>-- Revista de divulgação</displayed-value>
+                <stored-value>magazine</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Patent</displayed-value> -->
+                <displayed-value>- Patente</displayed-value>
+                <stored-value>patent</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Preprint</displayed-value> -->
+                <displayed-value>- Preprint</displayed-value>
+                <stored-value>preprint</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Report</displayed-value> -->
+                <displayed-value>- Relatório</displayed-value>
+                <stored-value>report</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Report Part</displayed-value> -->
+                <displayed-value>-- Capítulo de relatório</displayed-value>
+                <stored-value>report part</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Internal Report</displayed-value> -->
+                <displayed-value>-- Relatório interno</displayed-value>
+                <stored-value>internal report</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Memorandum</displayed-value> -->
+                <displayed-value>-- Memorando</displayed-value>
+                <stored-value>memorandum</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Other Type of Report</displayed-value> -->
+                <displayed-value>-- Outro tipo de relatório</displayed-value>
+                <stored-value>other type of report</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Policy Report</displayed-value> -->
+                <displayed-value>-- Relatório de política</displayed-value>
+                <stored-value>policy report</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Project Deliverable</displayed-value> -->
+                <displayed-value>-- Entregável de projeto</displayed-value>
+                <stored-value>project deliverable</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Data Management Plan</displayed-value> -->
+                <displayed-value>--- Plano de gestão de dados</displayed-value>
+                <stored-value>data management plan</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Report to Funding Agency</displayed-value> -->
+                <displayed-value>-- Relatório para organismo financiador</displayed-value>
+                <stored-value>report to funding agency</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Research Report</displayed-value> -->
+                <displayed-value>-- Relatório de investigação</displayed-value>
+                <stored-value>research report</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Technical Report</displayed-value> -->
+                <displayed-value>-- Relatório técnico</displayed-value>
+                <stored-value>technical report</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Research Proposal</displayed-value> -->
+                <displayed-value>- Proposta de investigação</displayed-value>
+                <stored-value>research proposal</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Review</displayed-value> -->
+                <displayed-value>- Recensão</displayed-value>
+                <stored-value>review</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Book Review</displayed-value> -->
+                <displayed-value>-- Recensão de livro</displayed-value>
+                <stored-value>book review</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Technical Documentation</displayed-value> -->
+                <displayed-value>- Documentação técnica</displayed-value>
+                <stored-value>technical documentation</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Working Paper</displayed-value> -->
+                <displayed-value>- Working Paper</displayed-value>
+                <stored-value>working paper</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Thesis</displayed-value> -->
+                <displayed-value>- Tese</displayed-value>
+                <stored-value>thesis</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Bachelor Thesis</displayed-value> -->
+                <displayed-value>-- Trabalho de fim de curso</displayed-value>
+                <stored-value>bachelor thesis</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Doctoral Thesis</displayed-value> -->
+                <displayed-value>-- Tese de doutoramento</displayed-value>
+                <stored-value>doctoral thesis</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Master Thesis</displayed-value> -->
+                <displayed-value>-- Dissertação de mestrado</displayed-value>
+                <stored-value>master thesis</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Musical Notation</displayed-value> -->
+                <displayed-value>- Notação musical</displayed-value>
+                <stored-value>musical notation</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Blog Post</displayed-value> -->
+                <displayed-value>- Notícia de blog</displayed-value>
+                <stored-value>blog post</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Manuscript</displayed-value> -->
+                <displayed-value>- Manuscrito</displayed-value>
+                <stored-value>manuscript</stored-value> <!-- RCAAP reviewed <stored-value> 'website' to 'manuscript' -->
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Learning Object</displayed-value> -->
+                <displayed-value>Material pedagógico</displayed-value>
+                <stored-value>learning object</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Clinical Trial</displayed-value> -->
+                <displayed-value>Dados de ensaios clínicos</displayed-value>
+                <stored-value>clinical trial</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Clinical Study</displayed-value> -->
+                <displayed-value>Estudo clínico</displayed-value>
+                <stored-value>clinical study</stored-value>
+            </pair>
+            
+        </value-pairs>
+
+        <!-- 09-06-2023 - RCAAP change place! Translation of 'displayed-values' to pt_PT  -->
+        
+        <!-- OpenAIRE version types
+             https://openaire-guidelines-for-literature-repository-managers.readthedocs.io/en/v4.0.0/field_resourceversion.html
+             Based on COAR Vocabularies -> Controlled Vocabulary for Version Types (Version 1.1):
+             https://vocabularies.coar-repositories.org/version_types/
+        -->
+        
+        <value-pairs value-pairs-name="openaire_version_types" dc-term="version">
+            
+            <pair>
+                <!-- <displayed-value>Version of Record</displayed-value> -->
+                <displayed-value>Versão publicada (VoR)</displayed-value>
+                <stored-value>http://purl.org/coar/version/c_970fb48d4fbd8a85</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Accepted Manuscript</displayed-value> -->
+                <displayed-value>Versão final do autor aceite para publicação (AM)</displayed-value>
+                <stored-value>http://purl.org/coar/version/c_ab4af688f83e57aa</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Author’s Original</displayed-value> -->
+                <displayed-value>Versão original do autor (AO)</displayed-value>
+                <stored-value>http://purl.org/coar/version/c_b1a7d7d4d402bcce</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Submitted Manuscript Under Review</displayed-value> -->
+                <displayed-value>Versão submetida para revisão por pares (SMUR)</displayed-value>
+                <stored-value>http://purl.org/coar/version/c_71e4c1898caa6e32</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Proof</displayed-value> -->
+                <displayed-value>Prova tipográfica (P)</displayed-value>
+                <stored-value>http://purl.org/coar/version/c_fa2ee174bc00049f</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Corrected Version of Record</displayed-value> -->
+                <displayed-value>Versão publicada corrigida (CVoR)</displayed-value>
+                <stored-value>http://purl.org/coar/version/c_e19f295774971610</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Enhanced Version of Record</displayed-value> -->
+                <displayed-value>Versão melhorada (EVoR)</displayed-value>
+                <stored-value>http://purl.org/coar/version/c_dc82b40f9837b551</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Not Applicable (or Unknown)</displayed-value> -->
+                <displayed-value>Não aplicável ou desconhecida (NA)</displayed-value>
+                <stored-value>http://purl.org/coar/version/c_be7fb7dd8ff6fe43</stored-value>
+            </pair>
+            
+        </value-pairs>
+
+        <value-pairs value-pairs-name="openaire_rights" dc-term="rights">
+            
+            <pair>
+                <displayed-value>open access</displayed-value>
+                <stored-value>http://purl.org/coar/access_right/c_abf2</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>embargoed access</displayed-value>
+                <stored-value>http://purl.org/coar/access_right/c_f1cf</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>restricted access</displayed-value>
+                <stored-value>http://purl.org/coar/access_right/c_16ec</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>metadata only access</displayed-value>
+                <stored-value>http://purl.org/coar/access_right/c_14cb</stored-value>
+            </pair>
+            
+        </value-pairs>
+
+        <value-pairs value-pairs-name="openaire_author_identifier_types" dc-term="identifier">
+            
+             <pair>
+                <displayed-value>Ciencia ID</displayed-value>
+                <stored-value>ciencia-id</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>Open Researcher and Contributor ID (ORCID)</displayed-value>
+                <stored-value>orcid</stored-value>
+            </pair>
+            
+            <!--
+            <pair>
+                <displayed-value>Identificador institucional</displayed-value>
+                <stored-value>staffid</stored-value>
+            </pair>
+            -->
+            
+            <pair>
+                <displayed-value>Scopus Author ID</displayed-value>
+                <stored-value>scopus-author-id</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>Web of Science ResearcherID</displayed-value>
+                <stored-value>rid</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>Google Scholar ID</displayed-value>
+                <stored-value>gsid</stored-value>
+            </pair>
+            
+            <!-- 24-01-2024 > NOT IN USE IN RCAAP?!
+            <pair>
+                <displayed-value>International Standard Name Identifier (ISNI)</displayed-value>
+                <stored-value>isni</stored-value>
+            </pair>
+          
+            <pair>
+                <displayed-value>Outro</displayed-value>
+                <stored-value>other</stored-value>
+            </pair>
+              -->
+              
+        </value-pairs>
+
+        <value-pairs value-pairs-name="openaire_organization_identifier_types" dc-term="identifier">
+            
+            <pair>
+                <displayed-value>International Standard Name Identifier (ISNI)</displayed-value>
+                <stored-value>isni</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>Ringgold identifier (RIN)</displayed-value>
+                <stored-value>rin</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>Research Organization Registry (ROR)</displayed-value>
+                <stored-value>ror</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>Funder Registry (CrossRef)</displayed-value>
+                <stored-value>crossrefid</stored-value>
+            </pair>
+            
+            <!--
+            <pair>
+                <displayed-value>Global Research Identifier Database (GRID)</displayed-value>
+                <stored-value>grid</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>Direção-Geral de Estatísticas da Educação e Ciência (DGEEC)</displayed-value>
+                <stored-value>dgeec</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>Outro</displayed-value>
+                <stored-value>other</stored-value>
+            </pair>
+            -->
+            
+        </value-pairs>
+
+        <!-- Value-pair for organization types -->
+        
+        <value-pairs value-pairs-name="openaire_organization_types" dc-term="type">
+            
+            <pair>
+                <displayed-value>N/A</displayed-value>
+                <stored-value>n/a</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Is a Funding Organization</displayed-value> -->
+                <displayed-value>Organização de financiamento</displayed-value> <!-- 09-06-2023 - RCAAP translation -->
+                <stored-value>FundingOrganization</stored-value>
+            </pair>
+            
+            <!-- 15-01-2024 > To display other kind of organizations??? e.g. internal units or other-???
+            <pair>
+                <displayed-value>Unidade interna</displayed-value> 
+                <stored-value>internalUnit</stored-value>
+            </pair>
+            -->
+            
+        </value-pairs>
+        
+        <!-- 29-06-2023 - RCAAP specific! MOD for 'THESIS' form -->
+        <value-pairs value-pairs-name="thesis_types" dc-term="type">
+            
+       <!-- <pair>
+                <displayed-value>Thesis</displayed-value> 
+                <displayed-value>Tese</displayed-value>
+                <stored-value>thesis</stored-value>
+            </pair> -->
+            
+            <pair>
+                <!-- <displayed-value>Doctoral Thesis</displayed-value> -->
+                <displayed-value>Tese de doutoramento</displayed-value>
+                <stored-value>doctoral thesis</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Master Thesis</displayed-value> -->
+                <displayed-value>Dissertação de mestrado</displayed-value>
+                <stored-value>master thesis</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>Trabalho de fim de curso</displayed-value>
+                <stored-value>bachelor thesis</stored-value>
+            </pair> 
+            
+        </value-pairs>
+        
+        <!-- 11-01-2024 - RCAAP specific! MOD for 'OER' form -->
+        <value-pairs value-pairs-name="oer_types" dc-term="type">
+            
+            <pair>
+                <!-- <displayed-value>Learning Object</displayed-value> -->
+                <displayed-value>Material pedagógico</displayed-value>
+                <stored-value>learning object</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Video</displayed-value> -->
+                <displayed-value>-- Vídeo</displayed-value>
+                <stored-value>video</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Interactive Resource</displayed-value> -->
+                <displayed-value>Recurso interativo</displayed-value>
+                <stored-value>interactive resource</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Website</displayed-value> -->
+                <displayed-value>- Sítio web</displayed-value>
+                <stored-value>website</stored-value>
+            </pair>
+            
+            <pair>
+                <!-- <displayed-value>Other</displayed-value> -->
+                <displayed-value>Outro</displayed-value>
+                <stored-value>other</stored-value>
+            </pair>
+            
+        </value-pairs>
+        
+        
+        <!-- 09-06-2023 - RCAAP specific! ADD for peer-review -->
+        <value-pairs value-pairs-name="yes_no" dc-term="peerreviewed">
+            
+            <pair>
+                <displayed-value>Sim</displayed-value>
+                <stored-value>yes</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>Não</displayed-value>
+                <stored-value>no</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>N/A</displayed-value>
+                <stored-value>n/a</stored-value>
+            </pair>
+            
+        </value-pairs>
+        
+
+    </form-value-pairs>
+
+</input-forms>
