@@ -24,6 +24,7 @@
     <submission-map>
         <!-- Default submission process -->
         <!--<name-map collection-handle="default" submission-name="traditional"/>-->
+        <name-map collection-handle="default" submission-name="RCAAP_Publication_Submission"/>
 
         <!-- Sample Entities Collection configuration based on the demo Entities dataset available at:
              https://github.com/DSpace-Labs/AIP-Files/releases/tag/demo-entities-data
@@ -53,17 +54,10 @@
         <name-map collection-handle="123456789/30" submission-name="JournalIssue"/>
         -->
         
-        <name-map collection-handle="10400.7/276" submission-name="sample"/>  <!-- RS sample form test -->
-        <name-map collection-handle="123456789/1369" submission-name="RCAAP_OER_Submission"/>  <!-- RCAAP Open Education Resources (OER) Form Testing 11-01-2024 -->
-        <name-map collection-handle="123456789/1371" submission-name="RCAAP_Item_Submission"/>  <!-- RCAAP ITEM Form Testing 11-01-2024 -->
-        <name-map collection-handle="123456789/1368" submission-name="RCAAP_Thesis_Submission"/> <!-- RCAAP THESIS Form Testing 11-01-2024 -->
-        <name-map collection-handle="10400.7/840" submission-name="RCAAP_Thesis_Submission"/> <!-- RCAAP THESIS Form Testing 11-01-2024 -->
-        <name-map collection-handle="default" submission-name="RCAAP_Publication_Submission"/> <!-- RCAAP PUBLICATION Form Testing 11-01-2024 -->
-        
-        <name-map collection-entity-type="Publication" submission-name="RCAAP_Publication_Submission"/> <!-- RCAAP PUBLICATION Form Testing 11-01-2024 -->
-        <name-map collection-entity-type="Person" submission-name="RCAAP_Person_Submission"/> <!-- RCAAP PERSON Form Testing 11-01-2024 -->
-        <name-map collection-entity-type="Project" submission-name="RCAAP_Project_Submission"/> <!-- RCAAP PROJECT Form Testing 11-01-2024 -->
-        <name-map collection-entity-type="OrgUnit" submission-name="RCAAP_Organization_Submission"/> <!-- RCAAP ORGUNIT Form Testing 11-01-2024 -->
+        <name-map collection-entity-type="Publication" submission-name="RCAAP_Publication_Submission"/> <!-- RCAAP PUBLICATION Form 08-03-2024 -->
+        <name-map collection-entity-type="Person" submission-name="RCAAP_Person_Submission"/> <!-- RCAAP PERSON Form Testing 08-03-2024 -->
+        <name-map collection-entity-type="Project" submission-name="RCAAP_Project_Submission"/> <!-- RCAAP PROJECT Form Testing 08-03-2024 -->
+        <name-map collection-entity-type="OrgUnit" submission-name="RCAAP_Organization_Submission"/> <!-- RCAAP ORGUNIT Form Testing 08-03-2024 -->
 
     </submission-map>
 
@@ -97,7 +91,7 @@
             <heading></heading>
             <processing-class>org.dspace.app.rest.submit.step.CollectionStep</processing-class>
             <type>collection</type>
-            <scope visibility="hidden" visibilityOutside="hidden">submission</scope>
+            <!-- <scope visibility="hidden" visibilityOutside="hidden">submission</scope> RCAPP 08-03-2024 -->
         </step-definition>
 
         <!-- The following set of DescribeStep <step-definition>s all point to forms (of the same name) which are
@@ -113,52 +107,6 @@
             <processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
             <type>submission-form</type>
         </step-definition>
-        
-        <!-- RCAAP! TO REMOVE AFTER RCAAP STEPS VALIDATION!!! 19-02-2024 
-        
-        <step-definition id="publicationStep" mandatory="true">
-            <heading>submit.progressbar.describe.stepone</heading>
-            <processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
-            <type>submission-form</type>
-        </step-definition>
-        
-        <step-definition id="personStep" mandatory="true">
-            <heading>submit.progressbar.describe.stepone</heading>
-            <processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
-            <type>submission-form</type>
-        </step-definition>
-        
-        <step-definition id="projectStep" mandatory="true">
-            <heading>submit.progressbar.describe.stepone</heading>
-            <processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
-            <type>submission-form</type>
-        </step-definition>
-        
-        <step-definition id="orgUnitStep" mandatory="true">
-            <heading>submit.progressbar.describe.stepone</heading>
-            <processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
-            <type>submission-form</type>
-        </step-definition>
-        
-        <step-definition id="journalStep" mandatory="true">
-            <heading>submit.progressbar.describe.stepone</heading>
-            <processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
-            <type>submission-form</type>
-        </step-definition>
-        
-        <step-definition id="journalVolumeStep" mandatory="true">
-            <heading>submit.progressbar.describe.stepone</heading>
-            <processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
-            <type>submission-form</type>
-        </step-definition>
-        
-        <step-definition id="journalIssueStep" mandatory="true">
-            <heading>submit.progressbar.describe.stepone</heading>
-            <processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
-            <type>submission-form</type>
-        </step-definition>
-        
-        -->  
 
         <step-definition id="upload">
             <heading>submit.progressbar.upload</heading>
@@ -177,10 +125,10 @@
         <step-definition id="cclicense" mandatory="false">
             <heading>submit.progressbar.CClicense</heading>
             <processing-class>org.dspace.app.rest.submit.step.CCLicenseStep</processing-class>
-	        <type>cclicense</type>
+            <type>cclicense</type>
         </step-definition>
 
-		<!-- This optional step may allow the user to select access conditions on the item -->
+        <!-- This optional step may allow the user to select access conditions on the item -->
         <step-definition id="itemAccessConditions">
             <heading>submit.progressbar.accessCondition</heading>
             <processing-class>org.dspace.app.rest.submit.step.AccessConditionStep</processing-class>
@@ -216,28 +164,6 @@
             <processing-class>org.dspace.app.rest.submit.step.SherpaPolicyStep</processing-class>
             <type>sherpaPolicy</type>
         </step-definition>
-
-        
-        <!-- OPENAIRE STEPS FOR PUBLICATION --> <!-- TO REMOVE AFTER RCAAP STEPS VALIDATION!!! 19-02-2024  -->   
-        
-        <step-definition id="openAIREPublicationPageoneForm" mandatory="true">
-            <heading>submit.progressbar.describe.stepone</heading>
-            <processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
-            <type>submission-form</type>
-        </step-definition>
-        
-        <step-definition id="openAIREPublicationPagetwoForm" mandatory="true">
-            <heading>submit.progressbar.describe.steptwo</heading>
-            <processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
-            <type>submission-form</type>
-        </step-definition>
-        
-        <step-definition id="openAIREPublicationPagethreeForm" mandatory="true"> <!-- 15-01-2024 - RCAAP Section Addition!-->
-            <heading>submit.progressbar.describe.rcaap.stepone</heading>
-            <processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
-            <type>submission-form</type>
-        </step-definition>
-        
         
         <!-- RCAAP STEPS FOR ENTITIES 19-02-2024  -->   
         
@@ -533,43 +459,6 @@
             
         </submission-process>
         
-        
-        <!-- 06-12-2023 - RS Sample test!-->
-        
-        <!-- RS Sample submission processes -->
-        <submission-process name="Sample">
-            
-            <step id="collection"/>
-
-            <!--Step will be to describe the item. -->
-            <step id="openAIREPublicationPageoneForm"/>
-            
-            <!--Step will be to describe the item. -->
-            <step id="openAIREPublicationPagetwoForm"/>
-            
-            <!--Step will be to describe the item. -->
-            <step id="openAIREPublicationPagethreeForm"/> <!-- 11-01-2024 - RCAAP addition! -->
-            
-            <!-- Uncomment this step to show when appropriate publisher policies retrieved from SHERPA/RoMEO --> <!-- 24-11-2023 - RCAAP change place! -->
-            <step id="sherpaPolicies"/>
-            
-            <!--Step will be to upload the item -->
-            <step id="upload"/>
-            
-            <!-- Uncomment this step to allow the user to embargo or access restrict the entire item -->
-            <step id="itemAccessConditions"/> 
-            
-            <!-- Uncomment this step to allow the user to select a Creative Commons License -->
-            <step id="cclicense"/>
-            
-            <!--Step will be to sign off on the License -->
-            <step id="license"/>
-            
-        </submission-process>
-        
-        <!-- // RS Sample test!-->
-
-       
         
     </submission-definitions>
 
