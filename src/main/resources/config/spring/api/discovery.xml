@@ -1455,12 +1455,14 @@
         <property name="sidebarFacets">
             <list>
                 <ref bean="searchFilterSubject"/>
+                <ref bean="searchFilterProjectFunder"/>
             </list>
         </property>
         <!--The search filters which can be used on the discovery search page-->
         <property name="searchFilters">
             <list>
                 <ref bean="searchFilterSubject"/>
+                <ref bean="searchFilterProjectFunder"/>
                 <ref bean="searchFilterIdentifier"/>
                 <ref bean="searchFilterIsOrgUnitOfProjectRelation"/>
                 <ref bean="searchFilterIsPersonOfProjectRelation"/>
