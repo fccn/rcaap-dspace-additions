@@ -35,8 +35,8 @@ COPY . /dspace-src/dspace/modules/additions
 # copy specific configurations
 COPY ./src/main/resources/config/ /dspace-src/dspace/config
 
-# copy specific configurations
-COPY ./src/main/resources/config/ /dspace-src/dspace/config
+# copy specific solr configurations
+COPY ./src/main/resources/solr/ /dspace-src/dspace/solr
 
 # copy specific executables
 COPY ./src/main/resources/bin/ /dspace-src/dspace/bin
