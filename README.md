@@ -22,9 +22,14 @@ Fazer clone do projeto para a diretoria additions em `DSpace/dspace/modules/`:
 git clone https://github.com/fccn/rcaap-dspace-additions.git additions
 ```
 
-Depois, colocar as nossas configurações default:
+Colocar as nossas configurações default:
 ```
 rsync -r --remove-source-files  additions/src/main/resources/config/ ../config
+```
+
+Depois, colocar as nossas modificações SOLR:
+```
+rsync -r --remove-source-files  additions/src/main/resources/solr/ ../solr
 ```
 
 Colocar também os ficheiros executáveis que estão no additions:
