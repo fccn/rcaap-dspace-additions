@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-lazy-init="true">
+
+	<bean id="CienciaVitaeRestConnector" class="pt.rcaap.cienciavitae.curriculum.client.RestConnector">
+		<constructor-arg index="0"  value="${cienciavitae.api.url:https://qa.cienciavitae.pt/api/v1.1}"/>
+		<constructor-arg index="1"  value="${cienciavitae.api.username:MYUSERNAME}"/>
+		<constructor-arg index="2"  value="${cienciavitae.api.password:MYPASSWORD}"/>
+	</bean>
+
+	<bean
+		class="org.dspace.external.provider.impl.CienciaVitaeCurriculumDataProvider"
+		init-method="init">
+		<property name="sourceIdentifier" value="CienciaVitaeCurriculum" />
+		<property name="connector" ref="CienciaVitaeRestConnector" />
+		<property name="cienciaVitaeUrl" value="${cienciavitae.url:https://qa.cienciavitae.pt/}" />
+		
+		<property name="supportedEntityTypes">
+			<list>
+				<value>Person</value>
+			</list>
+		</property>
+	</bean>
+	
+</beans>
+

@@ -14,6 +14,10 @@ INSERT INTO "metadataschemaregistry" ( "metadata_schema_id", "namespace", "short
 VALUES (nextval('metadataschemaregistry_seq'), 'http://namespace.openaire.eu/schema/oaire/', 'oaire' );
 COMMIT;
 
+BEGIN;
+INSERT INTO "metadataschemaregistry" ( "metadata_schema_id", "namespace", "short_id") 
+VALUES (nextval('metadataschemaregistry_seq'), 'http://datacite.org/schema/kernel-4', 'datacite' );
+COMMIT;
 
 BEGIN;
 INSERT INTO "metadataschemaregistry" ( "metadata_schema_id", "namespace", "short_id") 

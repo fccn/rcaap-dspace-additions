@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+       default-lazy-init="true">
+
+    <bean id="renatesAPIConnector" class="org.dspace.external.RenatesConnector">
+        <property name="renatesURI" value="${renates.api.url:https://renates.dgeec.mec.pt/ws/renatesws.asmx/Tese}"/>
+    </bean>
+    <bean class="org.dspace.external.provider.impl.RenatesLiveImporter" init-method="init">
+        <property name="sourceIdentifier" value="renates"/>
+        <property name="tidRegExp" value="[12]0\d{7}(?!\d)"/>
+        <property name="renatesConnector" ref="renatesAPIConnector"/>
+        <property name="tipoTese" ref="tipoTese"/>
+		
+		<!-- need to add EntityType -->
+		<property name="supportedEntityTypes">
+            <list>
+                <value>Publication</value>
+                <value>none</value>
+            </list>
+        </property>
+		
+    </bean>
+
+    <util:map id="tipoTese" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.String">
+        <!--<entry key="Doutoramento" value="http://purl.org/coar/resource_type/c_db06"/>
+        <entry key="Mestrado" value="http://purl.org/coar/resource_type/c_bdcc"/>-->
+        <!--<entry key="Doutoramento" value="doctoralThesis"/>
+        <entry key="Mestrado" value="masterThesis"/>-->
+		<entry key="Doutoramento" value="doctoral thesis"/>
+        <entry key="Mestrado" value="master thesis"/>
+    </util:map>
+
+</beans>
+

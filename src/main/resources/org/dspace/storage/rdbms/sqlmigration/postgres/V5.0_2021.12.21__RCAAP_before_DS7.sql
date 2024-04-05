@@ -4,7 +4,7 @@
 
 BEGIN;
 
-CREATE TABLE "handle_audit_ds7" ( 
+CREATE TABLE IF NOT EXISTS "handle_audit_ds7" ( 
 	"operation" Character( 1 ) NOT NULL,
 	"stamp" Timestamp Without Time Zone NOT NULL,
 	"userid" Text NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE "handle_audit_ds7" (
 COMMIT;
 
 BEGIN;
-CREATE TABLE "item_audit_ds7" ( 
+CREATE TABLE IF NOT EXISTS "item_audit_ds7" ( 
 	"operation" Character( 1 ) NOT NULL,
 	"stamp" Timestamp Without Time Zone NOT NULL,
 	"userid" Text NOT NULL,
@@ -108,7 +108,33 @@ VALUES (nextval('metadatafieldregistry_seq'), (SELECT metadata_schema_id FROM "m
 
 COMMIT;
 
+BEGIN;
 
+INSERT INTO "metadatafieldregistry" ( "metadata_field_id","metadata_schema_id", "element", "qualifier") 
+VALUES (nextval('metadatafieldregistry_seq'), (SELECT metadata_schema_id FROM "metadataschemaregistry" WHERE "short_id" = 'datacite'), 'subject', 'fos' );
+
+COMMIT;
+
+BEGIN;
+
+INSERT INTO "metadatafieldregistry" ( "metadata_field_id","metadata_schema_id", "element", "qualifier") 
+VALUES (nextval('metadatafieldregistry_seq'), (SELECT metadata_schema_id FROM "metadataschemaregistry" WHERE "short_id" = 'datacite'), 'subject', 'sdg' );
+
+COMMIT;
+
+BEGIN;
+
+INSERT INTO "metadatafieldregistry" ( "metadata_field_id","metadata_schema_id", "element") 
+VALUES (nextval('metadatafieldregistry_seq'), (SELECT metadata_schema_id FROM "metadataschemaregistry" WHERE "short_id" = 'rcaap'), 'rights' );
+
+COMMIT;
+
+BEGIN;
+
+INSERT INTO "metadatafieldregistry" ( "metadata_field_id","metadata_schema_id", "element") 
+VALUES (nextval('metadatafieldregistry_seq'), (SELECT metadata_schema_id FROM "metadataschemaregistry" WHERE "short_id" = 'rcaap'), 'type' );
+
+COMMIT;
 -- mover os field type id existentes do esquema degois para o esquema openaire
 BEGIN;
 UPDATE metadatavalue SET metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'oaire') and metadatafieldregistry.element = 'citation' and metadatafieldregistry.qualifier = 'startPage')
@@ -128,5 +154,97 @@ WHERE metadata_field_id = (select metadata_field_id from "metadatafieldregistry"
 
 UPDATE metadatavalue SET metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'oaire') and metadatafieldregistry.element = 'citation' and metadatafieldregistry.qualifier = 'conferencePlace')
 WHERE metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'degois') and metadatafieldregistry.element = 'publication' and metadatafieldregistry.qualifier = 'location');
+
+COMMIT;
+
+-- mover os dc.subject.fos (do esquema RCAAP) para o esquema openaire em datacite.subject.fos
+BEGIN;
+
+UPDATE metadatavalue SET metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'datacite') and metadatafieldregistry.element = 'subject' and metadatafieldregistry.qualifier = 'fos')
+WHERE metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'dc') and metadatafieldregistry.element = 'subject' and metadatafieldregistry.qualifier = 'fos');
+
+-- apagar o campo antigo dc.subject.fos (nao pertence ao DC)
+DELETE FROM "metadatafieldregistry" 
+WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'dc') and metadatafieldregistry.element = 'subject' and metadatafieldregistry.qualifier = 'fos';
+
+COMMIT;
+
+-- mover os metadados dc.rights do tipo item para um campo específico RCAAP
+BEGIN;
+
+UPDATE metadatavalue SET metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'rcaap') and metadatafieldregistry.element = 'rights' and metadatafieldregistry.qualifier is NULL)
+WHERE metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'dc') and metadatafieldregistry.element = 'rights' and metadatafieldregistry.qualifier is NULL)
+AND resource_type_id = 2
+AND LOWER(text_value) LIKE '%access';
+
+COMMIT;
+
+
+-- mover os dc.subject.ods (do esquema RCAAP) para o esquema openaire em datacite.subject.sdg
+BEGIN;
+
+UPDATE metadatavalue SET metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'datacite') and metadatafieldregistry.element = 'subject' and metadatafieldregistry.qualifier = 'sdg')
+WHERE metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'dc') and metadatafieldregistry.element = 'subject' and metadatafieldregistry.qualifier = 'ods');
+
+-- apagar o campo antigo dc.subject.ods (nao pertence ao DC)
+DELETE FROM "metadatafieldregistry"
+WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'dc') and metadatafieldregistry.element = 'subject' and metadatafieldregistry.qualifier = 'ods';
+
+COMMIT;
+
+-- mover os metadados dc.type do tipo item para um campo específico RCAAP
+BEGIN;
+UPDATE metadatavalue SET metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'rcaap') and metadatafieldregistry.element = 'type' and metadatafieldregistry.qualifier is NULL)
+WHERE metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'dc') and metadatafieldregistry.element = 'type' and metadatafieldregistry.qualifier is NULL)
+AND resource_type_id = 2
+AND LOWER(text_value) IN ('article','bachelorthesis','masterthesis','doctoralthesis','book','bookpart','review','conferenceobject','lecture','workingpaper','preprint','report','annotation','contributiontoperiodical','patent','other','dataset','pedagogicalpublication');
+COMMIT;
+
+-- corrigir os dc types - para nova solução
+-- Criar uma tabela temporária
+BEGIN;
+CREATE TEMPORARY TABLE temp_dctype(
+   "text_value_in" text,
+   "text_value_out" text
+);
+
+-- inserir valores de mapeamento
+INSERT INTO temp_dctype ("text_value_out", "text_value_in")
+VALUES
+   ('journal article','article'),
+   ('bachelor thesis','bachelorthesis'),
+   ('master thesis','masterthesis'),
+   ('doctoral thesis','doctoralthesis'),
+   ('book','book'),
+   ('book part','bookpart'),
+   ('review','review'),
+   ('conference object','conferenceobject'),
+   ('lecture','lecture'),
+   ('working paper','workingpaper'),
+   ('preprint','preprint'),
+   ('report','report'),
+   ('annotation','annotation'),
+   ('periodical','contributiontoperiodical'),
+   ('patent','patent'),
+   ('other','other'),
+   ('dataset','dataset'),
+   ('learning object','pedagogicalpublication');
+
+
+-- mapear valores existentes rcaap.type
+INSERT INTO "metadatavalue" ( "metadata_value_id","resource_id", "metadata_field_id", "text_value", "place", "resource_type_id") 
+SELECT
+	nextval('metadatavalue_seq') as "metadata_value_id",
+	mdv.resource_id as "resource_id",
+	(SELECT metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM metadataschemaregistry as mr WHERE "short_id" = 'dc') and metadatafieldregistry.element = 'type' and metadatafieldregistry.qualifier is NULL) as "metadata_field_id",
+	text_value_out as "text_value",
+	mdv.place as "place",
+	mdv.resource_type_id as "resource_type_id"
+
+FROM metadatavalue AS mdv 
+LEFT JOIN temp_dctype ON LOWER(mdv.text_value) = text_value_in
+WHERE mdv.metadata_field_id IN (SELECT metadata_field_id FROM "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'rcaap') AND metadatafieldregistry.element = 'type' AND metadatafieldregistry.qualifier is NULL);
+
+
 
 COMMIT;

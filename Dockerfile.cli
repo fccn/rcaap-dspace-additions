@@ -1,0 +1,101 @@
+# This file is based on DSpace Dockerfile.cli
+
+# This image will be published as rcaap/dspace-cli
+# See https://github.com/fccn/rcaap-dspace-additions for usage details
+#
+# - note: default tag for branch: rcaap/dspace-cli: rcaap/dspace-cli:latest
+
+# build:
+# docker build -t rcaap/dspace-cli -f Dockerfile.cli .
+
+# This Dockerfile uses JDK11 by default, but has also been tested with JDK17.
+# To build with JDK17, use "--build-arg JDK_VERSION=17"
+ARG JDK_VERSION=11
+
+# ###################
+# NOTE:
+# if you change DSPACE_VERSION value, please also remember to change VERSION env variable
+# ###################
+ARG DSPACE_VERSION=dspace-7.6.1
+
+FROM alpine:3.5 as source
+RUN apk update
+RUN apk add git
+
+ENV VERSION=dspace-7.6.1
+
+WORKDIR /dspace-src
+
+# GitHub clone from DSpace
+RUN git clone -b $VERSION https://github.com/DSpace/DSpace.git /dspace-src
+
+RUN rm -rf /dspace-src/dspace/modules/additions
+COPY . /dspace-src/dspace/modules/additions
+
+# copy specific configurations
+COPY ./src/main/resources/config/ /dspace-src/dspace/config
+
+# copy specific solr configurations
+COPY ./src/main/resources/solr/ /dspace-src/dspace/solr
+
+# copy specific executables
+COPY ./src/main/resources/bin/ /dspace-src/dspace/bin
+
+# Step 1 - Run Maven Build
+FROM dspace/dspace-dependencies:${DSPACE_VERSION} as build
+ARG TARGET_DIR=dspace-installer
+
+WORKDIR /app
+# The dspace-installer directory will be written to /install
+RUN mkdir /install \
+    && chown -Rv dspace: /install \
+    && chown -Rv dspace: /app
+USER dspace
+
+# Copy the DSpace source code (from local machine) into the workdir (excluding .dockerignore contents)
+COPY --chown=dspace --from=source /dspace-src /app
+
+# use Virtual Metadata from OpenAIRE settings
+COPY --chown=dspace --from=source /dspace-src/dspace/config/spring/api/virtual-metadata.xml.openaire4 /app/dspace/config/spring/api/virtual-metadata.xml
+
+
+# Build DSpace.  Copy the dspace-installer directory to /install.  Clean up the build to keep the docker image small
+RUN mvn --no-transfer-progress package && \
+  mv /app/dspace/target/${TARGET_DIR}/* /install && \
+  mvn clean
+
+# Step 2 - Run Ant Deploy
+FROM openjdk:${JDK_VERSION}-slim as ant_build
+ARG TARGET_DIR=dspace-installer
+# COPY the /install directory from 'build' container to /dspace-src in this container
+COPY --from=build /install /dspace-src
+WORKDIR /dspace-src
+# Create the initial install deployment using ANT
+ENV ANT_VERSION 1.10.13
+ENV ANT_HOME /tmp/ant-$ANT_VERSION
+ENV PATH $ANT_HOME/bin:$PATH
+# Need wget to install ant, and unzip for managing AIPs
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends wget unzip \
+    && apt-get purge -y --auto-remove \
+    && rm -rf /var/lib/apt/lists/*
+# Download and install 'ant'
+RUN mkdir $ANT_HOME && \
+    wget -qO- "https://archive.apache.org/dist/ant/binaries/apache-ant-$ANT_VERSION-bin.tar.gz" | tar -zx --strip-components=1 -C $ANT_HOME
+# Run necessary 'ant' deploy scripts
+RUN ant init_installation update_configs update_code
+
+# Step 3 - Run jdk
+FROM openjdk:${JDK_VERSION}
+# NOTE: DSPACE_INSTALL must align with the "dspace.dir" default configuration.
+ENV DSPACE_INSTALL=/dspace
+
+# Install postgres client to be able to execute Postgres queries for RCAAP scripts
+RUN apt-get update \
+    && apt-get -y install postgresql-client-13 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy the /dspace directory from 'ant_build' container to /dspace in this container
+COPY --from=ant_build /dspace $DSPACE_INSTALL
+# Give java extra memory (1GB)
+ENV JAVA_OPTS=-Xmx1000m

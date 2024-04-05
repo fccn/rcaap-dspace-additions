@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<node id="coar_resource_types" label="COAR Resource Types">
+    <isComposedBy>
+        <node id="c_e9a0" label="interactive resource">
+            <isComposedBy>
+                <node id="c_7ad9" label="website"/>
+            </isComposedBy>
+        </node>
+        <node id="c_ddb1" label="dataset">
+            <isComposedBy>
+                <node id="c_26e4" label="interview"/>
+            </isComposedBy>
+        </node>
+        <node id="c_c513" label="image">
+            <isComposedBy>
+                <node id="c_8a7e" label="moving image">
+                    <isComposedBy>
+                        <node id="c_12ce" label="video"/>
+                    </isComposedBy>
+                </node>
+                <node id="c_ecc8" label="still image"/>
+            </isComposedBy>
+        </node>
+        <node id="c_1843" label="other"/>
+        <node id="c_5ce6" label="software">
+            <isComposedBy>
+                <node id="c_c950" label="research software"/>
+            </isComposedBy>
+        </node>
+        <node id="c_393c" label="workflow"/>
+        <node id="c_12cc" label="cartographic material">
+            <isComposedBy>
+                <node id="c_12cd" label="map"/>
+            </isComposedBy>
+        </node>
+        <node id="c_18cc" label="sound">
+            <isComposedBy>
+                <node id="c_18cd" label="musical composition"/>
+            </isComposedBy>
+        </node>
+        <node id="c_18cf" label="text">
+            <isComposedBy>
+                <node id="c_1162" label="annotation"/>
+                <node id="c_86bc" label="bibliography"/>
+                <node id="c_2f33" label="book">
+                    <isComposedBy>
+                        <node id="c_3248" label="book part"/>
+                    </isComposedBy>
+                </node>
+                <node id="c_c94f" label="conference object">
+                    <isComposedBy>
+                        <node id="c_f744" label="conference proceedings">
+                            <isComposedBy>
+                                <node id="c_5794" label="conference paper"/>
+                                <node id="c_6670" label="conference poster"/>
+                            </isComposedBy>
+                        </node>
+                        <node id="c_18cp" label="conference paper not in proceedings"/>
+                        <node id="c_18co" label="conference poster not in proceedings"/>
+                    </isComposedBy>
+                </node>
+                <node id="c_8544" label="lecture"/>
+                <node id="c_0857" label="letter"/>
+                <node id="c_2659" label="periodical">
+                    <isComposedBy>
+                        <node id="c_0640" label="journal">
+                            <isComposedBy>
+                                <node id="c_3e5a" label="contribution to journal">
+                                    <isComposedBy>
+                                        <node id="c_6501" label="journal article">
+                                            <isComposedBy>
+                                                <node id="c_beb9" label="data paper"/>
+                                                <node id="c_dcae04bc" label="review article"/>
+                                                <node id="c_2df8fbb1" label="research article"/>
+                                                <node id="c_7acd" label="corrigendum"/>
+                                                <node id="c_7bab" label="software paper"/>
+                                            </isComposedBy>
+                                        </node>
+                                        <node id="c_b239" label="editorial"/>
+                                        <node id="c_545b" label="letter to the editor"/>
+                                    </isComposedBy>
+                                </node>
+                            </isComposedBy>
+                        </node>
+                        <node id="c_2fe3" label="newspaper">
+                            <isComposedBy>
+                                <node id="c_998f" label="newspaper article"/>
+                            </isComposedBy>
+                        </node>
+                        <node id="c_2cd9" label="magazine"/>
+                    </isComposedBy>
+                </node>
+                <node id="c_15cd" label="patent"/>
+                <node id="c_816b" label="preprint"/>
+                <node id="c_93fc" label="report">
+                    <isComposedBy>
+                        <node id="c_ba1f" label="report part"/>
+                        <node id="c_18ww" label="internal report"/>
+                        <node id="c_18wz" label="memorandum"/>
+                        <node id="c_18wq" label="other type of report"/>
+                        <node id="c_186u" label="policy report"/>
+                        <node id="c_18op" label="project deliverable">
+                            <isComposedBy>
+                                <node id="c_ab20" label="data management plan"/>
+                            </isComposedBy>
+                        </node>
+                        <node id="c_18hj" label="report to funding agency"/>
+                        <node id="c_18ws" label="research report"/>
+                        <node id="c_18gh" label="technical report"/>
+                    </isComposedBy>
+                </node>
+                <node id="c_baaf" label="research proposal"/>
+                <node id="c_efa0" label="review">
+                    <isComposedBy>
+                        <node id="c_ba08" label="book review"/>
+                    </isComposedBy>
+                </node>
+                <node id="c_71bd" label="technical documentation"/>
+                <node id="c_8042" label="working paper"/>
+                <node id="c_46ec" label="thesis">
+                    <isComposedBy>
+                        <node id="c_7a1f" label="bachelor thesis"/>
+                        <node id="c_db06" label="doctoral thesis"/>
+                        <node id="c_bdcc" label="master thesis"/>
+                    </isComposedBy>
+                </node>
+                <node id="c_18cw" label="musical notation"/>
+                <node id="c_6947" label="blog post"/>
+                <node id="c_0040" label="manuscript"/>
+            </isComposedBy>
+        </node>
+        <node id="c_e059" label="learning object"/>
+        <node id="c_cb28" label="clinical trial"/>
+        <node id="c_7877" label="clinical study"/>
+    </isComposedBy>
+</node>
