@@ -63,9 +63,9 @@ O ficheiro pom.xml nos `additions`, depois de seguir os passos da instalação, 
 <dependencies>
 ....
       <dependency>
-      	<groupId>pt.rcaap</groupId>
-      	<artifactId>cienciavitae.model</artifactId>
-      	<version>0.0.1-SNAPSHOT</version>
+        <groupId>pt.rcaap</groupId>
+        <artifactId>cienciavitae.model</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
       </dependency>
 ....
    </dependencies>
@@ -122,9 +122,6 @@ plugin.named.org.dspace.curate.CurationTask = org.dspace.ctask.general.VerifyTID
 plugin.named.org.dspace.curate.CurationTask = org.dspace.ctask.general.CheckDuplicates = CheckDuplicates
 plugin.named.org.dspace.curate.CurationTask = org.dspace.ctask.general.EmbargoJustification = JustificationEmbargo
 plugin.named.org.dspace.curate.CurationTask = org.dspace.ctask.general.DoiValidator = DoiValidator
-<<<<<<< HEAD
-```
-=======
 plugin.named.org.dspace.curate.CurationTask = org.dspace.ctask.general.PolicyCheck = PolicyCheck
 ```
 
@@ -178,4 +175,3 @@ docker push rcaap/dspace-cli
 
 As imagens ficarão disponibilizadas aqui:
 https://hub.docker.com/u/rcaap
->>>>>>> 4ef1e00d38feeb669e21a303646bd86e82feb87f
