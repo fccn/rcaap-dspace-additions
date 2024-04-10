@@ -21,27 +21,30 @@ public class VerifyTID extends Distribute {
 
     private static Logger log = org.apache.logging.log4j.LogManager.getLogger(VerifyTID.class);
     private static String THESIS_DATE = "2013-08-07";
+    private static String COARTYPE_DOCTORAL = "c_db06";
+    private static String COARTYPE_MASTER = "c_bdcc";
 
     @Override
     protected void performItem(Item item) throws SQLException, IOException {
 
-        String type = itemService.getMetadata(item,"dc.type");
+        String type = itemService.getMetadata(item,"dc.type").toLowerCase().replaceAll("\\s","");
 
-        if (type != null && (type.equals("masterThesis") || type.equals("doctoralThesis"))) {
+        if (type != null && (type.equals("masterthesis") || type.equals("doctoralthesis")) ||
+                                type.contains(COARTYPE_MASTER) || type.contains(COARTYPE_DOCTORAL)) {
             String tid = itemService.getMetadata(item,"dc.identifier.tid");
             String strIssuedDate = itemService.getMetadata(item,"dc.date.issued");
             String handle = item.getHandle();
              if (strIssuedDate != null) {
                  if(verifyIssueDateAfter(strIssuedDate) && (tid == null || tid.isEmpty())) {
                      if (item.isArchived() && !item.isWithdrawn()) {
-                         res.append("\t\t\thttp://hdl.handle.net/");
+                         res.append("\t\thttp://hdl.handle.net/");
                          res.append(handle);
                          res.append(" - não tem TID \n");
                      }
                  }
             }
              else{
-                 res.append("\t\t\thttp://hdl.handle.net/");
+                 res.append("\t\thttp://hdl.handle.net/");
                  res.append(handle);
                  res.append(" - Sem dateIssued - Inconclusivo\n");
              }

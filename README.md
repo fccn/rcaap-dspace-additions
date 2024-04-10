@@ -63,9 +63,9 @@ O ficheiro pom.xml nos `additions`, depois de seguir os passos da instalação, 
 <dependencies>
 ....
       <dependency>
-      	<groupId>pt.rcaap</groupId>
-      	<artifactId>cienciavitae.model</artifactId>
-      	<version>0.0.1-SNAPSHOT</version>
+        <groupId>pt.rcaap</groupId>
+        <artifactId>cienciavitae.model</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
       </dependency>
 ....
    </dependencies>
