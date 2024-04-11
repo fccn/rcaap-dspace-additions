@@ -27,7 +27,12 @@ public class VerifyTID extends Distribute {
     @Override
     protected void performItem(Item item) throws SQLException, IOException {
 
-        String type = itemService.getMetadata(item,"dc.type").toLowerCase().replaceAll("\\s","");
+        String type = itemService.getMetadata(item,"dc.type");
+        
+        //Just in case there is no dc.type
+        if(type != null){
+            type = type.toLowerCase().replaceAll("\\s","");
+        }
 
         if (type != null && (type.equals("masterthesis") || type.equals("doctoralthesis")) ||
                                 type.contains(COARTYPE_MASTER) || type.contains(COARTYPE_DOCTORAL)) {
