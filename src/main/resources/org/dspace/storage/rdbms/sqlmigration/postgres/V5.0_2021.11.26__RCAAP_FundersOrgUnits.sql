@@ -103,7 +103,7 @@ INSERT INTO "temp_funder" ( "item_id", "funder", "funder_name" , "funder_identif
 VALUES (
 	nextval('item_seq'), 
 	'WT',
-	'Welcome Trust',
+	'Wellcome Trust',
 	'http://doi.org/10.13039/100010269'
 );
 
