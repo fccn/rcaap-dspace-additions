@@ -98,9 +98,19 @@ Nota: Esta versão do xslt usa para o dc.type openaire4. Contudo, para quem não
         </xsl:template>
 
         <!--<xsl:template match="*[local-name()='genre']"> 
-                 <xsl:call-template name="dcRights">
+                 <xsl:call-template name="dcType">
                         </xsl:call-template>
         </xsl:template>-->
+
+Para repositórios que NÃO usem o esquema oiare e sim o esquema degois, devem alterar o oaire/citation de acordo com:
+
+       oaire.citation.startPage -> degois.publication.firstPage
+       oaire.citation.endPage --> depois.publicaiton.firstPage
+       oaire.publication.title -> degois.publication.title
+       oaire.publication.location -> degois.publication.location
+
+       Os restantes oaire.citation mapear para degois.publication
+
 ```
 
 ## Configuraração Renates

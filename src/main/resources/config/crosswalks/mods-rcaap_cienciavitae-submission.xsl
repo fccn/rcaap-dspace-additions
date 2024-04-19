@@ -209,8 +209,8 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
     </xsl:when>
     <xsl:when test="./@type='conference' and ../*[local-name()='genre']/text()='conferenceObject'">
          <xsl:element name="dim:field">
-            <xsl:attribute name="mdschema">degois</xsl:attribute>
-            <xsl:attribute name="element">publication</xsl:attribute>
+            <xsl:attribute name="mdschema">oaire</xsl:attribute>
+            <xsl:attribute name="element">citation</xsl:attribute>
             <xsl:attribute name="qualifier">title</xsl:attribute>
             <xsl:attribute name="lang">en_US</xsl:attribute>
             <xsl:value-of select="*[local-name()='namePart']"/>
@@ -379,8 +379,8 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
                                         <xsl:choose>
                                             <xsl:when test="not(../*[local-name()='name'][@type='conference'])">
                                                 <xsl:element name="dim:field">
-                                                    <xsl:attribute name="mdschema">degois</xsl:attribute>
-                                                    <xsl:attribute name="element">publication</xsl:attribute>
+                                                    <xsl:attribute name="mdschema">oaire</xsl:attribute>
+                                                    <xsl:attribute name="element">citation</xsl:attribute>
                                                     <xsl:attribute name="qualifier">title</xsl:attribute>
                                                     <xsl:attribute name="lang">en_US</xsl:attribute>
                                                     <xsl:value-of select="normalize-space(*[local-name()='titleInfo']/*[local-name()='title'])"/>
@@ -475,14 +475,14 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
 
 <!-- Changes needed - CV deposit -->
 
-<!-- **** MODS   originInfo/publisher  ====> Degois publication Loaction **** -->
+<!-- **** MODS   originInfo/publisher  ====> Degois publication Loaction **** Now OAIRE CITATION -->
         <xsl:template match="*[local-name()='originInfo']/*[local-name()='place']/*[local-name()='placeTerm']">
             <xsl:choose>
                 <xsl:when test="./@type='text'">
                     <xsl:element name="dim:field">
-                            <xsl:attribute name="mdschema">degois</xsl:attribute>
-                            <xsl:attribute name="element">publication</xsl:attribute> 
-                            <xsl:attribute name="qualifier">location</xsl:attribute>                
+                            <xsl:attribute name="mdschema">oaire</xsl:attribute>
+                            <xsl:attribute name="element">citation</xsl:attribute> 
+                            <xsl:attribute name="qualifier">conferencePlace</xsl:attribute>                
                             <xsl:attribute name="lang">en_US</xsl:attribute>
                             <xsl:value-of select="normalize-space(.)"/>
                     </xsl:element>
@@ -533,13 +533,13 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
                  </xsl:choose>
         </xsl:template>
 
-<!-- **** VOLUME AND ISSE MAPPED ON DEGOIS FIELDS DC.DEGOIS.VOLUME|ISSUE-->
+<!-- **** VOLUME AND ISSE MAPPED ON DEGOIS FIELDS DC.DEGOIS.VOLUME|ISSUE - Now OAIRE CITATION-->
         <xsl:template match="*[local-name()='detail']"> 
             <xsl:choose>
                 <xsl:when test="not(./@type='section')">
                     <xsl:element name="dim:field">
-                        <xsl:attribute name="mdschema">degois</xsl:attribute>
-                        <xsl:attribute name="element">publication</xsl:attribute>
+                        <xsl:attribute name="mdschema">oaire</xsl:attribute>
+                        <xsl:attribute name="element">citation</xsl:attribute>
                         <xsl:attribute name="qualifier"><xsl:value-of select="./@type"/></xsl:attribute>                       
                         <xsl:attribute name="lang">en_US</xsl:attribute>
                         <xsl:value-of select="normalize-space(.)"/>
@@ -548,20 +548,20 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
             </xsl:choose>
         </xsl:template>
 
-        <!-- GET PAGES - THIS OR SEPARATE INDIVIDUALLY ????  DC.DEGOIS.FIRSTPAGE  ... DC:DEGOIS:LASTPAGE -->
+        <!-- GET PAGES - THIS OR SEPARATE INDIVIDUALLY ????  DC.DEGOIS.FIRSTPAGE  ... DC:DEGOIS:LASTPAGE Now OAIRE CITATION -->
         <xsl:template match="*[local-name()='extent']"> 
                <xsl:choose>
                    <xsl:when test="./@unit='pages'"> 
                         <xsl:for-each select="./*">
                             <xsl:element name="dim:field">
-                                <xsl:attribute name="mdschema">degois</xsl:attribute>
-                                <xsl:attribute name="element">publication</xsl:attribute>
+                                <xsl:attribute name="mdschema">oaire</xsl:attribute>
+                                <xsl:attribute name="element">citation</xsl:attribute>
                                 <xsl:choose>
                                     <xsl:when test="contains(local-name(),'start')">
-                                        <xsl:attribute name="qualifier">firstPage</xsl:attribute>
+                                        <xsl:attribute name="qualifier">startPage</xsl:attribute>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <xsl:attribute name="qualifier">lastPage</xsl:attribute>
+                                        <xsl:attribute name="qualifier">endPage</xsl:attribute>
                                     </xsl:otherwise>
                                 </xsl:choose> 
                                 <xsl:value-of select="normalize-space(.)"/>     
@@ -571,7 +571,7 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
              </xsl:choose>                                     
         </xsl:template>
 
-        <!-- **** LOCATION MAPPED ON DEGOIS FIELDS DC.DEGOIS.VOLUME|ISSUE-->
+        <!-- **** LOCATION MAPPED ON DEGOIS FIELDS DC.DEGOIS.VOLUME|ISSUE Now OAIRE CITATION-->
         <!--<xsl:template match="*[local-name()='location']"> 
                 <xsl:element name="dim:field">
                         <xsl:attribute name="mdschema">degois</xsl:attribute>
@@ -593,7 +593,7 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
         </xsl:template>-->
 
         <xsl:template match="*[local-name()='genre']"> 
-                 <xsl:call-template name="dcRights">
+                 <xsl:call-template name="dcType">
                         </xsl:call-template>
         </xsl:template>
 
@@ -650,7 +650,7 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
                     </xsl:element> 
         </xsl:template>
 
-   <xsl:template name="dcRights">
+   <xsl:template name="dcType">
         <xsl:element name="dim:field">
                 <xsl:attribute name="mdschema">dc</xsl:attribute>
                 <xsl:attribute name="element">type</xsl:attribute>
