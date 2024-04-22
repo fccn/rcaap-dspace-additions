@@ -174,6 +174,7 @@ COMMIT;
 
 BEGIN;
 
+-- mais tarde no processo, vamos ter que corrigir o campo place que iremos armazenar
 INSERT INTO "author_relationship" ("author_relationship_id", "author_item_id", "metadata_value_id", "item_id", "metadata_field_id", "text_value", "place" )
 SELECT
 	nextval('author_relationship_seq') as "author_relationship_id", 
@@ -188,9 +189,6 @@ FROM metadatavalue as mv inner join authorprofile as ap on ap.uuid = authority;
 COMMIT;
 
 
-BEGIN;
-DELETE FROM "metadatavalue" WHERE "metadata_value_id" IN (SELECT "metadata_value_id" FROM "author_relationship");
-COMMIT;
 
 BEGIN;
 -- DROP TABLE "authorprofile" ----------------------------------
