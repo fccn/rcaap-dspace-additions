@@ -7,7 +7,7 @@
 -- Atualizar o campo place na tabela author_relationship
 BEGIN;
 UPDATE author_relationship AS ar SET place = (SELECT mv.place FROM metadatavalue as mv
-	WHERE mv.metadata_value_id = ar.metadata_value_id)
+	WHERE mv.metadata_value_id = ar.metadata_value_id);
 COMMIT;
 
 -- #########################################
