@@ -68,3 +68,21 @@ WHERE workspace_item_id IN (
 
 
 COMMIT;
+
+-- Normalize bundle permissions
+
+-- remove start_date from READ action of bundles for usergroup anonymous (fix embargo)
+UPDATE resourcepolicy SET start_date = NULL
+WHERE resource_type_id = 1
+  AND action_id = 0
+  AND resource_id IS NOT NULL
+  AND start_date IS NOT NULL
+  AND epersongroup_id = 0;
+
+-- replace administrator  with anonymous from READ action of bundles (fix restricted)
+UPDATE resourcepolicy SET epersongroup_id = 0
+WHERE resource_type_id = 1
+  AND action_id = 0
+  AND resource_id IS NOT NULL
+  AND start_date IS NULL
+  AND epersongroup_id = 1;
