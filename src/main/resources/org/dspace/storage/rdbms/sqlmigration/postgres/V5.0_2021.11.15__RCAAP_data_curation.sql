@@ -69,6 +69,7 @@ WHERE workspace_item_id IN (
 
 COMMIT;
 
+BEGIN;
 -- Normalize bundle permissions
 
 -- remove start_date from READ action of bundles for usergroup anonymous (fix embargo)
@@ -86,3 +87,20 @@ WHERE resource_type_id = 1
   AND resource_id IS NOT NULL
   AND start_date IS NULL
   AND epersongroup_id = 1;
+
+-- add anonymous READ action permissions to bundles when they don't exist
+INSERT INTO resourcepolicy (policy_id, resource_id, resource_type_id, action_id, epersongroup_id) 
+  SELECT 
+    nextval( 'resourcepolicy_seq' ),
+    bundle.bundle_id,
+    1,
+    0,
+    0
+  FROM bundle 
+  INNER JOIN metadatavalue ON metadatavalue.resource_id = bundle.bundle_id
+  LEFT JOIN resourcepolicy ON resourcepolicy.resource_id = bundle.bundle_id
+  WHERE policy_id IS NULL
+    AND metadatavalue.text_value = 'ORIGINAL'
+    AND metadatavalue.resource_type_id = 1;
+
+COMMIT;
