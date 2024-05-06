@@ -603,7 +603,7 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
             <xsl:choose>                                                                                                                                                        
                 <xsl:when test="@xlink:href='info:eu-repo/semantics/embargoedAccess'">
                     <xsl:element name="dim:field">
-                        <xsl:attribute name="mdschema">dc</xsl:attribute>
+                        <xsl:attribute name="mdschema">rcaap</xsl:attribute>
                         <xsl:attribute name="element">rights</xsl:attribute>
                         <xsl:attribute name="lang">en_US</xsl:attribute>
                         <xsl:text>embargoedAccess</xsl:text>
@@ -615,7 +615,7 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
                 </xsl:when>      
                  <xsl:when test="@xlink:href='info:eu-repo/semantics/closedAccess'">
                     <xsl:element name="dim:field">
-                        <xsl:attribute name="mdschema">dc</xsl:attribute>
+                        <xsl:attribute name="mdschema">rcaap</xsl:attribute>
                         <xsl:attribute name="element">rights</xsl:attribute>
                         <xsl:attribute name="lang">en_US</xsl:attribute>
                         <xsl:text>closedAccess</xsl:text> 
@@ -623,7 +623,7 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
                 </xsl:when>               
                 <xsl:when test="@xlink:href='info:eu-repo/semantics/restrictedAccess'">
                     <xsl:element name="dim:field">
-                        <xsl:attribute name="mdschema">dc</xsl:attribute>
+                        <xsl:attribute name="mdschema">rcaap</xsl:attribute>
                         <xsl:attribute name="element">rights</xsl:attribute> 
                         <xsl:attribute name="lang">en_US</xsl:attribute>
                         <xsl:text>restrictedAccess</xsl:text>
@@ -631,7 +631,7 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
                 </xsl:when>   
                 <xsl:otherwise>
                     <xsl:element name="dim:field">
-                        <xsl:attribute name="mdschema">dc</xsl:attribute>
+                        <xsl:attribute name="mdschema">rcaap</xsl:attribute>
                         <xsl:attribute name="element">rights</xsl:attribute>
                         <xsl:attribute name="lang">en_US</xsl:attribute>
                         <xsl:text>openAccess</xsl:text>
