@@ -78,7 +78,7 @@ Depois de seguir os passos de instalação, deverá também existir um ficheiro 
 Será necessário colocar no local.cfg a seguinte configuração:
 ```
 # Ciencia Vitae specific SWORD import mapping stylesheet
-crosswalk.submission.MODS.stylesheet = mods-rcaap_cienciavitae-submission.xslt
+crosswalk.submission.MODS.stylesheet = crosswalks/mods-rcaap_cienciavitae-submission.xsl
 ```
 
 Depois de seguir os passos de instalação, deverá também existir um ficheiro na diretoria `[DSpace]/config/crosswalks/mods-rcaap_cienciavitae-submission.xsl` com a configuração do serviço. Caso contrário, o ficheiro a usar estará disponível em: https://github.com/fccn/rcaap-dspace-additions/blob/main/src/main/resources/config/crosswalks/mods-rcaap_cienciavitae-submission.xsl
