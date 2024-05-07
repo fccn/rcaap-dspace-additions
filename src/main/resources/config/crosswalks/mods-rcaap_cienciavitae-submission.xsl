@@ -682,7 +682,7 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
                                 <xsl:text>preprint</xsl:text>
                         </xsl:when>
                         <xsl:when test="//*[text()='annotation']">
-                                <xsl:text>annoatiob</xsl:text>
+                                <xsl:text>annoation</xsl:text>
                         </xsl:when>
                         <xsl:when test="//*[text()='report']">
                                 <xsl:text>report</xsl:text>
