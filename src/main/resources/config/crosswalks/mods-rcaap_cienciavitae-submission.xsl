@@ -119,6 +119,13 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
 
         </xsl:comment>
 
+        <!--CREATE dspace entity as publication -->
+        <xsl:element name="dim:field">
+                <xsl:attribute name="mdschema">dspace</xsl:attribute>
+                <xsl:attribute name="element">entity</xsl:attribute>
+                <xsl:attribute name="qualifier">type</xsl:attribute>
+                <xsl:text>Publication</xsl:text>
+        </xsl:element>
 
 <!-- WR_ NAMESPACE NOTE
         Don't "code into" this XSLT the creation of the attribute with the name 'xmlns:dim', to hold the DSpace URI for that namespace.
@@ -130,6 +137,7 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
 <!-- WR_ Do Not Use (see above note)
                 <xsl:attribute name="xmlns:dim">http://www.dspace.org/xmlns/dspace/dim</xsl:attribute>
         -->
+
                         <xsl:apply-templates/>
                 </xsl:element>
         </xsl:template>
@@ -650,8 +658,14 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
                     </xsl:element> 
         </xsl:template>
 
-
-
+<xsl:template name="doctype">
+<xsl:element name="dim:field">
+                        <xsl:attribute name="mdschema">dspace</xsl:attribute>
+                        <xsl:attribute name="element">entity</xsl:attribute>
+                        <xsl:attribute name="qualifier">type</xsl:attribute>
+                        <xsl:text>publication</xsl:text>
+                </xsl:element>
+        </xsl:template>
 
    <xsl:template name="dcType">
         <!--<xsl:variable name="dc_type" select="."/>-->
