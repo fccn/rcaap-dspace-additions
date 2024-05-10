@@ -615,7 +615,6 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
                         <xsl:attribute name="element">rights</xsl:attribute>
                         <xsl:attribute name="lang">en_US</xsl:attribute>
                         <xsl:text>embargoedAccess</xsl:text>
-                        <xsl:value-of select="normalize-space(.)"/>
                     </xsl:element>     
                     <xsl:call-template name="dateEmbargo">
                         <xsl:with-param name="dateEmbargo" select="../*[local-name()='originInfo']/*[local-name()='copyrightDate' and @point='end']" />
