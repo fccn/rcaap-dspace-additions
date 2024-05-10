@@ -97,10 +97,8 @@ INSERT INTO resourcepolicy (policy_id, resource_id, resource_type_id, action_id,
     0,
     0
   FROM bundle 
-  INNER JOIN metadatavalue ON metadatavalue.resource_id = bundle.bundle_id
-  LEFT JOIN resourcepolicy ON resourcepolicy.resource_id = bundle.bundle_id
-  WHERE policy_id IS NULL
-    AND metadatavalue.text_value = 'ORIGINAL'
-    AND metadatavalue.resource_type_id = 1;
+  INNER JOIN metadatavalue ON metadatavalue.resource_id = bundle.bundle_id AND metadatavalue.text_value = 'ORIGINAL' AND metadatavalue.resource_type_id = 1
+  LEFT JOIN resourcepolicy ON resourcepolicy.resource_id = bundle.bundle_id AND resourcepolicy.resource_type_id = 1
+  WHERE policy_id IS NULL;
 
 COMMIT;
