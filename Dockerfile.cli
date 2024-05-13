@@ -38,6 +38,9 @@ COPY ./src/main/resources/config/ /dspace-src/dspace/config
 # copy specific solr configurations
 COPY ./src/main/resources/solr/ /dspace-src/dspace/solr
 
+# copy specific server additions
+COPY ./src/main/resources/server/ /dspace-src/dspace/modules/server
+
 # copy specific executables
 COPY ./src/main/resources/bin/ /dspace-src/dspace/bin
 
