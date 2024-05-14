@@ -27,9 +27,14 @@ Colocar as nossas configurações default:
 rsync -r --remove-source-files  additions/src/main/resources/config/ ../config
 ```
 
-Depois, colocar as nossas modificações SOLR:
+Colocar as nossas modificações SOLR:
 ```
 rsync -r --remove-source-files  additions/src/main/resources/solr/ ../solr
+```
+
+Depois, colocar o módulo server:
+```
+rsync -r --remove-source-files  additions/src/main/resources/server/ ./server
 ```
 
 Colocar também os ficheiros executáveis que estão no additions:
