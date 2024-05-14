@@ -24,7 +24,7 @@ git clone https://github.com/fccn/rcaap-dspace-additions.git additions
 
 Mudar de diretoria para additions
 ```
-cd addditions
+cd additions
 ```
 
 Colocar as nossas configurações default:
