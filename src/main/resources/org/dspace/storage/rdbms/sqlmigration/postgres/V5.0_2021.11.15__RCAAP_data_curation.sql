@@ -97,10 +97,22 @@ INSERT INTO resourcepolicy (policy_id, resource_id, resource_type_id, action_id,
     0,
     0
   FROM bundle 
-  INNER JOIN metadatavalue ON metadatavalue.resource_id = bundle.bundle_id
-  LEFT JOIN resourcepolicy ON resourcepolicy.resource_id = bundle.bundle_id
-  WHERE policy_id IS NULL
-    AND metadatavalue.text_value = 'ORIGINAL'
-    AND metadatavalue.resource_type_id = 1;
+  INNER JOIN metadatavalue ON metadatavalue.resource_id = bundle.bundle_id AND metadatavalue.text_value = 'ORIGINAL' AND metadatavalue.resource_type_id = 1
+  LEFT JOIN resourcepolicy ON resourcepolicy.resource_id = bundle.bundle_id AND resourcepolicy.resource_type_id = 1
+  WHERE policy_id IS NULL;
 
+COMMIT;
+
+-- remove first level of existing vocabularies
+BEGIN;
+
+-- change dc.subject.ods, remove "ODS::"
+UPDATE metadatavalue SET text_value = REPLACE(text_value,'ODS::','')
+WHERE metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'dc') and metadatafieldregistry.element = 'subject' and metadatafieldregistry.qualifier = 'ods')
+AND text_value like 'ODS::%';
+
+-- change dc.subject.fos, remove "Domínio/Área Científica::"
+UPDATE metadatavalue SET text_value = REPLACE(text_value,'Domínio/Área Científica::','')
+WHERE metadata_field_id = (select metadata_field_id from "metadatafieldregistry" WHERE metadatafieldregistry.metadata_schema_id = (SELECT mr.metadata_schema_id FROM "metadataschemaregistry" as mr WHERE "short_id" = 'dc') and metadatafieldregistry.element = 'subject' and metadatafieldregistry.qualifier = 'fos')
+AND text_value like 'Domínio/Área Científica::%';
 COMMIT;

@@ -22,25 +22,35 @@ Fazer clone do projeto para a diretoria additions em `DSpace/dspace/modules/`:
 git clone https://github.com/fccn/rcaap-dspace-additions.git additions
 ```
 
-Colocar as nossas configurações default:
+Mudar de diretoria para additions
 ```
-rsync -r --remove-source-files  additions/src/main/resources/config/ ../config
+cd additions
 ```
 
-Depois, colocar as nossas modificações SOLR:
+Colocar as nossas configurações default:
 ```
-rsync -r --remove-source-files  additions/src/main/resources/solr/ ../solr
+rsync -r --remove-source-files  ./src/main/resources/config/ ../../config
+```
+
+Colocar as nossas modificações SOLR:
+```
+rsync -r --remove-source-files  ./src/main/resources/solr/ ../../solr
+```
+
+Depois, colocar o módulo server:
+```
+rsync -r --remove-source-files  ./src/main/resources/server/ ../server
 ```
 
 Colocar também os ficheiros executáveis que estão no additions:
 ```
-rsync -r --remove-source-files --chmod=Fu=rwx,Fg=rx,Fo=rx  additions/src/main/resources/bin/ ../bin
+rsync -r --remove-source-files --chmod=Fu=rwx,Fg=rx,Fo=rx  ./src/main/resources/bin/ ../../bin
 ```
 
 
 Definir o esquema de **virtual metadata** do OpenAIRE como sendo o default
 ```
-cd ..
+cd ../..
 mv config/spring/api/virtual-metadata.xml config/spring/api/virtual-metadata.xml.origin
 mv config/spring/api/virtual-metadata.xml.openaire4 config/spring/api/virtual-metadata.xml
 ```
