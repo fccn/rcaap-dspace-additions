@@ -3049,8 +3049,10 @@
         <property name="defaultFilterQueries">
             <list>
                 <!--Only find items, and orgunits or persons-->
-                <value>search.resourcetype:Item AND latestVersion:true AND entityType_keyword:Publication</value>
+                <value>search.resourcetype:Item AND latestVersion:true</value>
                 <value>-withdrawn:true AND -discoverable:false</value>
+                <!-- All Publications and Items (non entities) -->
+                <value>entityType_keyword:Publication OR (*:* -entityType_keyword:[* TO *])</value>
             </list>
         </property>
 
