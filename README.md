@@ -85,10 +85,12 @@ Depois de seguir os passos de instalação, deverá também existir um ficheiro 
 
 ## Configuração Depósito a partir do Ciência Vitae
 
-Será necessário colocar no local.cfg a seguinte configuração:
+Será necessário colocar no local.cfg as seguintes configurações:
 ```
-# Ciencia Vitae specific SWORD import mapping stylesheet
+# Enable SWORDv2
 swordv2-server.enabled = true
+
+# Ciencia Vitae specific SWORD import mapping stylesheet
 crosswalk.submission.MODS.stylesheet = crosswalks/mods-rcaap_cienciavitae-submission.xsl
 ```
 
