@@ -61,7 +61,7 @@ mv config/spring/api/virtual-metadata.xml.openaire4 config/spring/api/virtual-me
 Será necessário adicionar as seguintes configurações ao local.cfg para suporte da API do CV:
 ```
 # cienciavitae api
-cienciavitae.url = https://qa.cienciavitae.pt
+cienciavitae.url = [URL] Exemplo URL:www.cienciavitae.pt
 
 cienciavitae.api.url = ${cienciavitae.url}/api/v1.1
 cienciavitae.api.username = USER
@@ -83,10 +83,13 @@ O ficheiro pom.xml nos `additions`, depois de seguir os passos da instalação, 
 
 Depois de seguir os passos de instalação, deverá também existir um ficheiro na diretoria `[DSpace]/config/spring/api/external-cienciavitae.xml` com a configuração do serviço. Caso contrário, o ficheiro a usar estará disponível em: https://github.com/fccn/rcaap-dspace-additions/blob/main/src/main/resources/config/spring/api/external-cienciavitae.xml
 
-## Configuração Submissão a partir do Ciência Vitae
+## Configuração Depósito a partir do Ciência Vitae
 
-Será necessário colocar no local.cfg a seguinte configuração:
+Será necessário colocar no local.cfg as seguintes configurações:
 ```
+# Enable SWORDv2
+swordv2-server.enabled = true
+
 # Ciencia Vitae specific SWORD import mapping stylesheet
 crosswalk.submission.MODS.stylesheet = crosswalks/mods-rcaap_cienciavitae-submission.xsl
 ```
