@@ -141,14 +141,14 @@
 
     <bean id="rcaapOpenAccess" class="org.dspace.submit.model.AccessConditionOption">
         <property name="groupName" value="Anonymous"/>
-        <property name="name" value="Open Access"/>
+        <property name="name" value="open access"/>
         <property name="hasStartDate" value="false"/>
         <property name="hasEndDate" value="false"/>
     </bean>
 
     <bean id="rcaapEmbargoed" class="org.dspace.submit.model.AccessConditionOption">
         <property name="groupName" value="Anonymous"/>
-        <property name="name" value="Embargoed"/>
+        <property name="name" value="embargoed access"/>
         <property name="hasStartDate" value="true"/>
         <property name="startDateLimit" value="+36MONTHS"/>
         <property name="hasEndDate" value="false"/>
@@ -156,7 +156,7 @@
 
     <bean id="rcaapRestricted" class="org.dspace.submit.model.AccessConditionOption">
         <property name="groupName" value="Administrator"/>
-        <property name="name" value="Restricted"/>
+        <property name="name" value="restricted access"/>
         <property name="hasStartDate" value="false"/>
         <property name="hasEndDate" value="false"/>
     </bean>
