@@ -1400,6 +1400,7 @@
             <list>
                 <ref bean="searchFilterSubject"/>
                 <ref bean="searchFilterProjectFunder"/>
+                <ref bean="searchFilterProjectFundingStream"/>
             </list>
         </property>
         <!--The search filters which can be used on the discovery search page-->
@@ -1407,6 +1408,7 @@
             <list>
                 <ref bean="searchFilterSubject"/>
                 <ref bean="searchFilterProjectFunder"/>
+                <ref bean="searchFilterProjectFundingStream"/>
                 <ref bean="searchFilterIdentifier"/>
                 <ref bean="searchFilterIsOrgUnitOfProjectRelation"/>
                 <ref bean="searchFilterIsPersonOfProjectRelation"/>
@@ -1456,6 +1458,7 @@
             <list>
                 <ref bean="searchFilterSubject"/>
                 <ref bean="searchFilterProjectFunder"/>
+                <ref bean="searchFilterProjectFundingStream"/>
             </list>
         </property>
         <!--The search filters which can be used on the discovery search page-->
@@ -1463,6 +1466,7 @@
             <list>
                 <ref bean="searchFilterSubject"/>
                 <ref bean="searchFilterProjectFunder"/>
+                <ref bean="searchFilterProjectFundingStream"/>
                 <ref bean="searchFilterIdentifier"/>
                 <ref bean="searchFilterIsOrgUnitOfProjectRelation"/>
                 <ref bean="searchFilterIsPersonOfProjectRelation"/>
@@ -2834,6 +2838,15 @@
         </property>
     </bean>
 
+    <bean id="searchFilterProjectFundingStream"
+        class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="projectFundingStream" />
+        <property name="metadataFields">
+            <list>
+                <value>oaire.fundingStream</value>
+            </list>
+        </property>
+    </bean>
 
     <bean id="searchFilterIsOrgUnitOfProjectRelation" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
 
