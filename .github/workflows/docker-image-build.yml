@@ -14,5 +14,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag rcaap-dspace-build:$(date +%s)
+    - name: Build the RCAAP DSpace Docker image
+      run: docker build . --file Dockerfile --tag rcaap/dspace:$(date +%s)
+    - name: Build the RCAAP DSpace CLI Docker image
+      run: docker build . --file Dockerfile.cli --tag rcaap/dspace-cli:$(date +%s)
