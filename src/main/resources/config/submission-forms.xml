@@ -698,7 +698,7 @@
                     <input-type>onebox</input-type>
                     <hint>Indique o tipo de item que vai depositar</hint>
                     <required>Tem que indicar o tipo de item que vai depositar!</required>
-                    <vocabulary>coar_types</vocabulary>
+                    <vocabulary closed="true">coar_types</vocabulary>
                 </field>
             </row>
             
@@ -817,7 +817,7 @@
                     <input-type>onebox</input-type>
                     <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste trabalho de acordo com a classificação 'Swedish Research Subject Categories' (SRSC).</hint>
                     <required></required>
-                    <vocabulary>srsc</vocabulary>
+                    <vocabulary closed="true">srsc</vocabulary>
                 </field>
             </row>
             -->
@@ -836,7 +836,7 @@
                     <input-type>onebox</input-type>
                     <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste item de acordo com a classificação 'Field of Science and Technology' (FOS) &lt;a href="https://www.oecd.org/science/inno/38235147.pdf" target="_blank" &gt;(https://www.oecd.org/science/inno/38235147.pdf)&lt;/a&gt;.</hint>
                     <required></required>
-                    <vocabulary>fos</vocabulary>
+                    <vocabulary closed="true">fos</vocabulary>
                 </field>
             </row>
             
@@ -851,7 +851,7 @@
                     <input-type>onebox</input-type>
                     <hint>Identifique aqui 'Objetivos de Desenvolvimento Sustentável' (ODS) com os quais o item se alinha. Mais informações: &lt;a href="https://www.ods.pt/ods/#17objetivos" target="_blank" &gt;17 objectivos do desenvolvimento sustentável&lt;/a&gt;</hint>
                     <required></required>
-                    <vocabulary>sdg</vocabulary>
+                    <vocabulary closed="true">sdg</vocabulary>
                 </field>
             </row> 
             
@@ -1234,7 +1234,7 @@
                 </field>
             </row>
             
-            <!--
+            <!-- 24-05-2024 - RCAAP! Mod 'dc.contributor.author' for AUTHOR entity -->
             <row>
                 <relation-field>
                     <relationship-type>isAuthorOfPublication</relationship-type>
@@ -1253,9 +1253,9 @@
                     <required>Tem que introduzir pelo menos um autor (pode ser o nome textual ou criar relacionamento com uma entidade 'pessoa')!</required>
                 </relation-field>
             </row> 
-            -->
+            
 
-            <!-- 11-01-2024 - RCAAP! Mod 'dc.contributor.auhor' for AUTHOR -->
+            <!-- 11-01-2024 - RCAAP! Mod 'dc.contributor.author' for AUTHOR 
             <row>
                 <field>
                     <dc-schema>dc</dc-schema>
@@ -1268,7 +1268,7 @@
                     <required>Tem que introduzir o nome do autor!</required>
                 </field>
             </row>
-            
+            -->
             
             <!-- 29-06-2023 - RCAAP! ADD 'dc.contributor.advisor' for ADVISOR -->
             <row>
@@ -1377,7 +1377,7 @@
                     <input-type>onebox</input-type>
                     <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste trabalho de acordo com a classificação 'Field of Science and Technology' (FOS) &lt;a href="https://www.oecd.org/science/inno/38235147.pdf" target="_blank" &gt;(https://www.oecd.org/science/inno/38235147.pdf)&lt;/a&gt;.</hint>
                     <required></required>
-                    <vocabulary>fos</vocabulary>
+                    <vocabulary closed="true">fos</vocabulary>
                 </field>
             </row>
             
@@ -1392,7 +1392,7 @@
                     <input-type>onebox</input-type>
                     <hint>Identifique aqui 'Objetivos de Desenvolvimento Sustentável' (ODS) com os quais o trabalho se alinha. Mais informações: &lt;a href="https://www.ods.pt/ods/#17objetivos" target="_blank" &gt;17 objectivos do desenvolvimento sustentável&lt;/a&gt;</hint>
                     <required></required>
-                    <vocabulary>sdg</vocabulary>
+                    <vocabulary closed="true">sdg</vocabulary>
                 </field>
             </row>
                         
@@ -1571,7 +1571,7 @@
                     <input-type>onebox</input-type>
                     <hint>Indique o tipo de item que vai depositar</hint>
                     <required>Tem que indicar o tipo de item que vai depositar!</required>
-                    <vocabulary>coar_types</vocabulary>
+                    <vocabulary closed="true">coar_types</vocabulary>
                 </field>
             </row>
             
@@ -1707,7 +1707,7 @@
                     <input-type>onebox</input-type>
                     <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste trabalho de acordo com a classificação 'Swedish Research Subject Categories' (SRSC).</hint>
                     <required></required>
-                    <vocabulary>srsc</vocabulary>
+                    <vocabulary closed="true">srsc</vocabulary>
                 </field>
             </row>
             -->
@@ -1726,7 +1726,7 @@
                     <input-type>onebox</input-type>
                     <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste item de acordo com a classificação 'Field of Science and Technology' (FOS) &lt;a href="https://www.oecd.org/science/inno/38235147.pdf" target="_blank" &gt;(https://www.oecd.org/science/inno/38235147.pdf)&lt;/a&gt;.</hint>
                     <required></required>
-                    <vocabulary>fos</vocabulary>
+                    <vocabulary closed="true">fos</vocabulary>
                 </field>
             </row>
             
@@ -1741,7 +1741,7 @@
                     <input-type>onebox</input-type>
                     <hint>Identifique aqui 'Objetivos de Desenvolvimento Sustentável' (ODS) com os quais o item se alinha. Mais informações: &lt;a href="https://www.ods.pt/ods/#17objetivos" target="_blank" &gt;17 objectivos do desenvolvimento sustentável&lt;/a&gt;</hint>
                     <required></required>
-                    <vocabulary>sdg</vocabulary>
+                    <vocabulary closed="true">sdg</vocabulary>
                 </field>
             </row> 
             
@@ -2118,7 +2118,7 @@
                     <input-type>onebox</input-type>
                     <hint>Indique o tipo de item que vai depositar</hint>
                     <required>Tem que indicar o tipo de item que vai depositar!</required>
-                    <vocabulary>coar_types</vocabulary>
+                    <vocabulary closed="true">coar_types</vocabulary>
                 </field>
             </row>
             -->
@@ -2254,7 +2254,7 @@
                     <input-type>onebox</input-type>
                     <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste trabalho de acordo com a classificação 'Swedish Research Subject Categories' (SRSC).</hint>
                     <required></required>
-                    <vocabulary>srsc</vocabulary>
+                    <vocabulary closed="true">srsc</vocabulary>
                 </field>
             </row>
             -->
@@ -2273,7 +2273,7 @@
                     <input-type>onebox</input-type>
                     <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste item de acordo com a classificação 'Field of Science and Technology' (FOS) &lt;a href="https://www.oecd.org/science/inno/38235147.pdf" target="_blank" &gt;(https://www.oecd.org/science/inno/38235147.pdf)&lt;/a&gt;.</hint>
                     <required></required>
-                    <vocabulary>fos</vocabulary>
+                    <vocabulary closed="true">fos</vocabulary>
                 </field>
             </row>
             
@@ -2288,7 +2288,7 @@
                     <input-type>onebox</input-type>
                     <hint>Identifique aqui 'Objetivos de Desenvolvimento Sustentável' (ODS) com os quais o item se alinha. Mais informações: &lt;a href="https://www.ods.pt/ods/#17objetivos" target="_blank" &gt;17 objectivos do desenvolvimento sustentável&lt;/a&gt;</hint>
                     <required></required>
-                    <vocabulary>sdg</vocabulary>
+                    <vocabulary closed="true">sdg</vocabulary>
                 </field>
             </row> 
             
