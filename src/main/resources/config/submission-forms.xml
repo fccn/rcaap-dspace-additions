@@ -698,7 +698,7 @@
                     <input-type>onebox</input-type>
                     <hint>Indique o tipo de item que vai depositar</hint>
                     <required>Tem que indicar o tipo de item que vai depositar!</required>
-                    <vocabulary>coar_types</vocabulary>
+                    <vocabulary closed="true">coar_types</vocabulary>
                 </field>
             </row>
             
@@ -1571,7 +1571,7 @@
                     <input-type>onebox</input-type>
                     <hint>Indique o tipo de item que vai depositar</hint>
                     <required>Tem que indicar o tipo de item que vai depositar!</required>
-                    <vocabulary>coar_types</vocabulary>
+                    <vocabulary closed="true">coar_types</vocabulary>
                 </field>
             </row>
             
@@ -2118,7 +2118,7 @@
                     <input-type>onebox</input-type>
                     <hint>Indique o tipo de item que vai depositar</hint>
                     <required>Tem que indicar o tipo de item que vai depositar!</required>
-                    <vocabulary>coar_types</vocabulary>
+                    <vocabulary closed="true">coar_types</vocabulary>
                 </field>
             </row>
             -->
