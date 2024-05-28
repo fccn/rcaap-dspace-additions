@@ -121,8 +121,9 @@ if [ "${N_DAYS}" -ge "0" ]; then
 
     for HANDLE in $HANDLES
     do
+      FILENAME=$(echo ${HANDLE} | sed 's/\//\-/')
       # export AIP packages
-      "${SCRIPTPATH}/dspace" packager -d -a -u -t AIP -e "${EMAIL}" -i "${HANDLE}" "${BACKUP_DIR}/ITEM@${HANDLE//\//-}.zip" >> "${LOG_FILE}"
+      "${SCRIPTPATH}/dspace" packager -d -a -u -t AIP -e "${EMAIL}" -i "${HANDLE}" "${BACKUP_DIR}/ITEM@${FILENAME}.zip" >> "${LOG_FILE}"
       # first, retrieve the number of archived items processed
       NUMBER_ITEMS=$((NUMBER_ITEMS+1))
     done
