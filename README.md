@@ -89,6 +89,7 @@ Será necessário colocar no local.cfg as seguintes configurações:
 ```
 # Enable SWORDv2
 swordv2-server.enabled = true
+swordv2-server.url = ${dspace.server.url}/swordv2
 
 # Ciencia Vitae specific SWORD import mapping stylesheet
 crosswalk.submission.MODS.stylesheet = crosswalks/mods-rcaap_cienciavitae-submission.xsl
