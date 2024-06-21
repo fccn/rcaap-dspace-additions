@@ -99,8 +99,9 @@ FROM tomcat:9-jdk${JDK_VERSION}
 RUN addgroup --gid 1000 dspace && useradd dspace -u 1000 -g 1000 -s /sbin/nologin -d /dspace
 # NOTE: DSPACE_INSTALL must align with the "dspace.dir" default configuration.
 ENV DSPACE_INSTALL=/dspace
-RUN chown -R dspace:dspace /usr/local/tomcat /dspace 
-RUN chmod g+s /dspace /usr/local/tomcat
+USER dspace
+RUN chown -R dspace:dspace /usr/local/tomcat
+RUN chmod g+s /usr/local/tomcat
 # Copy the /dspace directory from 'ant_build' container to /dspace in this container
 COPY --chown=dspace:dspace --from=ant_build /dspace $DSPACE_INSTALL
 # Expose Tomcat port and AJP port
