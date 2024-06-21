@@ -92,13 +92,14 @@ RUN ant init_installation update_configs update_code
 FROM openjdk:${JDK_VERSION}
 # NOTE: DSPACE_INSTALL must align with the "dspace.dir" default configuration.
 ENV DSPACE_INSTALL=/dspace
-
+RUN chown -R dspace:dspace /usr/local/tomcat /dspace
+RUN chmod g+s /dspace /usr/local/tomcat
 # Install postgres client to be able to execute Postgres queries for RCAAP scripts
 RUN apt-get update \
     && apt-get -y install postgresql-client-13 \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy the /dspace directory from 'ant_build' container to /dspace in this container
-COPY --from=ant_build /dspace $DSPACE_INSTALL
+COPY --chown=dspace:dspace --from=ant_build /dspace $DSPACE_INSTALL
 # Give java extra memory (1GB)
 ENV JAVA_OPTS=-Xmx1000m
