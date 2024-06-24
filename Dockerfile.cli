@@ -90,7 +90,6 @@ RUN ant init_installation update_configs update_code
 
 # Step 3 - Run jdk
 FROM openjdk:${JDK_VERSION}
-RUN addgroup --gid 1000 dspace && useradd dspace -u 1000 -g 1000 -s /sbin/nologin -d /dspace
 # NOTE: DSPACE_INSTALL must align with the "dspace.dir" default configuration.
 ENV DSPACE_INSTALL=/dspace
 # Install postgres client to be able to execute Postgres queries for RCAAP scripts
@@ -99,7 +98,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy the /dspace directory from 'ant_build' container to /dspace in this container
-COPY --chown=dspace:dspace --from=ant_build /dspace $DSPACE_INSTALL
+COPY --chown=www-data:www-data --from=ant_build /dspace $DSPACE_INSTALL
 # Give java extra memory (1GB)
 ENV JAVA_OPTS=-Xmx1000m
-USER dspace
+USER www-data
