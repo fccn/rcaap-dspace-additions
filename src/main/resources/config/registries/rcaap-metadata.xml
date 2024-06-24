@@ -43,6 +43,13 @@
         <scope_note></scope_note>
     </dc-type>
 
+    <dc-type>
+        <schema>rcaap</schema>
+        <element>contributor</element>
+        <qualifier>authoremail</qualifier>
+        <scope_note>Endereço de email para entrega do pedido de cópia</scope_note>
+    </dc-type>
+
     <!-- Sustainable Development Goals -->
     <dc-type>
         <schema>datacite</schema>
