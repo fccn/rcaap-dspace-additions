@@ -95,6 +95,9 @@ ENV DSPACE_INSTALL=/dspace
 # Create dspace folder for assets
 RUN mkdir -p /srv/dspace/assetstore \
     && chown -Rv www-data:www-data /srv/dspace
+# Create folder for storing Handle Server System assets
+RUN mkdir -p /var/www/.handle \
+    && chown -Rv www-data:www-data /var/www/.handle
 # Install postgres client to be able to execute Postgres queries for RCAAP scripts
 RUN apt-get update \
     && apt-get -y install postgresql-client-13 \
