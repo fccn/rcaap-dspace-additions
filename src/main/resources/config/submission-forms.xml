@@ -72,7 +72,7 @@
                     <repeatable>false</repeatable>
                     <label>Contacto do autor(a) para envio de pedido(s) de cópia </label>
                     <input-type>onebox</input-type>
-                    <hint>Se o registo for de acesso restrito ou embargado, insira aqui o e-mail do autor(a) correspondente preferencial, para posterior envio de resposta a eventuais pedidos de cópia ou de acesso.</hint>
+                    <hint>Se o registo for de acesso restrito ou embargado, insira aqui o e-mail do autor(a) correspondente preferencial, para posterior envio de resposta a eventuais pedidos de cópia ou de acesso. NOTA IMPORTANTE: Caso este registo seja carregado com vários ficheiros, para efeitos desta funcionalidade será apenas considerado o e-mail inserido/associado ao ficheiro primário.</hint>
                     <required></required>
                 </field>
             </row>
@@ -1158,7 +1158,7 @@
                     <dc-schema>dcterms</dc-schema>
                     <dc-element>references</dc-element>
                     <dc-qualifier></dc-qualifier>
-                    <repeatable>false</repeatable>
+                    <repeatable>true</repeatable>
                     <label>Ligação para datasets (dados científicos)</label>
                     <input-type>onebox</input-type>
                     <hint>Caso este documento tenha dados científicos (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
@@ -1498,7 +1498,7 @@
                     <dc-schema>dcterms</dc-schema>
                     <dc-element>references</dc-element>
                     <dc-qualifier></dc-qualifier>
-                    <repeatable>false</repeatable>
+                    <repeatable>true</repeatable>
                     <label>Ligação para datasets (dados científicos)</label>
                     <input-type>onebox</input-type>
                     <hint>Caso este trabalho tenha dados científicos (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
@@ -2058,7 +2058,7 @@
                     <dc-schema>dcterms</dc-schema>
                     <dc-element>references</dc-element>
                     <dc-qualifier></dc-qualifier>
-                    <repeatable>false</repeatable>
+                    <repeatable>true</repeatable>
                     <label>Ligação para datasets (dados científicos)</label>
                     <input-type>onebox</input-type>
                     <hint>Caso este documento tenha dados científicos (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
@@ -2619,7 +2619,7 @@
                     <dc-schema>dcterms</dc-schema>
                     <dc-element>references</dc-element>
                     <dc-qualifier></dc-qualifier>
-                    <repeatable>false</repeatable>
+                    <repeatable>true</repeatable>
                     <label>Ligação para datasets (dados científicos)</label>
                     <input-type>onebox</input-type>
                     <hint>Caso este documento tenha dados científicos (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
