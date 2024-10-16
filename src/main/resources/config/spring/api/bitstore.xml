@@ -8,7 +8,7 @@
         <property name="stores">
             <map>
                 <entry key="0" value-ref="localStore"/>
-                <entry key="1" value-ref="secondaryLocalStore"/>
+                <entry key="1" value-ref="localStore2"/>
                 <entry key="2" value-ref="s3Store"/>
             </map>
         </property>
@@ -16,10 +16,6 @@
 
     <bean name="localStore" class="org.dspace.storage.bitstore.DSBitStoreService" scope="singleton">
         <property name="baseDir" value="${assetstore.dir}"/>
-    </bean>
-
-    <bean name="secondaryLocalStore" class="org.dspace.storage.bitstore.DSBitStoreService" scope="singleton">
-        <property name="baseDir" value="${assetstore.secondary_dir:/dspace/assetstore}"/>
     </bean>
 
     <bean name="s3Store" class="org.dspace.storage.bitstore.S3BitStoreService" scope="singleton" lazy-init="true">
@@ -42,5 +38,9 @@
     </bean>
 
     <!-- <bean name="localStore2 ... -->
+    <bean name="localStore2" class="org.dspace.storage.bitstore.DSBitStoreService" scope="singleton">
+        <property name="baseDir" value="${assetstore.secondary_dir:/dspace/assetstore}"/>
+    </bean>
+
     <!-- <bean name="s3Store2 ... -->
 </beans>
