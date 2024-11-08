@@ -99,8 +99,8 @@ FROM tomcat:9-jdk${JDK_VERSION}
 # NOTE: DSPACE_INSTALL must align with the "dspace.dir" default configuration.
 ENV DSPACE_INSTALL=/dspace
 # Create dspace folder for assets
-RUN mkdir -p /srv/dspace/assetstore \
-    && chown -Rv www-data:www-data /srv/dspace
+RUN mkdir -p /srv/rcaap/dspace/assetstore \
+    && chown -Rv www-data:www-data /srv/rcaap/dspace
 # Copy the /dspace directory from 'ant_build' container to /dspace in this container
 COPY --chown=www-data:www-data --from=ant_build /dspace $DSPACE_INSTALL
 # Expose Tomcat port and AJP port

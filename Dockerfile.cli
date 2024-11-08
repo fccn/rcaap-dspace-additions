@@ -93,8 +93,8 @@ FROM openjdk:${JDK_VERSION}
 # NOTE: DSPACE_INSTALL must align with the "dspace.dir" default configuration.
 ENV DSPACE_INSTALL=/dspace
 # Create dspace folder for assets
-RUN mkdir -p /srv/dspace/assetstore \
-    && chown -Rv www-data:www-data /srv/dspace
+RUN mkdir -p /srv/rcaap/dspace/assetstore \
+    && chown -Rv www-data:www-data /srv/rcaap/dspace
 # Create folder for storing Handle Server System assets
 RUN mkdir -p /var/www/.handle \
     && chown -Rv www-data:www-data /var/www/.handle
