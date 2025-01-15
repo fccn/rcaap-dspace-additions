@@ -967,7 +967,7 @@
                     <repeatable>true</repeatable> <!-- 09-06-2023 - RCAAP! Mod to true -->
                     <label>Identificadores</label>
                     <input-type value-pairs-name="common_identifiers">qualdrop_value</input-type>
-                    <hint>Se este item tiver identificador(es) associado(s), selecione(-os) e identifique(-os) na seguinte lista. &lt;b&gt;Nota importante&lt;/b&gt;: Sugerimos que nesta fase clique no botão 'Guardar' para que, quando aplicável, seja apresentada ajuda em contexto do serviço SHERPA!</hint>
+                    <hint>Se este item tiver identificador(es) associado(s), selecione(-os) e identifique(-os) na seguinte lista. &lt;b&gt;Nota importante&lt;/b&gt;: Sugerimos que nesta fase clique no botão 'Guardar' para que, quando aplicável, seja apresentada ajuda em contexto do serviço "Open Policy finder"!</hint>
                     <required></required>
                 </field>
             </row>
@@ -1109,7 +1109,7 @@
                     <repeatable>false</repeatable>
                     <label>Versão do item</label>
                     <input-type value-pairs-name="openaire_version_types">dropdown</input-type>
-                    <hint>Indique qual é a versão correspondente à publicação que (vai ou já) carregou neste depósito. &lt;b&gt;Nota importante&lt;/b&gt;: Para uma decisão mais informada sugerimos a leitura da ajuda em contexto, quando disponível, na secção seguinte [Sherpa]'".</hint>
+                    <hint>Indique qual é a versão correspondente à publicação que (vai ou já) carregou neste depósito. &lt;b&gt;Nota importante&lt;/b&gt;: Para uma decisão mais informada sugerimos a leitura da ajuda em contexto, quando disponível, na secção seguinte [Open Policy Finder]'".</hint>
                     <required>Tem que indicar qual é a versão que vai utilizar neste depósito! Caso não se aplique ou desconheça pode selecionar a opção 'Não aplicável (N/A)'.</required>
                 </field>
             </row>
@@ -1158,7 +1158,7 @@
                     <dc-schema>dcterms</dc-schema>
                     <dc-element>references</dc-element>
                     <dc-qualifier></dc-qualifier>
-                    <repeatable>false</repeatable>
+                    <repeatable>true</repeatable>
                     <label>Ligação para datasets (dados científicos)</label>
                     <input-type>onebox</input-type>
                     <hint>Caso este documento tenha dados científicos (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
@@ -1498,7 +1498,7 @@
                     <dc-schema>dcterms</dc-schema>
                     <dc-element>references</dc-element>
                     <dc-qualifier></dc-qualifier>
-                    <repeatable>false</repeatable>
+                    <repeatable>true</repeatable>
                     <label>Ligação para datasets (dados científicos)</label>
                     <input-type>onebox</input-type>
                     <hint>Caso este trabalho tenha dados científicos (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
@@ -1855,7 +1855,7 @@
                     <repeatable>true</repeatable> <!-- 09-06-2023 - RCAAP! Mod to true -->
                     <label>Identificadores</label>
                     <input-type value-pairs-name="common_identifiers">qualdrop_value</input-type>
-                    <hint>Se este item tiver identificador(es) associado(s), selecione(-os) e identifique(-os) na seguinte lista. &lt;b&gt;Nota importante&lt;/b&gt;: Sugerimos que nesta fase clique no botão 'Guardar' para que, quando aplicável, seja apresentada ajuda em contexto do serviço SHERPA!</hint>
+                    <hint>Se este item tiver identificador(es) associado(s), selecione(-os) e identifique(-os) na seguinte lista. &lt;b&gt;Nota importante&lt;/b&gt;: Sugerimos que nesta fase clique no botão 'Guardar' para que, quando aplicável, seja apresentada ajuda em contexto do serviço "Open Policy Finder"!</hint>
                     <required></required>
                 </field>
             </row>
@@ -1997,7 +1997,7 @@
                     <repeatable>false</repeatable>
                     <label>Versão do item</label>
                     <input-type value-pairs-name="openaire_version_types">dropdown</input-type>
-                    <hint>Indique qual é a versão correspondente à publicação que (vai ou já) carregou neste depósito. &lt;b&gt;Nota importante&lt;/b&gt;: Para uma decisão mais informada sugerimos a leitura da ajuda em contexto, quando disponível, na secção seguinte [Sherpa]'".</hint>
+                    <hint>Indique qual é a versão correspondente à publicação que (vai ou já) carregou neste depósito. &lt;b&gt;Nota importante&lt;/b&gt;: Para uma decisão mais informada sugerimos a leitura da ajuda em contexto, quando disponível, na secção seguinte [Open Policy Finder]'".</hint>
                     <required>Tem que indicar qual é a versão que vai utilizar neste depósito! Caso não se aplique ou desconheça pode selecionar a opção 'Não aplicável (N/A)'.</required>
                 </field>
             </row>
@@ -2058,7 +2058,7 @@
                     <dc-schema>dcterms</dc-schema>
                     <dc-element>references</dc-element>
                     <dc-qualifier></dc-qualifier>
-                    <repeatable>false</repeatable>
+                    <repeatable>true</repeatable>
                     <label>Ligação para datasets (dados científicos)</label>
                     <input-type>onebox</input-type>
                     <hint>Caso este documento tenha dados científicos (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
@@ -2428,7 +2428,7 @@
                     <repeatable>true</repeatable> <!-- 09-06-2023 - RCAAP! Mod to true -->
                     <label>Identificadores</label>
                     <input-type value-pairs-name="common_identifiers">qualdrop_value</input-type>
-                    <hint>Se este item tiver identificador(es) associado(s), selecione(-os) e identifique(-os) na seguinte lista. &lt;b&gt;Nota importante&lt;/b&gt;: Sugerimos que nesta fase clique no botão 'Guardar' para que, quando aplicável, seja apresentada ajuda em contexto do serviço SHERPA!</hint>
+                    <hint>Se este item tiver identificador(es) associado(s), selecione(-os) e identifique(-os) na seguinte lista. &lt;b&gt;Nota importante&lt;/b&gt;: Sugerimos que nesta fase clique no botão 'Guardar' para que, quando aplicável, seja apresentada ajuda em contexto do serviço "Open Policy Finder"!</hint>
                     <required></required>
                 </field>
             </row>
@@ -2570,7 +2570,7 @@
                     <repeatable>false</repeatable>
                     <label>Versão do item</label>
                     <input-type value-pairs-name="openaire_version_types">dropdown</input-type>
-                    <hint>Indique qual é a versão correspondente à publicação que (vai ou já) carregou neste depósito. &lt;b&gt;Nota importante&lt;/b&gt;: Para uma decisão mais informada sugerimos a leitura da ajuda em contexto, quando disponível, na secção seguinte [Sherpa]'".</hint>
+                    <hint>Indique qual é a versão correspondente à publicação que (vai ou já) carregou neste depósito. &lt;b&gt;Nota importante&lt;/b&gt;: Para uma decisão mais informada sugerimos a leitura da ajuda em contexto, quando disponível, na secção seguinte [Open Policy Finder]'".</hint>
                     <required>Tem que indicar qual é a versão que vai utilizar neste depósito! Caso não se aplique ou desconheça pode selecionar a opção 'Não aplicável (N/A)'.</required>
                 </field>
             </row>
@@ -2619,7 +2619,7 @@
                     <dc-schema>dcterms</dc-schema>
                     <dc-element>references</dc-element>
                     <dc-qualifier></dc-qualifier>
-                    <repeatable>false</repeatable>
+                    <repeatable>true</repeatable>
                     <label>Ligação para datasets (dados científicos)</label>
                     <input-type>onebox</input-type>
                     <hint>Caso este documento tenha dados científicos (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
