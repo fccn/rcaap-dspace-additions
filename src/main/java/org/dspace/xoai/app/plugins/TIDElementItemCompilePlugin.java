@@ -28,7 +28,7 @@ import org.dspace.xoai.util.ItemUtils;
  *     <element name="uri">
  *       <element name="none">
  *         <field name="value">http://hdl.handle.net/101766/831</field>
- *         <field name="tid">urn:tid:101766831</field>
+ *         <field name="value">urn:tid:101766831</field>
  *       </element>
  *     </element>
  * }
