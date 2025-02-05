@@ -1159,9 +1159,9 @@
                     <dc-element>references</dc-element>
                     <dc-qualifier></dc-qualifier>
                     <repeatable>true</repeatable>
-                    <label>Ligação para datasets (dados científicos)</label>
+                    <label>Ligação para dados de investigação (datasets)</label>
                     <input-type>onebox</input-type>
-                    <hint>Caso este documento tenha dados científicos (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
+                    <hint>Caso este documento tenha dados de investigação (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
                     <required></required>
                 </field>
             </row>
@@ -1499,9 +1499,9 @@
                     <dc-element>references</dc-element>
                     <dc-qualifier></dc-qualifier>
                     <repeatable>true</repeatable>
-                    <label>Ligação para datasets (dados científicos)</label>
+                    <label>Ligação para dados de investigação (datasets)</label>
                     <input-type>onebox</input-type>
-                    <hint>Caso este trabalho tenha dados científicos (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
+                    <hint>Caso este trabalho tenha dados de investigação (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
                     <required></required>
                 </field>
             </row>
@@ -2059,9 +2059,9 @@
                     <dc-element>references</dc-element>
                     <dc-qualifier></dc-qualifier>
                     <repeatable>true</repeatable>
-                    <label>Ligação para datasets (dados científicos)</label>
+                    <label>Ligação para dados de investigação (datasets)</label>
                     <input-type>onebox</input-type>
-                    <hint>Caso este documento tenha dados científicos (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
+                    <hint>Caso este documento tenha dados de investigação (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
                     <required></required>
                 </field>
             </row>
@@ -2620,9 +2620,9 @@
                     <dc-element>references</dc-element>
                     <dc-qualifier></dc-qualifier>
                     <repeatable>true</repeatable>
-                    <label>Ligação para datasets (dados científicos)</label>
+                    <label>Ligação para dados de investigação (datasets)</label>
                     <input-type>onebox</input-type>
-                    <hint>Caso este documento tenha dados científicos (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
+                    <hint>Caso este documento tenha dados de investigação (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
                     <required></required>
                 </field>
             </row>
