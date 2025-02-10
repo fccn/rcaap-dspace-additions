@@ -834,7 +834,7 @@
                     <repeatable>true</repeatable>
                     <label>Áreas do conhecimento (FOS/OCDE)</label>
                     <input-type>onebox</input-type>
-                    <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste item de acordo com a classificação 'Field of Science and Technology' (FOS) &lt;a href="https://www.oecd.org/science/inno/38235147.pdf" target="_blank" &gt;(https://www.oecd.org/science/inno/38235147.pdf)&lt;/a&gt;.</hint>
+                    <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste item de acordo com a classificação 'Field of Science and Technology' (FOS) &lt;a href="https://one.oecd.org/document/DSTI/EAS/STP/NESTI(2006)19/FINAL/en/pdf" target="_blank" &gt;(https://one.oecd.org/document/DSTI/EAS/STP/NESTI(2006)19/FINAL/en/pdf)&lt;/a&gt;.</hint>
                     <required></required>
                     <vocabulary closed="true">fos</vocabulary>
                 </field>
@@ -1375,7 +1375,7 @@
                     <repeatable>true</repeatable>
                     <label>Áreas do conhecimento (FOS/OCDE)</label>
                     <input-type>onebox</input-type>
-                    <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste trabalho de acordo com a classificação 'Field of Science and Technology' (FOS) &lt;a href="https://www.oecd.org/science/inno/38235147.pdf" target="_blank" &gt;(https://www.oecd.org/science/inno/38235147.pdf)&lt;/a&gt;.</hint>
+                    <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste trabalho de acordo com a classificação 'Field of Science and Technology' (FOS) &lt;a href="https://one.oecd.org/document/DSTI/EAS/STP/NESTI(2006)19/FINAL/en/pdf" target="_blank" &gt;(https://one.oecd.org/document/DSTI/EAS/STP/NESTI(2006)19/FINAL/en/pdf)&lt;/a&gt;.</hint>
                     <required></required>
                     <vocabulary closed="true">fos</vocabulary>
                 </field>
@@ -1724,7 +1724,7 @@
                     <repeatable>true</repeatable>
                     <label>Áreas do conhecimento (FOS/OCDE)</label>
                     <input-type>onebox</input-type>
-                    <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste item de acordo com a classificação 'Field of Science and Technology' (FOS) &lt;a href="https://www.oecd.org/science/inno/38235147.pdf" target="_blank" &gt;(https://www.oecd.org/science/inno/38235147.pdf)&lt;/a&gt;.</hint>
+                    <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste item de acordo com a classificação 'Field of Science and Technology' (FOS) &lt;a href="https://one.oecd.org/document/DSTI/EAS/STP/NESTI(2006)19/FINAL/en/pdf" target="_blank" &gt;(https://one.oecd.org/document/DSTI/EAS/STP/NESTI(2006)19/FINAL/en/pdf)&lt;/a&gt;.</hint>
                     <required></required>
                     <vocabulary closed="true">fos</vocabulary>
                 </field>
@@ -2271,7 +2271,7 @@
                     <repeatable>true</repeatable>
                     <label>Áreas do conhecimento (FOS/OCDE)</label>
                     <input-type>onebox</input-type>
-                    <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste item de acordo com a classificação 'Field of Science and Technology' (FOS) &lt;a href="https://www.oecd.org/science/inno/38235147.pdf" target="_blank" &gt;(https://www.oecd.org/science/inno/38235147.pdf)&lt;/a&gt;.</hint>
+                    <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste item de acordo com a classificação 'Field of Science and Technology' (FOS) &lt;a href="https://one.oecd.org/document/DSTI/EAS/STP/NESTI(2006)19/FINAL/en/pdf" target="_blank" &gt;(https://one.oecd.org/document/DSTI/EAS/STP/NESTI(2006)19/FINAL/en/pdf)&lt;/a&gt;.</hint>
                     <required></required>
                     <vocabulary closed="true">fos</vocabulary>
                 </field>
