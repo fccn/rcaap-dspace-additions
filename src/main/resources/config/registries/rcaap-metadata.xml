@@ -151,4 +151,11 @@
         <scope_note>Identificador do Authenticus</scope_note>
     </dc-type>
 
+    <dc-type>
+        <schema>dc</schema>
+        <element>identifier</element>
+        <qualifier>eisbn</qualifier>
+        <scope_note>International Standard Book Number (electronic Version)</scope_note>
+    </dc-type>
+
 </dspace-dc-types>
