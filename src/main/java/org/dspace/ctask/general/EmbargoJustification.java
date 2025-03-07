@@ -1,6 +1,8 @@
 package org.dspace.ctask.general;
 
 import org.apache.logging.log4j.Logger;
+import org.dspace.access.status.factory.AccessStatusServiceFactory;
+import org.dspace.access.status.service.AccessStatusService;
 import org.dspace.content.Item;
 import org.dspace.curate.Curator;
 import org.dspace.curate.Distributive;
@@ -18,12 +20,17 @@ public class EmbargoJustification extends Distribute {
 
     private String OPEN_ACCESS = "openaccess";
 
+    AccessStatusService accessStatusService = AccessStatusServiceFactory.getInstance().getAccessStatusService();
+
     @Override
-    protected void performItem(Item item) throws SQLException, IOException {
+    protected void performItem(Item item)  throws SQLException, IOException{
         String handle = item.getHandle();
         String rights = itemService.getMetadata(item, RIGHTS);
         String relation = itemService.getMetadata(item, RELATION);
         String justification = itemService.getMetadata(item, EMBARGO_FCT);
+
+        String accessStatusRights  = accessStatusService.getAccessStatus(Curator.curationContext(), item);
+        rights = accessStatusRights != null ? accessStatusRights : rights;
 
         //String Item_UUID = item.getID().toString();
         //itemService.getEntityType(Curator.curationContext(), item).toString();
@@ -39,7 +46,7 @@ public class EmbargoJustification extends Distribute {
                 res.append(rights);
                 res.append("\n");
             }*/
-            if( rights != null && !OPEN_ACCESS.equals(rights.replaceAll("\\s*","").toLowerCase()) &&
+            if( rights != null && !OPEN_ACCESS.equals(rights.replaceAll("\\s*\\.*","").toLowerCase()) &&
                     (justification == null || justification.isEmpty()) ){
 
                 res.append("\t\t\thttp://hdl.handle.net/");
@@ -48,7 +55,7 @@ public class EmbargoJustification extends Distribute {
                 res.append(" ");
                 res.append(rights);
                 res.append("\tRelation:");
-                res.append(relation != null ? (relation.length() >0 ? " SIM" : " NO") : " NO");
+                res.append(relation != null ? (relation.length() >0 ? " SIM" : " NÃO") : " NÃO");
                 res.append("\n");
                 /*res.append("\t\t\thttp://dev2.rcaap.pt/entities/publication/");
                 res.append(Item_UUID);

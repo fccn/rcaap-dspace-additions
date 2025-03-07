@@ -72,7 +72,9 @@ DB_HOST=$(echo "${DB_URL}"|rev|cut -d'/' -f2|cut -d':' -f2|rev)
 
 # processing bitstreams
 
-HANDLES=$(echo "SELECT handle FROM handle WHERE resource_id IN ( SELECT item_id FROM item2bundle AS i2b INNER JOIN bundle2bitstream AS b2b ON b2b.bundle_id = i2b.bundle_id INNER JOIN resourcepolicy AS rp ON rp.dspace_object = b2b.bitstream_id WHERE rp.resource_type_id = 0 AND ( (start_date >= date_trunc('day', current_date - interval '${N_DAYS}' DAY) AND start_date < date_trunc('day', current_date)) OR ((end_date >= date_trunc('day', current_date - interval '${N_DAYS}' DAY) AND end_date < date_trunc('day', current_date))) ) );" | PGPASSWORD="${DB_PASSWORD}" psql -tU "${DB_USERNAME}" -h "${DB_HOST}" -p "${DB_PORT}" "${DB_DATABASE}")
+# Issue https://github.com/DSpace/DSpace/issues/9764 - Proccess index-discovery fails when using DSO handle, we can revert this when fixed
+#HANDLES=$(echo "SELECT handle FROM handle WHERE resource_id IN ( SELECT item_id FROM item2bundle AS i2b INNER JOIN bundle2bitstream AS b2b ON b2b.bundle_id = i2b.bundle_id INNER JOIN resourcepolicy AS rp ON rp.dspace_object = b2b.bitstream_id WHERE rp.resource_type_id = 0 AND ( (start_date >= date_trunc('day', current_date - interval '${N_DAYS}' DAY) AND start_date < date_trunc('day', current_date)) OR ((end_date >= date_trunc('day', current_date - interval '${N_DAYS}' DAY) AND end_date < date_trunc('day', current_date))) ) );" | PGPASSWORD="${DB_PASSWORD}" psql -tU "${DB_USERNAME}" -h "${DB_HOST}" -p "${DB_PORT}" "${DB_DATABASE}")
+HANDLES=$(echo "SELECT item_id FROM item2bundle AS i2b inner join bundle2bitstream AS b2b ON b2b.bundle_id = i2b.bundle_id inner join resourcepolicy AS rp ON rp.dspace_object = b2b.bitstream_id WHERE rp.resource_type_id = 0 AND ( ( start_date >= date_trunc('day', current_date - interval '${N_DAYS}' DAY) AND start_date < date_trunc('day', current_date) ) OR (( end_date >= date_trunc('day', current_date - interval '${N_DAYS}' DAY) AND end_date < date_trunc('day', current_date) )) );" | PGPASSWORD="${DB_PASSWORD}" psql -tU "${DB_USERNAME}" -h "${DB_HOST}" -p "${DB_PORT}" "${DB_DATABASE}")
 
 NUMBER_ITEMS=0
 
@@ -86,8 +88,9 @@ do
 done
 
 # processing items
-
-HANDLES=$(echo "SELECT handle FROM handle WHERE resource_id IN ( SELECT rp.dspace_object FROM resourcepolicy AS rp WHERE rp.resource_type_id = 2 AND ( (start_date >= date_trunc('day', current_date - interval '${N_DAYS}' DAY) AND start_date < date_trunc('day', current_date)) OR ((end_date >= date_trunc('day', current_date - interval '${N_DAYS}' DAY) AND end_date < date_trunc('day', current_date))) ));" | PGPASSWORD="${DB_PASSWORD}" psql -tU "${DB_USERNAME}" -h "${DB_HOST}" -p "${DB_PORT}" "${DB_DATABASE}")
+# Issue https://github.com/DSpace/DSpace/issues/9764 - Proccess index-discovery fails when using DSO handle, we can revert this when fixed
+#HANDLES=$(echo "SELECT handle FROM handle WHERE resource_id IN ( SELECT rp.dspace_object FROM resourcepolicy AS rp WHERE rp.resource_type_id = 2 AND ( (start_date >= date_trunc('day', current_date - interval '${N_DAYS}' DAY) AND start_date < date_trunc('day', current_date)) OR ((end_date >= date_trunc('day', current_date - interval '${N_DAYS}' DAY) AND end_date < date_trunc('day', current_date))) ));" | PGPASSWORD="${DB_PASSWORD}" psql -tU "${DB_USERNAME}" -h "${DB_HOST}" -p "${DB_PORT}" "${DB_DATABASE}")
+HANDLES=$(echo "SELECT rp.dspace_object FROM resourcepolicy AS rp WHERE rp.resource_type_id = 2 AND ( ( start_date >= date_trunc('day', current_date - interval '${N_DAYS}' DAY) AND start_date < date_trunc('day', current_date) ) OR (( end_date >= date_trunc('day', current_date - interval '${N_DAYS}' DAY) AND end_date < date_trunc('day', current_date) )) );" | PGPASSWORD="${DB_PASSWORD}" psql -tU "${DB_USERNAME}" -h "${DB_HOST}" -p "${DB_PORT}" "${DB_DATABASE}")
 
 
 for HANDLE in $HANDLES

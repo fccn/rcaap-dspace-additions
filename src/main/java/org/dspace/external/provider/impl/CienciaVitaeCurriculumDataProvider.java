@@ -255,8 +255,11 @@ public class CienciaVitaeCurriculumDataProvider extends AbstractExternalDataProv
                 }
             }
 
-            String name = person.getPersonInfo().getPresentedName();
-            if (person.getCitationNames().getTotal() > 0) {
+            String name = null;
+            if (person.getPersonInfo() != null) {
+                name = person.getPersonInfo().getPresentedName();
+            }
+            if (person.getCitationNames() != null && person.getCitationNames().getTotal() > 0) {
                 // Get the preferred citation name
                 for (CitationName citationName : person.getCitationNames().getCitationName()) {
                     if (citationName.getPrivacyLevel() == PrivacyLevelEnum.PUBLICO
@@ -265,13 +268,14 @@ public class CienciaVitaeCurriculumDataProvider extends AbstractExternalDataProv
                     }
                 }
             }
-            if (name == null) {
-                name = person.getPersonInfo().getFullName();
+            if (person.getPersonInfo() != null) {
+                if (name == null) {
+                    name = person.getPersonInfo().getFullName();
+                }
+
+                this.addGivenName(person.getPersonInfo().getNames()).addFamilyName(person.getPersonInfo().getSurnames())
+                        .setDisplayValue(name).addName(name).addAltName(person.getPersonInfo().getFullName());
             }
-
-            this.addGivenName(person.getPersonInfo().getNames()).addFamilyName(person.getPersonInfo().getSurnames())
-                    .setDisplayValue(name).addName(name).addAltName(person.getPersonInfo().getFullName());
-
             // give priority to orcid identifier (if one exists)
             if (orcidID != null) {
                 this.setId(orcidID).setValue(orcidID);
@@ -331,24 +335,32 @@ public class CienciaVitaeCurriculumDataProvider extends AbstractExternalDataProv
                 }
             }
 
-            String name = person.getIdentifyingInfo().getPersonInfo().getPresentedName();
-            if (person.getIdentifyingInfo().getCitationNames().getTotal() > 0) {
-                // Get the preferred citation name
-                for (CitationName citationName : person.getIdentifyingInfo().getCitationNames().getCitationName()) {
-                    if (citationName.getPrivacyLevel() == PrivacyLevelEnum.PUBLICO
-                            && citationName.isPreferredCitationName()) {
-                        name = citationName.getValue();
+            String name = null;
+            if (person.getIdentifyingInfo() != null) {
+                if (person.getIdentifyingInfo().getPersonInfo() != null) {
+                    name = person.getIdentifyingInfo().getPersonInfo().getPresentedName();
+                }
+                if (person.getIdentifyingInfo().getCitationNames() != null && 
+                    person.getIdentifyingInfo().getCitationNames().getTotal() > 0) {
+                    // Get the preferred citation name
+                    for (CitationName citationName : person.getIdentifyingInfo().getCitationNames().getCitationName()) {
+                        if (citationName.getPrivacyLevel() == PrivacyLevelEnum.PUBLICO
+                                && citationName.isPreferredCitationName()) {
+                            name = citationName.getValue();
+                        }
                     }
                 }
-            }
-            // Set name as full name as a default
-            if (name == null) {
-                name = person.getIdentifyingInfo().getPersonInfo().getFullName();
-            }
+                // Set name as full name as a default
+                if (name == null && person.getIdentifyingInfo().getPersonInfo() != null) {
+                    name = person.getIdentifyingInfo().getPersonInfo().getFullName();
+                }
 
-            this.addGivenName(person.getIdentifyingInfo().getPersonInfo().getNames())
-                    .addFamilyName(person.getIdentifyingInfo().getPersonInfo().getSurnames()).setDisplayValue(name)
-                    .addName(name).addAltName(person.getIdentifyingInfo().getPersonInfo().getFullName());
+                if (person.getIdentifyingInfo().getPersonInfo() != null ) {
+                    this.addGivenName(person.getIdentifyingInfo().getPersonInfo().getNames())
+                            .addFamilyName(person.getIdentifyingInfo().getPersonInfo().getSurnames()).setDisplayValue(name)
+                            .addName(name).addAltName(person.getIdentifyingInfo().getPersonInfo().getFullName());
+                }
+            }
 
         }
 

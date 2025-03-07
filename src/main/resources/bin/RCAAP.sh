@@ -6,6 +6,7 @@
 
 # Current script dir
 SCRIPTPATH=$(dirname "$0")
+LOG_FILE="${SCRIPTPATH}/../log/rcaap_cli.log"
 
 usage()
 {
@@ -57,10 +58,10 @@ fi
 
 # Verify if script exists as a file
 if [ ! -f "$SCRIPT" ]; then
-    echo "Error executing ${SCRIPT}"
+    echo "Error executing ${SCRIPT}" >> "${LOG_FILE}"
     usage
     exit 1
 fi
 
-echo "Executing $SCRIPT $@"
+echo "Executing $SCRIPT $@" >> "${LOG_FILE}"
 "$SCRIPT" "$@"

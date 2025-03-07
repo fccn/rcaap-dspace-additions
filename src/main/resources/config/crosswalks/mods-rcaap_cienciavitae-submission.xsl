@@ -119,6 +119,13 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
 
         </xsl:comment>
 
+        <!--CREATE dspace entity as publication -->
+        <xsl:element name="dim:field">
+                <xsl:attribute name="mdschema">dspace</xsl:attribute>
+                <xsl:attribute name="element">entity</xsl:attribute>
+                <xsl:attribute name="qualifier">type</xsl:attribute>
+                <xsl:text>Publication</xsl:text>
+        </xsl:element>
 
 <!-- WR_ NAMESPACE NOTE
         Don't "code into" this XSLT the creation of the attribute with the name 'xmlns:dim', to hold the DSpace URI for that namespace.
@@ -130,6 +137,7 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
 <!-- WR_ Do Not Use (see above note)
                 <xsl:attribute name="xmlns:dim">http://www.dspace.org/xmlns/dspace/dim</xsl:attribute>
         -->
+
                         <xsl:apply-templates/>
                 </xsl:element>
         </xsl:template>
@@ -209,8 +217,8 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
     </xsl:when>
     <xsl:when test="./@type='conference' and ../*[local-name()='genre']/text()='conferenceObject'">
          <xsl:element name="dim:field">
-            <xsl:attribute name="mdschema">degois</xsl:attribute>
-            <xsl:attribute name="element">publication</xsl:attribute>
+            <xsl:attribute name="mdschema">oaire</xsl:attribute>
+            <xsl:attribute name="element">citation</xsl:attribute>
             <xsl:attribute name="qualifier">title</xsl:attribute>
             <xsl:attribute name="lang">en_US</xsl:attribute>
             <xsl:value-of select="*[local-name()='namePart']"/>
@@ -379,8 +387,8 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
                                         <xsl:choose>
                                             <xsl:when test="not(../*[local-name()='name'][@type='conference'])">
                                                 <xsl:element name="dim:field">
-                                                    <xsl:attribute name="mdschema">degois</xsl:attribute>
-                                                    <xsl:attribute name="element">publication</xsl:attribute>
+                                                    <xsl:attribute name="mdschema">oaire</xsl:attribute>
+                                                    <xsl:attribute name="element">citation</xsl:attribute>
                                                     <xsl:attribute name="qualifier">title</xsl:attribute>
                                                     <xsl:attribute name="lang">en_US</xsl:attribute>
                                                     <xsl:value-of select="normalize-space(*[local-name()='titleInfo']/*[local-name()='title'])"/>
@@ -475,14 +483,14 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
 
 <!-- Changes needed - CV deposit -->
 
-<!-- **** MODS   originInfo/publisher  ====> Degois publication Loaction **** -->
+<!-- **** MODS   originInfo/publisher  ====> Degois publication Loaction **** Now OAIRE CITATION -->
         <xsl:template match="*[local-name()='originInfo']/*[local-name()='place']/*[local-name()='placeTerm']">
             <xsl:choose>
                 <xsl:when test="./@type='text'">
                     <xsl:element name="dim:field">
-                            <xsl:attribute name="mdschema">degois</xsl:attribute>
-                            <xsl:attribute name="element">publication</xsl:attribute> 
-                            <xsl:attribute name="qualifier">location</xsl:attribute>                
+                            <xsl:attribute name="mdschema">oaire</xsl:attribute>
+                            <xsl:attribute name="element">citation</xsl:attribute> 
+                            <xsl:attribute name="qualifier">conferencePlace</xsl:attribute>                
                             <xsl:attribute name="lang">en_US</xsl:attribute>
                             <xsl:value-of select="normalize-space(.)"/>
                     </xsl:element>
@@ -533,13 +541,13 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
                  </xsl:choose>
         </xsl:template>
 
-<!-- **** VOLUME AND ISSE MAPPED ON DEGOIS FIELDS DC.DEGOIS.VOLUME|ISSUE-->
+<!-- **** VOLUME AND ISSE MAPPED ON DEGOIS FIELDS DC.DEGOIS.VOLUME|ISSUE - Now OAIRE CITATION-->
         <xsl:template match="*[local-name()='detail']"> 
             <xsl:choose>
                 <xsl:when test="not(./@type='section')">
                     <xsl:element name="dim:field">
-                        <xsl:attribute name="mdschema">degois</xsl:attribute>
-                        <xsl:attribute name="element">publication</xsl:attribute>
+                        <xsl:attribute name="mdschema">oaire</xsl:attribute>
+                        <xsl:attribute name="element">citation</xsl:attribute>
                         <xsl:attribute name="qualifier"><xsl:value-of select="./@type"/></xsl:attribute>                       
                         <xsl:attribute name="lang">en_US</xsl:attribute>
                         <xsl:value-of select="normalize-space(.)"/>
@@ -548,20 +556,20 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
             </xsl:choose>
         </xsl:template>
 
-        <!-- GET PAGES - THIS OR SEPARATE INDIVIDUALLY ????  DC.DEGOIS.FIRSTPAGE  ... DC:DEGOIS:LASTPAGE -->
+        <!-- GET PAGES - THIS OR SEPARATE INDIVIDUALLY ????  DC.DEGOIS.FIRSTPAGE  ... DC:DEGOIS:LASTPAGE Now OAIRE CITATION -->
         <xsl:template match="*[local-name()='extent']"> 
                <xsl:choose>
                    <xsl:when test="./@unit='pages'"> 
                         <xsl:for-each select="./*">
                             <xsl:element name="dim:field">
-                                <xsl:attribute name="mdschema">degois</xsl:attribute>
-                                <xsl:attribute name="element">publication</xsl:attribute>
+                                <xsl:attribute name="mdschema">oaire</xsl:attribute>
+                                <xsl:attribute name="element">citation</xsl:attribute>
                                 <xsl:choose>
                                     <xsl:when test="contains(local-name(),'start')">
-                                        <xsl:attribute name="qualifier">firstPage</xsl:attribute>
+                                        <xsl:attribute name="qualifier">startPage</xsl:attribute>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <xsl:attribute name="qualifier">lastPage</xsl:attribute>
+                                        <xsl:attribute name="qualifier">endPage</xsl:attribute>
                                     </xsl:otherwise>
                                 </xsl:choose> 
                                 <xsl:value-of select="normalize-space(.)"/>     
@@ -571,7 +579,7 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
              </xsl:choose>                                     
         </xsl:template>
 
-        <!-- **** LOCATION MAPPED ON DEGOIS FIELDS DC.DEGOIS.VOLUME|ISSUE-->
+        <!-- **** LOCATION MAPPED ON DEGOIS FIELDS DC.DEGOIS.VOLUME|ISSUE Now OAIRE CITATION-->
         <!--<xsl:template match="*[local-name()='location']"> 
                 <xsl:element name="dim:field">
                         <xsl:attribute name="mdschema">degois</xsl:attribute>
@@ -593,7 +601,7 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
         </xsl:template>-->
 
         <xsl:template match="*[local-name()='genre']"> 
-                 <xsl:call-template name="dcRights">
+                 <xsl:call-template name="dcType">
                         </xsl:call-template>
         </xsl:template>
 
@@ -603,11 +611,10 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
             <xsl:choose>                                                                                                                                                        
                 <xsl:when test="@xlink:href='info:eu-repo/semantics/embargoedAccess'">
                     <xsl:element name="dim:field">
-                        <xsl:attribute name="mdschema">dc</xsl:attribute>
+                        <xsl:attribute name="mdschema">rcaap</xsl:attribute>
                         <xsl:attribute name="element">rights</xsl:attribute>
                         <xsl:attribute name="lang">en_US</xsl:attribute>
                         <xsl:text>embargoedAccess</xsl:text>
-                        <xsl:value-of select="normalize-space(.)"/>
                     </xsl:element>     
                     <xsl:call-template name="dateEmbargo">
                         <xsl:with-param name="dateEmbargo" select="../*[local-name()='originInfo']/*[local-name()='copyrightDate' and @point='end']" />
@@ -615,7 +622,7 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
                 </xsl:when>      
                  <xsl:when test="@xlink:href='info:eu-repo/semantics/closedAccess'">
                     <xsl:element name="dim:field">
-                        <xsl:attribute name="mdschema">dc</xsl:attribute>
+                        <xsl:attribute name="mdschema">rcaap</xsl:attribute>
                         <xsl:attribute name="element">rights</xsl:attribute>
                         <xsl:attribute name="lang">en_US</xsl:attribute>
                         <xsl:text>closedAccess</xsl:text> 
@@ -623,7 +630,7 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
                 </xsl:when>               
                 <xsl:when test="@xlink:href='info:eu-repo/semantics/restrictedAccess'">
                     <xsl:element name="dim:field">
-                        <xsl:attribute name="mdschema">dc</xsl:attribute>
+                        <xsl:attribute name="mdschema">rcaap</xsl:attribute>
                         <xsl:attribute name="element">rights</xsl:attribute> 
                         <xsl:attribute name="lang">en_US</xsl:attribute>
                         <xsl:text>restrictedAccess</xsl:text>
@@ -631,7 +638,7 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
                 </xsl:when>   
                 <xsl:otherwise>
                     <xsl:element name="dim:field">
-                        <xsl:attribute name="mdschema">dc</xsl:attribute>
+                        <xsl:attribute name="mdschema">rcaap</xsl:attribute>
                         <xsl:attribute name="element">rights</xsl:attribute>
                         <xsl:attribute name="lang">en_US</xsl:attribute>
                         <xsl:text>openAccess</xsl:text>
@@ -650,66 +657,252 @@ $ scp MODS-2-DIM.xslt athena.dialup.mit.edu:~/Private/
                     </xsl:element> 
         </xsl:template>
 
-   <xsl:template name="dcRights">
+<xsl:template name="doctype">
+<xsl:element name="dim:field">
+                        <xsl:attribute name="mdschema">dspace</xsl:attribute>
+                        <xsl:attribute name="element">entity</xsl:attribute>
+                        <xsl:attribute name="qualifier">type</xsl:attribute>
+                        <xsl:text>publication</xsl:text>
+                </xsl:element>
+        </xsl:template>
+
+   <xsl:template name="dcType">
+        <!--<xsl:variable name="dc_type" select="."/>-->
+        <xsl:variable name="dc_type">
+            <xsl:call-template name="lowercase">
+                <xsl:with-param name="value" select="."/>
+            </xsl:call-template>
+        </xsl:variable>
         <xsl:element name="dim:field">
                 <xsl:attribute name="mdschema">dc</xsl:attribute>
                 <xsl:attribute name="element">type</xsl:attribute>
                 <xsl:attribute name="lang">en_US</xsl:attribute>
                 <xsl:choose>
-                        <xsl:when test="//*[text()='article']">
-                                <xsl:text>article</xsl:text>
-                        </xsl:when>
-                        <xsl:when test="//*[text()='patent']">
-                                <xsl:text>patent</xsl:text>
-                        </xsl:when>
-                        <xsl:when test="//*[text()='contributionToPeriodical']">
-                                <xsl:text>contribution to periodical</xsl:text>
-                        </xsl:when>
-                        <xsl:when test="//*[text()='conferenceObject']">
-                                <xsl:text>conference object</xsl:text>
-                        </xsl:when>
-                        <xsl:when test="//*[text()='lecture']">
-                                <xsl:text>lecture</xsl:text>
-                        </xsl:when>
-                        <xsl:when test="//*[text()='review']">
-                                <xsl:text>review</xsl:text>
-                        </xsl:when>
-                        <!-- Não existe no openaire????-->
-                        <xsl:when test="//*[text()='pedagogicalEducation']">
-                                <xsl:text>pedagogical education</xsl:text>
-                        </xsl:when>
-                        <xsl:when test="//*[text()='preprint']">
-                                <xsl:text>preprint</xsl:text>
-                        </xsl:when>
-                        <xsl:when test="//*[text()='annotation']">
-                                <xsl:text>annoatiob</xsl:text>
-                        </xsl:when>
-                        <xsl:when test="//*[text()='report']">
-                                <xsl:text>report</xsl:text>
-                        </xsl:when>
-                        <xsl:when test="//*[text()='workingPaper']">
-                                <xsl:text>working paper</xsl:text>
-                        </xsl:when>
-                        <xsl:when test="//*[text()='book']">
-                                <xsl:text>book</xsl:text>
-                        </xsl:when>
-                        <xsl:when test="//*[text()='bookPart']">
-                                <xsl:text>book part</xsl:text>
-                        </xsl:when>
-                        <xsl:when test="//*[text()='bachelorThesis']">
+                        <xsl:when test="$dc_type = 'annotation' or $dc_type = 'http://purl.org/coar/resource_type/c_1162'">
+                        <xsl:text>annotation</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'journal' or $dc_type = 'http://purl.org/coar/resource_type/c_0640'">
+                                <xsl:text>journal</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'journal article' or $dc_type = 'article' or $dc_type = 'journalarticle' or $dc_type = 'http://purl.org/coar/resource_type/c_6501'">
+                                <xsl:text>journal article</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'editorial' or $dc_type = 'http://purl.org/coar/resource_type/c_b239' ">
+                                <xsl:text>editorial</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'bachelor thesis' or $dc_type = 'bachelorthesis' or $dc_type = 'http://purl.org/coar/resource_type/c_7a1f' ">
                                 <xsl:text>bachelor thesis</xsl:text>
-                        </xsl:when>      
-                        <xsl:when test="//*[text()='doctoralThesis']">
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'bibliography' or $dc_type = 'http://purl.org/coar/resource_type/c_86bc' ">
+                                <xsl:text>bibliography</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'book' or $dc_type = 'http://purl.org/coar/resource_type/c_2f33' ">
+                                <xsl:text>book</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'book part' or $dc_type = 'bookpart' or $dc_type = 'http://purl.org/coar/resource_type/c_3248'">
+                                <xsl:text>book part</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'book review' or $dc_type = 'bookreview' or $dc_type = 'http://purl.org/coar/resource_type/c_ba08'">
+                                <xsl:text>book review</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'website' or $dc_type = 'http://purl.org/coar/resource_type/c_7ad9' ">
+                                <xsl:text>website</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'interactive resource' or $dc_type = 'interactiveresource' or $dc_type = 'http://purl.org/coar/resource_type/c_e9a0' or $dc_type = 'resource'">
+                                <xsl:text>interactive resource</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'conference proceedings' or $dc_type = 'conferenceproceedings' or $dc_type = 'http://purl.org/coar/resource_type/c_f744' ">
+                                <xsl:text>conference proceedings</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'conference object' or $dc_type = 'conferenceobject' or $dc_type = 'http://purl.org/coar/resource_type/c_c94f' ">
+                                <xsl:text>conference object</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'conference paper' or $dc_type = 'conferencepaper' or $dc_type = 'http://purl.org/coar/resource_type/c_5794' ">
+                                <xsl:text>conference paper</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'conference poster' or $dc_type = 'conferenceposter' or $dc_type = 'http://purl.org/coar/resource_type/c_6670' ">
+                                <xsl:text>conference poster</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'contribution to journal' or $dc_type = 'contributiontojournal' or $dc_type = 'http://purl.org/coar/resource_type/c_3e5a' ">
+                                <xsl:text>contribution to journal</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'datapaper' or $dc_type = 'http://purl.org/coar/resource_type/c_beb9' ">
+                                <xsl:text>data paper</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'dataset' or $dc_type = 'http://purl.org/coar/resource_type/c_ddb1'">
+                                <xsl:text>dataset</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'doctoral thesis' or $dc_type = 'doctoralthesis' or $dc_type = 'http://purl.org/coar/resource_type/c_db06' ">
                                 <xsl:text>doctoral thesis</xsl:text>
-                        </xsl:when>
-                        <xsl:when test="//*[text()='masterThesis']">
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'image' or $dc_type = 'http://purl.org/coar/resource_type/c_c513'">
+                                <xsl:text>image</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'lecture' or $dc_type = 'http://purl.org/coar/resource_type/c_8544' ">
+                                <xsl:text>lecture</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'letter' or $dc_type = 'http://purl.org/coar/resource_type/c_0857' ">
+                                <xsl:text>letter</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'master thesis' or $dc_type = 'masterthesis' or $dc_type = 'http://purl.org/coar/resource_type/c_bdcc' ">
                                 <xsl:text>master thesis</xsl:text>
-                        </xsl:when>
-                        <xsl:otherwise>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'moving image' or $dc_type = 'movingimage' or $dc_type = 'http://purl.org/coar/resource_type/c_8a7e' ">
+                                <xsl:text>moving image</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'periodical' or $dc_type = 'http://purl.org/coar/resource_type/c_2659' ">
+                                <xsl:text>periodical</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'letter to the editor' or $dc_type = 'lettertotheeditor' or $dc_type = 'http://purl.org/coar/resource_type/c_545b' ">
+                                <xsl:text>letter to the editor</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'patent' or $dc_type = 'http://purl.org/coar/resource_type/c_15cd' ">
+                                <xsl:text>patent</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'preprint' or $dc_type = 'http://purl.org/coar/resource_type/c_816b' ">
+                                <xsl:text>preprint</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'report' or $dc_type = 'http://purl.org/coar/resource_type/c_93fc' ">
+                                <xsl:text>report</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'report part' or $dc_type = 'reportpart' or $dc_type = 'http://purl.org/coar/resource_type/c_ba1f' ">
+                                <xsl:text>report part</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'research proposal' or $dc_type = 'researchproposal' or $dc_type = 'http://purl.org/coar/resource_type/c_baaf' ">
+                                <xsl:text>research proposal</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'review' or $dc_type = 'http://purl.org/coar/resource_type/c_efa0' ">
+                                <xsl:text>review</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'software' or $dc_type = 'http://purl.org/coar/resource_type/c_5ce6' or $dc_type = 'software'">
+                                <xsl:text>software</xsl:text>
+                            </xsl:when>
+                            <xsl:when  test="$dc_type = 'still image' or $dc_type = 'stillimage' or $dc_type = 'http://purl.org/coar/resource_type/c_ecc8' ">
+                                <xsl:text>still image</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'technical documentation' or $dc_type = 'technicaldocumentation' or $dc_type = 'http://purl.org/coar/resource_type/c_71bd' ">
+                                <xsl:text>technical documentation</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'workflow' or $dc_type = 'http://purl.org/coar/resource_type/c_393c'">
+                                <xsl:text>workflow</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'working paper' or $dc_type = 'workingpaper' or $dc_type = 'http://purl.org/coar/resource_type/c_8042' ">
+                                <xsl:text>working paper</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'thesis' or $dc_type = 'http://purl.org/coar/resource_type/c_46ec' ">
+                                <xsl:text>thesis</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'cartographic material' or $dc_type = 'cartographicmaterial' or $dc_type = 'http://purl.org/coar/resource_type/c_12cc' ">
+                                <xsl:text>cartographic material</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'map' or $dc_type = 'http://purl.org/coar/resource_type/c_12cd' ">
+                                <xsl:text>map</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'video' or $dc_type = 'http://purl.org/coar/resource_type/c_12ce' ">
+                                <xsl:text>video</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'sound' or $dc_type = 'http://purl.org/coar/resource_type/c_18cc'">
+                                <xsl:text>sound</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'musical composition' or $dc_type = 'musicalcomposition' or $dc_type = 'http://purl.org/coar/resource_type/c_18cd' ">
+                                <xsl:text>musical composition</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'text' or $dc_type = 'http://purl.org/coar/resource_type/c_18cf'">
+                                <xsl:text>text</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'conference paper not in proceedings' or $dc_type = 'conferencepapernotinproceedings' or $dc_type = 'http://purl.org/coar/resource_type/c_18cp' ">
+                                <xsl:text>conference paper not in proceedings</xsl:text>
+                            </xsl:when>
+                            <xsl:when  test="$dc_type = 'conference poster not in proceedings' or $dc_type = 'conferenceposternotinproceedings' or $dc_type = 'http://purl.org/coar/resource_type/c_18co' ">
+                                <xsl:text>conference poster not in proceedings</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'musical notation' or $dc_type = 'http://purl.org/coar/resource_type/c_18cw' ">
+                                <xsl:text>musical notation</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'internal report' or $dc_type = 'internalreport' or $dc_type = 'http://purl.org/coar/resource_type/c_18ww' ">
+                                <xsl:text>internal report</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'memorandum' or $dc_type = 'http://purl.org/coar/resource_type/c_18wz' ">
+                                <xsl:text>memorandum</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'other type of report'  or $dc_type = 'othertypeofreport' or $dc_type = 'http://purl.org/coar/resource_type/c_18wq' ">
+                                <xsl:text>other type of report</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'policy report' or $dc_type = 'policyreport'  or $dc_type = 'http://purl.org/coar/resource_type/c_186u' ">
+                                <xsl:text>policy report</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'project deliverable' or $dc_type = 'projectdeliverable' or $dc_type = 'http://purl.org/coar/resource_type/c_18op' ">
+                                <xsl:text>project deliverable</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'report to funding agency' or $dc_type = 'reporttofundingagency' or $dc_type = 'http://purl.org/coar/resource_type/c_18hj' ">
+                                <xsl:text>report to funding agency</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'research report' or $dc_type = 'researchreport' or $dc_type = 'http://purl.org/coar/resource_type/c_18ws' ">
+                                <xsl:text>research report</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'technical report' or $dc_type = 'technicalreport' or $dc_type = 'http://purl.org/coar/resource_type/c_18gh' ">
+                                <xsl:text>technical report</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'review article' or $dc_type = 'reviewarticle' or $dc_type = 'http://purl.org/coar/resource_type/c_dcae04bc' ">
+                                <xsl:text>review article</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'research article' or $dc_type = 'researcharticle' or $dc_type = 'http://purl.org/coar/resource_type/c_2df8fbb1' ">
+                                <xsl:text>research article</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'interview' or $dc_type = 'http://purl.org/coar/resource_type/c_26e4' ">
+                                <xsl:text>interview</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'research software' or $dc_type = 'researchsoftware' or $dc_type = 'http://purl.org/coar/resource_type/c_c950' ">
+                                <xsl:text>research software</xsl:text>
+                            </xsl:when>
+                            <xsl:when  test="$dc_type = 'corrigendum' or $dc_type = 'http://purl.org/coar/resource_type/c_7acd' ">
+                                <xsl:text>corrigendum</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'software paper' or $dc_type = 'softwarepaper' or $dc_type = 'http://purl.org/coar/resource_type/c_7bab' ">
+                                <xsl:text>software paper</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$dc_type = 'newspaper article' or $dc_type = 'newspaperarticle' or $dc_type = 'http://purl.org/coar/resource_type/c_998f' ">
+                                <xsl:text>newspaper article</xsl:text>
+                            </xsl:when>
+                           <xsl:when test="$dc_type = 'magazine' or $dc_type = 'http://purl.org/coar/resource_type/c_2cd9' ">
+                                <xsl:text>magazine</xsl:text>
+                            </xsl:when>
+                           <xsl:when  test="$dc_type = 'data management plan' or $dc_type = 'datamanagementplan' or $dc_type = 'http://purl.org/coar/resource_type/c_ab20' ">
+                                <xsl:text>data management plan</xsl:text>
+                            </xsl:when>
+                           <xsl:when test="$dc_type = 'blog post' or $dc_type = 'blogpost' or $dc_type = 'http://purl.org/coar/resource_type/c_6947' ">
+                                <xsl:text>blog post</xsl:text>
+                            </xsl:when>
+                           <xsl:when test="$dc_type = 'manuscript' or $dc_type = 'http://purl.org/coar/resource_type/c_0040' ">
+                                <xsl:text>manuscript</xsl:text>
+                            </xsl:when>
+                           <xsl:when test="$dc_type = 'learning object' or $dc_type = 'learningobject' or $dc_type = 'http://purl.org/coar/resource_type/c_e059'">
+                                <xsl:text>learning object</xsl:text>
+                            </xsl:when>
+                           <xsl:when test="$dc_type = 'clinical trial' or $dc_type = 'clinicaltrial' or $dc_type = 'http://purl.org/coar/resource_type/c_cb28'">
+                                <xsl:text>clinical trial</xsl:text>
+                            </xsl:when>
+                           <xsl:when test="$dc_type = 'clinical study' or $dc_type = 'clinicalstudy' or $dc_type = 'http://purl.org/coar/resource_type/c_7877'">
+                                <xsl:text>clinical study</xsl:text>
+                            </xsl:when>
+                            <xsl:otherwise>
                                 <xsl:text>other</xsl:text>
-                        </xsl:otherwise>
+                            </xsl:otherwise>
                 </xsl:choose>                      
             </xsl:element>
         </xsl:template>
+
+
+        <!--  -->
+   <!-- Other Auxiliary templates -->
+   <!--  -->
+    <xsl:param name="smallcase" select="'abcdefghijklmnopqrstuvwxyzàèìòùáéíóúýâêîôûãñõäëïöüÿåæœçðø'"/>
+    <xsl:param name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÈÌÒÙÁÉÍÓÚÝÂÊÎÔÛÃÑÕÄËÏÖÜŸÅÆŒÇÐØ'"/>    
+
+   <!-- to retrieve a string in lowercase -->
+    <xsl:template name="lowercase">
+        <xsl:param name="value"/>
+        <xsl:value-of select="translate($value, $uppercase, $smallcase)"/>
+    </xsl:template>
 
 </xsl:stylesheet>

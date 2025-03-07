@@ -43,6 +43,13 @@
         <scope_note></scope_note>
     </dc-type>
 
+    <dc-type>
+        <schema>rcaap</schema>
+        <element>contributor</element>
+        <qualifier>authoremail</qualifier>
+        <scope_note>Endereço de email para entrega do pedido de cópia</scope_note>
+    </dc-type>
+
     <!-- Sustainable Development Goals -->
     <dc-type>
         <schema>datacite</schema>
@@ -142,6 +149,13 @@
         <element>identifier</element>
         <qualifier>authenticusid</qualifier>
         <scope_note>Identificador do Authenticus</scope_note>
+    </dc-type>
+
+    <dc-type>
+        <schema>dc</schema>
+        <element>identifier</element>
+        <qualifier>eisbn</qualifier>
+        <scope_note>International Standard Book Number (electronic Version)</scope_note>
     </dc-type>
 
 </dspace-dc-types>

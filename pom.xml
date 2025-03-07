@@ -24,6 +24,7 @@
    <properties>
        <!-- This is the path to the root [dspace-src] directory. -->
        <root.basedir>${basedir}/../../..</root.basedir>
+       <xoai.version>3.4.0</xoai.version>
    </properties>
 
    <build>
@@ -210,6 +211,10 @@
       </dependency>
       <dependency>
           <groupId>org.dspace</groupId>
+          <artifactId>dspace-oai</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>org.dspace</groupId>
           <artifactId>dspace-api</artifactId>
           <type>test-jar</type>
           <scope>test</scope>
@@ -221,6 +226,19 @@
       <dependency>
           <groupId>org.dspace</groupId>
           <artifactId>dspace-services</artifactId>
+      </dependency>
+      <!-- OAI Data Provider Framework -->
+      <dependency>
+            <groupId>org.dspace</groupId>
+            <artifactId>xoai</artifactId>
+            <version>${xoai.version}</version>
+            <exclusions>
+                <!-- Use version provided by SolrJ -->
+                <exclusion>
+                    <groupId>com.fasterxml.woodstox</groupId>
+                    <artifactId>woodstox-core</artifactId>
+                </exclusion>
+            </exclusions>
       </dependency>
       <dependency>
          <groupId>javax.servlet</groupId>

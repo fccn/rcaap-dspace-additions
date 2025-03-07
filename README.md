@@ -6,9 +6,9 @@
 
 # Instalação DSpace 7++
 
-Obter o código DSpace versão 7.6.1. (nas instruções abaixo, substituir [dspace-7X] por dspace-7.6.1)
+Obter o código DSpace **versão 7.6.1**. (nas instruções abaixo, substituir [dspace-version] por `dspace-7.6.1`)
 ```
-git clone --branch [dspace-7X] https://github.com/DSpace/DSpace.git DSpace
+git clone --branch [dspace-version] https://github.com/DSpace/DSpace.git DSpace
 ```
 
 Depois, garantir que o DSpace não tem os `additions` default.
@@ -22,20 +22,35 @@ Fazer clone do projeto para a diretoria additions em `DSpace/dspace/modules/`:
 git clone https://github.com/fccn/rcaap-dspace-additions.git additions
 ```
 
-Depois, colocar as nossas configurações default:
+Mudar de diretoria para additions
 ```
-rsync -r --remove-source-files  additions/src/main/resources/config/ ../config
+cd additions
+```
+
+Colocar as nossas configurações default:
+```
+rsync -r --remove-source-files  ./src/main/resources/config/ ../../config
+```
+
+Colocar as nossas modificações SOLR:
+```
+rsync -r --remove-source-files  ./src/main/resources/solr/ ../../solr
+```
+
+Depois, colocar o módulo server:
+```
+rsync -r --remove-source-files  ./src/main/resources/server/ ../server
 ```
 
 Colocar também os ficheiros executáveis que estão no additions:
 ```
-rsync -r --remove-source-files --chmod=Fu=rwx,Fg=rx,Fo=rx  additions/src/main/resources/bin/ ../bin
+rsync -r --remove-source-files --chmod=Fu=rwx,Fg=rx,Fo=rx  ./src/main/resources/bin/ ../../bin
 ```
 
 
 Definir o esquema de **virtual metadata** do OpenAIRE como sendo o default
 ```
-cd ..
+cd ../..
 mv config/spring/api/virtual-metadata.xml config/spring/api/virtual-metadata.xml.origin
 mv config/spring/api/virtual-metadata.xml.openaire4 config/spring/api/virtual-metadata.xml
 ```
@@ -46,7 +61,7 @@ mv config/spring/api/virtual-metadata.xml.openaire4 config/spring/api/virtual-me
 Será necessário adicionar as seguintes configurações ao local.cfg para suporte da API do CV:
 ```
 # cienciavitae api
-cienciavitae.url = https://qa.cienciavitae.pt
+cienciavitae.url = [URL] Exemplo URL:www.cienciavitae.pt
 
 cienciavitae.api.url = ${cienciavitae.url}/api/v1.1
 cienciavitae.api.username = USER
@@ -58,9 +73,9 @@ O ficheiro pom.xml nos `additions`, depois de seguir os passos da instalação, 
 <dependencies>
 ....
       <dependency>
-      	<groupId>pt.rcaap</groupId>
-      	<artifactId>cienciavitae.model</artifactId>
-      	<version>0.0.1-SNAPSHOT</version>
+        <groupId>pt.rcaap</groupId>
+        <artifactId>cienciavitae.model</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
       </dependency>
 ....
    </dependencies>
@@ -68,12 +83,16 @@ O ficheiro pom.xml nos `additions`, depois de seguir os passos da instalação, 
 
 Depois de seguir os passos de instalação, deverá também existir um ficheiro na diretoria `[DSpace]/config/spring/api/external-cienciavitae.xml` com a configuração do serviço. Caso contrário, o ficheiro a usar estará disponível em: https://github.com/fccn/rcaap-dspace-additions/blob/main/src/main/resources/config/spring/api/external-cienciavitae.xml
 
-## Configuração Submissão a partir do Ciência Vitae
+## Configuração Depósito a partir do Ciência Vitae
 
-Será necessário colocar no local.cfg a seguinte configuração:
+Será necessário colocar no local.cfg as seguintes configurações:
 ```
+# Enable SWORDv2
+swordv2-server.enabled = true
+swordv2-server.url = ${dspace.server.url}/swordv2
+
 # Ciencia Vitae specific SWORD import mapping stylesheet
-crosswalk.submission.MODS.stylesheet = mods-rcaap_cienciavitae-submission.xslt
+crosswalk.submission.MODS.stylesheet = crosswalks/mods-rcaap_cienciavitae-submission.xsl
 ```
 
 Depois de seguir os passos de instalação, deverá também existir um ficheiro na diretoria `[DSpace]/config/crosswalks/mods-rcaap_cienciavitae-submission.xsl` com a configuração do serviço. Caso contrário, o ficheiro a usar estará disponível em: https://github.com/fccn/rcaap-dspace-additions/blob/main/src/main/resources/config/crosswalks/mods-rcaap_cienciavitae-submission.xsl
@@ -93,9 +112,19 @@ Nota: Esta versão do xslt usa para o dc.type openaire4. Contudo, para quem não
         </xsl:template>
 
         <!--<xsl:template match="*[local-name()='genre']"> 
-                 <xsl:call-template name="dcRights">
+                 <xsl:call-template name="dcType">
                         </xsl:call-template>
         </xsl:template>-->
+
+Para repositórios que NÃO usem o esquema oiare e sim o esquema degois, devem alterar o oaire/citation de acordo com:
+
+       oaire.citation.startPage -> degois.publication.firstPage
+       oaire.citation.endPage --> depois.publicaiton.firstPage
+       oaire.publication.title -> degois.publication.title
+       oaire.publication.location -> degois.publication.location
+
+       Os restantes oaire.citation mapear para degois.publication
+
 ```
 
 ## Configuraração Renates

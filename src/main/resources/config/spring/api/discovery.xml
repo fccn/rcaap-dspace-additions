@@ -1399,12 +1399,16 @@
         <property name="sidebarFacets">
             <list>
                 <ref bean="searchFilterSubject"/>
+                <ref bean="searchFilterProjectFunder"/>
+                <ref bean="searchFilterProjectFundingStream"/>
             </list>
         </property>
         <!--The search filters which can be used on the discovery search page-->
         <property name="searchFilters">
             <list>
                 <ref bean="searchFilterSubject"/>
+                <ref bean="searchFilterProjectFunder"/>
+                <ref bean="searchFilterProjectFundingStream"/>
                 <ref bean="searchFilterIdentifier"/>
                 <ref bean="searchFilterIsOrgUnitOfProjectRelation"/>
                 <ref bean="searchFilterIsPersonOfProjectRelation"/>
@@ -1453,12 +1457,16 @@
         <property name="sidebarFacets">
             <list>
                 <ref bean="searchFilterSubject"/>
+                <ref bean="searchFilterProjectFunder"/>
+                <ref bean="searchFilterProjectFundingStream"/>
             </list>
         </property>
         <!--The search filters which can be used on the discovery search page-->
         <property name="searchFilters">
             <list>
                 <ref bean="searchFilterSubject"/>
+                <ref bean="searchFilterProjectFunder"/>
+                <ref bean="searchFilterProjectFundingStream"/>
                 <ref bean="searchFilterIdentifier"/>
                 <ref bean="searchFilterIsOrgUnitOfProjectRelation"/>
                 <ref bean="searchFilterIsPersonOfProjectRelation"/>
@@ -1509,6 +1517,7 @@
         <!--Which sidebar facets are to be displayed-->
         <property name="sidebarFacets">
             <list>
+                <ref bean="searchFilterType"/>
                 <ref bean="searchFilterOrganizationAddressCountry"/>
                 <ref bean="searchFilterOrganizationAddressLocality"/>
                 <ref bean="searchFilterOrganizationFoundingDate"/>
@@ -1517,6 +1526,7 @@
         <!--The search filters which can be used on the discovery search page-->
         <property name="searchFilters">
             <list>
+                <ref bean="searchFilterType"/>
                 <ref bean="searchFilterOrganizationLegalName"/>
                 <ref bean="searchFilterOrganizationAddressCountry"/>
                 <ref bean="searchFilterOrganizationAddressLocality"/>
@@ -1573,6 +1583,7 @@
         <!--Which sidebar facets are to be displayed-->
         <property name="sidebarFacets">
             <list>
+                <ref bean="searchFilterType"/>
                 <ref bean="searchFilterOrganizationAddressCountry"/>
                 <ref bean="searchFilterOrganizationAddressLocality"/>
                 <ref bean="searchFilterOrganizationFoundingDate"/>
@@ -1581,6 +1592,7 @@
         <!--The search filters which can be used on the discovery search page-->
         <property name="searchFilters">
             <list>
+                <ref bean="searchFilterType"/>
                 <ref bean="searchFilterOrganizationLegalName"/>
                 <ref bean="searchFilterOrganizationAddressCountry"/>
                 <ref bean="searchFilterOrganizationAddressLocality"/>
@@ -2816,6 +2828,26 @@
         </property>
     </bean>
 
+    <bean id="searchFilterProjectFunder"
+        class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="projectFunder" />
+        <property name="metadataFields">
+            <list>
+                <value>project.funder.name</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="searchFilterProjectFundingStream"
+        class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="projectFundingStream" />
+        <property name="metadataFields">
+            <list>
+                <value>oaire.fundingStream</value>
+            </list>
+        </property>
+    </bean>
+
     <bean id="searchFilterIsOrgUnitOfProjectRelation" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
 
         <property name="indexFieldName" value="isOrgUnitOfProject"/>
@@ -2949,16 +2981,16 @@
     </bean>
     <bean id="sortOrganizationAddressCountry"
           class="org.dspace.discovery.configuration.DiscoverySortFieldConfiguration">
-        <property name="metadataField" value="organisation.address.addressCountry"/>
+        <property name="metadataField" value="organization.address.addressCountry"/>
         <property name="defaultSortOrder" value="asc"/>
     </bean>
     <bean id="sortOrganizationAddressLocality"
           class="org.dspace.discovery.configuration.DiscoverySortFieldConfiguration">
-        <property name="metadataField" value="organisation.address.addressLocality"/>
+        <property name="metadataField" value="organization.address.addressLocality"/>
         <property name="defaultSortOrder" value="asc"/>
     </bean>
     <bean id="sortOrganizationFoundingDate" class="org.dspace.discovery.configuration.DiscoverySortFieldConfiguration">
-        <property name="metadataField" value="organisation.foundingDate"/>
+        <property name="metadataField" value="organization.foundingDate"/>
         <property name="type" value="date"/>
         <property name="defaultSortOrder" value="desc"/>
     </bean>
@@ -3030,8 +3062,10 @@
         <property name="defaultFilterQueries">
             <list>
                 <!--Only find items, and orgunits or persons-->
-                <value>search.resourcetype:Item AND latestVersion:true AND entityType_keyword:Publication</value>
+                <value>search.resourcetype:Item AND latestVersion:true</value>
                 <value>-withdrawn:true AND -discoverable:false</value>
+                <!-- All Publications and Items (non entities) -->
+                <value>entityType_keyword:Publication OR (*:* -entityType_keyword:[* TO *])</value>
             </list>
         </property>
 

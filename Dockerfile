@@ -35,8 +35,11 @@ COPY . /dspace-src/dspace/modules/additions
 # copy specific configurations
 COPY ./src/main/resources/config/ /dspace-src/dspace/config
 
-# copy specific configurations
-COPY ./src/main/resources/config/ /dspace-src/dspace/config
+# copy specific solr configurations
+COPY ./src/main/resources/solr/ /dspace-src/dspace/solr
+
+# copy specific server additions
+COPY ./src/main/resources/server/ /dspace-src/dspace/modules/server
 
 # copy specific executables
 COPY ./src/main/resources/bin/ /dspace-src/dspace/bin
@@ -95,8 +98,11 @@ RUN ant init_installation update_configs update_code update_webapps
 FROM tomcat:9-jdk${JDK_VERSION}
 # NOTE: DSPACE_INSTALL must align with the "dspace.dir" default configuration.
 ENV DSPACE_INSTALL=/dspace
+# Create dspace folder for assets
+RUN mkdir -p /srv/rcaap/dspace/assetstore \
+    && chown -Rv www-data:www-data /srv/rcaap/dspace
 # Copy the /dspace directory from 'ant_build' container to /dspace in this container
-COPY --from=ant_build /dspace $DSPACE_INSTALL
+COPY --chown=www-data:www-data --from=ant_build /dspace $DSPACE_INSTALL
 # Expose Tomcat port and AJP port
 EXPOSE 8080 8009
 # Give java extra memory (2GB)
@@ -110,3 +116,4 @@ RUN ln -s $DSPACE_INSTALL/webapps/server   /usr/local/tomcat/webapps/server
 # Please note that server webapp should only run on one path at a time.
 #RUN mv /usr/local/tomcat/webapps/ROOT /usr/local/tomcat/webapps/ROOT.bk && \
 #    ln -s $DSPACE_INSTALL/webapps/server   /usr/local/tomcat/webapps/ROOT
+USER www-data

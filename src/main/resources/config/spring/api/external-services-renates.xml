@@ -13,23 +13,18 @@
         <property name="tidRegExp" value="[12]0\d{7}(?!\d)"/>
         <property name="renatesConnector" ref="renatesAPIConnector"/>
         <property name="tipoTese" ref="tipoTese"/>
-		
-		<!-- need to add EntityType -->
-		<property name="supportedEntityTypes">
+
+        <!-- need to add EntityType -->
+        <property name="supportedEntityTypes">
             <list>
                 <value>Publication</value>
                 <value>none</value>
             </list>
         </property>
-		
     </bean>
 
     <util:map id="tipoTese" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.String">
-        <!--<entry key="Doutoramento" value="http://purl.org/coar/resource_type/c_db06"/>
-        <entry key="Mestrado" value="http://purl.org/coar/resource_type/c_bdcc"/>-->
-        <!--<entry key="Doutoramento" value="doctoralThesis"/>
-        <entry key="Mestrado" value="masterThesis"/>-->
-		<entry key="Doutoramento" value="doctoral thesis"/>
+        <entry key="Doutoramento" value="doctoral thesis"/>
         <entry key="Mestrado" value="master thesis"/>
     </util:map>
 

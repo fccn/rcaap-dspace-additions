@@ -35,8 +35,11 @@ COPY . /dspace-src/dspace/modules/additions
 # copy specific configurations
 COPY ./src/main/resources/config/ /dspace-src/dspace/config
 
-# copy specific configurations
-COPY ./src/main/resources/config/ /dspace-src/dspace/config
+# copy specific solr configurations
+COPY ./src/main/resources/solr/ /dspace-src/dspace/solr
+
+# copy specific server additions
+COPY ./src/main/resources/server/ /dspace-src/dspace/modules/server
 
 # copy specific executables
 COPY ./src/main/resources/bin/ /dspace-src/dspace/bin
@@ -89,13 +92,19 @@ RUN ant init_installation update_configs update_code
 FROM openjdk:${JDK_VERSION}
 # NOTE: DSPACE_INSTALL must align with the "dspace.dir" default configuration.
 ENV DSPACE_INSTALL=/dspace
-
+# Create dspace folder for assets
+RUN mkdir -p /srv/rcaap/dspace/assetstore \
+    && chown -Rv www-data:www-data /srv/rcaap/dspace
+# Create folder for storing Handle Server System assets
+RUN mkdir -p /var/www/.handle \
+    && chown -Rv www-data:www-data /var/www/.handle
 # Install postgres client to be able to execute Postgres queries for RCAAP scripts
 RUN apt-get update \
     && apt-get -y install postgresql-client-13 \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy the /dspace directory from 'ant_build' container to /dspace in this container
-COPY --from=ant_build /dspace $DSPACE_INSTALL
+COPY --chown=www-data:www-data --from=ant_build /dspace $DSPACE_INSTALL
 # Give java extra memory (1GB)
 ENV JAVA_OPTS=-Xmx1000m
+USER www-data

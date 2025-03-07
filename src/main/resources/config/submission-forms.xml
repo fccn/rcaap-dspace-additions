@@ -72,7 +72,7 @@
                     <repeatable>false</repeatable>
                     <label>Contacto do autor(a) para envio de pedido(s) de cópia </label>
                     <input-type>onebox</input-type>
-                    <hint>Se o registo for de acesso restrito ou embargado, insira aqui o e-mail do autor(a) correspondente preferencial, para posterior envio de resposta a eventuais pedidos de cópia ou de acesso.</hint>
+                    <hint>Se o registo for de acesso restrito ou embargado, insira aqui o e-mail do autor(a) correspondente preferencial, para posterior envio de resposta a eventuais pedidos de cópia ou de acesso. NOTA IMPORTANTE: Caso este registo seja carregado com vários ficheiros, para efeitos desta funcionalidade será apenas considerado o e-mail inserido/associado ao ficheiro primário.</hint>
                     <required></required>
                 </field>
             </row>
@@ -967,7 +967,7 @@
                     <repeatable>true</repeatable> <!-- 09-06-2023 - RCAAP! Mod to true -->
                     <label>Identificadores</label>
                     <input-type value-pairs-name="common_identifiers">qualdrop_value</input-type>
-                    <hint>Se este item tiver identificador(es) associado(s), selecione(-os) e identifique(-os) na seguinte lista. &lt;b&gt;Nota importante&lt;/b&gt;: Sugerimos que nesta fase clique no botão 'Guardar' para que, quando aplicável, seja apresentada ajuda em contexto do serviço "Open Policy finder"!</hint>
+                    <hint>Se este item tiver identificador(es) associado(s), selecione(-os) e identifique(-os) na seguinte lista. &lt;b&gt;Nota importante&lt;/b&gt;: Sugerimos que nesta fase clique no botão 'Guardar' para que, quando aplicável, seja apresentada ajuda em contexto do serviço "Open policy finder"!</hint>
                     <required></required>
                 </field>
             </row>
