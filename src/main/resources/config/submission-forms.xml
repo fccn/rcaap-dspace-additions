@@ -834,7 +834,7 @@
                     <repeatable>true</repeatable>
                     <label>Áreas do conhecimento (FOS/OCDE)</label>
                     <input-type>onebox</input-type>
-                    <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste item de acordo com a classificação 'Field of Science and Technology' (FOS) &lt;a href="https://www.oecd.org/science/inno/38235147.pdf" target="_blank" &gt;(https://www.oecd.org/science/inno/38235147.pdf)&lt;/a&gt;.</hint>
+                    <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste item de acordo com a classificação 'Field of Science and Technology' (FOS) &lt;a href="https://one.oecd.org/document/DSTI/EAS/STP/NESTI(2006)19/FINAL/en/pdf" target="_blank" &gt;(https://one.oecd.org/document/DSTI/EAS/STP/NESTI(2006)19/FINAL/en/pdf)&lt;/a&gt;.</hint>
                     <required></required>
                     <vocabulary closed="true">fos</vocabulary>
                 </field>
@@ -967,7 +967,7 @@
                     <repeatable>true</repeatable> <!-- 09-06-2023 - RCAAP! Mod to true -->
                     <label>Identificadores</label>
                     <input-type value-pairs-name="common_identifiers">qualdrop_value</input-type>
-                    <hint>Se este item tiver identificador(es) associado(s), selecione(-os) e identifique(-os) na seguinte lista. &lt;b&gt;Nota importante&lt;/b&gt;: Sugerimos que nesta fase clique no botão 'Guardar' para que, quando aplicável, seja apresentada ajuda em contexto do serviço "Open Policy Finder"!</hint>
+                    <hint>Se este item tiver identificador(es) associado(s), selecione(-os) e identifique(-os) na seguinte lista. &lt;b&gt;Nota importante&lt;/b&gt;: Sugerimos que nesta fase clique no botão 'Guardar' para que, quando aplicável, seja apresentada ajuda em contexto do serviço "Open policy finder"!</hint>
                     <required></required>
                 </field>
             </row>
@@ -1159,9 +1159,9 @@
                     <dc-element>references</dc-element>
                     <dc-qualifier></dc-qualifier>
                     <repeatable>true</repeatable>
-                    <label>Ligação para datasets (dados científicos)</label>
+                    <label>Ligação para dados de investigação (datasets)</label>
                     <input-type>onebox</input-type>
-                    <hint>Caso este documento tenha dados científicos (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
+                    <hint>Caso este documento tenha dados de investigação (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
                     <required></required>
                 </field>
             </row>
@@ -1375,7 +1375,7 @@
                     <repeatable>true</repeatable>
                     <label>Áreas do conhecimento (FOS/OCDE)</label>
                     <input-type>onebox</input-type>
-                    <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste trabalho de acordo com a classificação 'Field of Science and Technology' (FOS) &lt;a href="https://www.oecd.org/science/inno/38235147.pdf" target="_blank" &gt;(https://www.oecd.org/science/inno/38235147.pdf)&lt;/a&gt;.</hint>
+                    <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste trabalho de acordo com a classificação 'Field of Science and Technology' (FOS) &lt;a href="https://one.oecd.org/document/DSTI/EAS/STP/NESTI(2006)19/FINAL/en/pdf" target="_blank" &gt;(https://one.oecd.org/document/DSTI/EAS/STP/NESTI(2006)19/FINAL/en/pdf)&lt;/a&gt;.</hint>
                     <required></required>
                     <vocabulary closed="true">fos</vocabulary>
                 </field>
@@ -1499,9 +1499,9 @@
                     <dc-element>references</dc-element>
                     <dc-qualifier></dc-qualifier>
                     <repeatable>true</repeatable>
-                    <label>Ligação para datasets (dados científicos)</label>
+                    <label>Ligação para dados de investigação (datasets)</label>
                     <input-type>onebox</input-type>
-                    <hint>Caso este trabalho tenha dados científicos (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
+                    <hint>Caso este trabalho tenha dados de investigação (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
                     <required></required>
                 </field>
             </row>
@@ -1724,7 +1724,7 @@
                     <repeatable>true</repeatable>
                     <label>Áreas do conhecimento (FOS/OCDE)</label>
                     <input-type>onebox</input-type>
-                    <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste item de acordo com a classificação 'Field of Science and Technology' (FOS) &lt;a href="https://www.oecd.org/science/inno/38235147.pdf" target="_blank" &gt;(https://www.oecd.org/science/inno/38235147.pdf)&lt;/a&gt;.</hint>
+                    <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste item de acordo com a classificação 'Field of Science and Technology' (FOS) &lt;a href="https://one.oecd.org/document/DSTI/EAS/STP/NESTI(2006)19/FINAL/en/pdf" target="_blank" &gt;(https://one.oecd.org/document/DSTI/EAS/STP/NESTI(2006)19/FINAL/en/pdf)&lt;/a&gt;.</hint>
                     <required></required>
                     <vocabulary closed="true">fos</vocabulary>
                 </field>
@@ -2059,9 +2059,9 @@
                     <dc-element>references</dc-element>
                     <dc-qualifier></dc-qualifier>
                     <repeatable>true</repeatable>
-                    <label>Ligação para datasets (dados científicos)</label>
+                    <label>Ligação para dados de investigação (datasets)</label>
                     <input-type>onebox</input-type>
-                    <hint>Caso este documento tenha dados científicos (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
+                    <hint>Caso este documento tenha dados de investigação (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
                     <required></required>
                 </field>
             </row>
@@ -2271,7 +2271,7 @@
                     <repeatable>true</repeatable>
                     <label>Áreas do conhecimento (FOS/OCDE)</label>
                     <input-type>onebox</input-type>
-                    <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste item de acordo com a classificação 'Field of Science and Technology' (FOS) &lt;a href="https://www.oecd.org/science/inno/38235147.pdf" target="_blank" &gt;(https://www.oecd.org/science/inno/38235147.pdf)&lt;/a&gt;.</hint>
+                    <hint>Indique aqui o(s) domínio(s) científico(s)/área(s) científica(s) deste item de acordo com a classificação 'Field of Science and Technology' (FOS) &lt;a href="https://one.oecd.org/document/DSTI/EAS/STP/NESTI(2006)19/FINAL/en/pdf" target="_blank" &gt;(https://one.oecd.org/document/DSTI/EAS/STP/NESTI(2006)19/FINAL/en/pdf)&lt;/a&gt;.</hint>
                     <required></required>
                     <vocabulary closed="true">fos</vocabulary>
                 </field>
@@ -2620,9 +2620,9 @@
                     <dc-element>references</dc-element>
                     <dc-qualifier></dc-qualifier>
                     <repeatable>true</repeatable>
-                    <label>Ligação para datasets (dados científicos)</label>
+                    <label>Ligação para dados de investigação (datasets)</label>
                     <input-type>onebox</input-type>
-                    <hint>Caso este documento tenha dados científicos (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
+                    <hint>Caso este documento tenha dados de investigação (datasets) de suporte, disponíveis num repositório de dados (ex. Polen), pode fazer aqui seu relacionamento introduzindo o respetivo URL ou DOI.</hint>
                     <required></required>
                 </field>
             </row>
