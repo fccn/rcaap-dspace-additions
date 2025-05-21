@@ -1101,7 +1101,7 @@
                 </field>
             </row>
             
-            <!-- 17-11-2023 - RCAAP! Change place 'oire.version' -->
+            <!-- 17-03-2025 - RCAAP! Hint Change -->
             <row>
                 <field>
                     <dc-schema>oaire</dc-schema>
@@ -1109,7 +1109,7 @@
                     <repeatable>false</repeatable>
                     <label>Versão do item</label>
                     <input-type value-pairs-name="openaire_version_types">dropdown</input-type>
-                    <hint>Indique qual é a versão correspondente à publicação que (vai ou já) carregou neste depósito. &lt;b&gt;Nota importante&lt;/b&gt;: Para uma decisão mais informada sugerimos a leitura da ajuda em contexto, quando disponível, na secção seguinte [Open Policy Finder]'".</hint>
+                    <hint>Indique qual é a versão correspondente à publicação que (vai ou já) carregou neste depósito. &lt;b&gt;Nota importante&lt;/b&gt;: O depósito de &lt;b&gt;publicações que resultem de processos de financiamento FCT e cujo período de candidatura terminou após 7 de fevereiro de 2025 é obrigatório. Para informações adicionais consulte a &lt;a href="https://acessoaberto.fct.pt/pagina-inicial/tabela-comparativa/" target="_blank"&gt;tabela comparativa das vias de acesso aberto&lt;/a&gt; bem como o &lt;a href="https://acessoaberto.fct.pt/" target="_blank"&gt;site de suporte ao cumprimento da política&lt;/a&gt;.&lt;/b&gt;</hint>
                     <required>Tem que indicar qual é a versão que vai utilizar neste depósito! Caso não se aplique ou desconheça pode selecionar a opção 'Não aplicável (N/A)'.</required>
                 </field>
             </row>
@@ -1989,7 +1989,7 @@
                 </field>
             </row>
             
-            <!-- 17-11-2023 - RCAAP! Change place 'oire.version' -->
+            <!-- 17-03-2025 - RCAAP! Hint Change -->
             <row>
                 <field>
                     <dc-schema>oaire</dc-schema>
@@ -1997,7 +1997,7 @@
                     <repeatable>false</repeatable>
                     <label>Versão do item</label>
                     <input-type value-pairs-name="openaire_version_types">dropdown</input-type>
-                    <hint>Indique qual é a versão correspondente à publicação que (vai ou já) carregou neste depósito. &lt;b&gt;Nota importante&lt;/b&gt;: Para uma decisão mais informada sugerimos a leitura da ajuda em contexto, quando disponível, na secção seguinte [Open Policy Finder]'".</hint>
+                    <hint>Indique qual é a versão correspondente à publicação que (vai ou já) carregou neste depósito. &lt;b&gt;Nota importante&lt;/b&gt;: O depósito de &lt;b&gt;publicações que resultem de processos de financiamento FCT e cujo período de candidatura terminou após 7 de fevereiro de 2025 é obrigatório. Para informações adicionais consulte a &lt;a href="https://acessoaberto.fct.pt/pagina-inicial/tabela-comparativa/" target="_blank"&gt;tabela comparativa das vias de acesso aberto&lt;/a&gt; bem como o &lt;a href="https://acessoaberto.fct.pt/" target="_blank"&gt;site de suporte ao cumprimento da política&lt;/a&gt;. &lt;/b&gt;</hint>
                     <required>Tem que indicar qual é a versão que vai utilizar neste depósito! Caso não se aplique ou desconheça pode selecionar a opção 'Não aplicável (N/A)'.</required>
                 </field>
             </row>
@@ -2562,7 +2562,7 @@
                 </field>
             </row>
             
-            <!-- 17-11-2023 - RCAAP! Change place 'oire.version' -->
+            <!-- 17-03-2025 - RCAAP! Hint Change -->
             <row>
                 <field>
                     <dc-schema>oaire</dc-schema>
@@ -2570,7 +2570,7 @@
                     <repeatable>false</repeatable>
                     <label>Versão do item</label>
                     <input-type value-pairs-name="openaire_version_types">dropdown</input-type>
-                    <hint>Indique qual é a versão correspondente à publicação que (vai ou já) carregou neste depósito. &lt;b&gt;Nota importante&lt;/b&gt;: Para uma decisão mais informada sugerimos a leitura da ajuda em contexto, quando disponível, na secção seguinte [Open Policy Finder]'".</hint>
+                    <hint>Indique qual é a versão correspondente à publicação que (vai ou já) carregou neste depósito. &lt;b&gt;Nota importante&lt;/b&gt;: O depósito de &lt;b&gt;publicações que resultem de processos de financiamento FCT e cujo período de candidatura terminou após 7 de fevereiro de 2025 é obrigatório. Para informações adicionais consulte a &lt;a href="https://acessoaberto.fct.pt/pagina-inicial/tabela-comparativa/" target="_blank"&gt;tabela comparativa das vias de acesso aberto&lt;/a&gt; bem como o &lt;a href="https://acessoaberto.fct.pt/" target="_blank"&gt;site de suporte ao cumprimento da política&lt;/a&gt;. &lt;/b&gt;</hint>
                     <required>Tem que indicar qual é a versão que vai utilizar neste depósito! Caso não se aplique ou desconheça pode selecionar a opção 'Não aplicável (N/A)'.</required>
                 </field>
             </row>
