@@ -10,7 +10,8 @@
 
 # This Dockerfile uses JDK11 by default, but has also been tested with JDK17.
 # To build with JDK17, use "--build-arg JDK_VERSION=17"
-ARG JDK_VERSION=11
+ARG JDK_VERSION=11.0.11
+ARG TOMCAT_JDK_VERSION=11
 
 # ###################
 # NOTE:
@@ -18,7 +19,7 @@ ARG JDK_VERSION=11
 # ###################
 ARG DSPACE_VERSION=dspace-7.6.1
 
-FROM alpine:3.5 as source
+FROM alpine:3.5 AS source
 RUN apk update
 RUN apk add git
 
@@ -45,7 +46,7 @@ COPY ./src/main/resources/server/ /dspace-src/dspace/modules/server
 COPY ./src/main/resources/bin/ /dspace-src/dspace/bin
 
 # Step 1 - Run Maven Build
-FROM dspace/dspace-dependencies:${DSPACE_VERSION} as build
+FROM dspace/dspace-dependencies:${DSPACE_VERSION} AS build
 ARG TARGET_DIR=dspace-installer
 
 WORKDIR /app
@@ -73,15 +74,22 @@ RUN mvn --no-transfer-progress package ${MAVEN_FLAGS} && \
   mvn clean
 
 # Step 2 - Run Ant Deploy
-FROM openjdk:${JDK_VERSION}-slim as ant_build
+FROM openjdk:${JDK_VERSION}-slim AS ant_build
 ARG TARGET_DIR=dspace-installer
 # COPY the /install directory from 'build' container to /dspace-src in this container
 COPY --from=build /install /dspace-src
 WORKDIR /dspace-src
 # Create the initial install deployment using ANT
-ENV ANT_VERSION 1.10.13
-ENV ANT_HOME /tmp/ant-$ANT_VERSION
-ENV PATH $ANT_HOME/bin:$PATH
+ENV ANT_VERSION=1.10.13
+ENV ANT_HOME=/tmp/ant-$ANT_VERSION
+ENV PATH=$ANT_HOME/bin:$PATH
+
+# Fix debian old depencency - use archive
+RUN sed -i 's|deb.debian.org/debian|archive.debian.org/debian|g' /etc/apt/sources.list && \
+    sed -i 's|security.debian.org/debian-security|archive.debian.org/debian-security|g' /etc/apt/sources.list && \
+    sed -i '/deb.debian.org\/debian.*updates/d' /etc/apt/sources.list && \
+    echo "Acquire::Check-Valid-Until false;" > /etc/apt/apt.conf.d/99no-check-valid-until
+
 # Need wget to install ant
 RUN apt-get update \
     && apt-get install -y --no-install-recommends wget \
@@ -95,7 +103,7 @@ RUN ant init_installation update_configs update_code update_webapps
 
 # Step 3 - Run tomcat
 # Create a new tomcat image that does not retain the the build directory contents
-FROM tomcat:9-jdk${JDK_VERSION}
+FROM tomcat:9-jdk${TOMCAT_JDK_VERSION}
 # NOTE: DSPACE_INSTALL must align with the "dspace.dir" default configuration.
 ENV DSPACE_INSTALL=/dspace
 # Create dspace folder for assets
