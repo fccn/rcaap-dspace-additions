@@ -101,8 +101,21 @@ INSERT INTO "resourcepolicy" ( "policy_id", "resource_type_id", "resource_id", "
 VALUES ( nextval('resourcepolicy_seq'), 3, currval('collection_seq'), 9, 0 );
 
 -- CRIAR HANDLE
-INSERT INTO "handle" ( "handle_id", "handle", "resource_type_id", "resource_id") 
-VALUES ( nextval('handle_seq'), (select substring(handle from 0 for position('/' in handle)) from handle order by handle_id DESC limit 1) || '/' || currval('handle_seq'), 3, currval('collection_seq') );
+-- INSERT INTO "handle" ( "handle_id", "handle", "resource_type_id", "resource_id") 
+-- VALUES ( nextval('handle_seq'), (select substring(handle from 0 for position('/' in handle)) from handle order by handle_id DESC limit 1) || '/' || currval('handle_seq'), 3, currval('collection_seq') );
+INSERT INTO "handle" ("handle_id", "handle", "resource_type_id", "resource_id")
+VALUES (
+    nextval('handle_seq'),
+    COALESCE(
+        (SELECT substring(handle FROM 0 FOR position('/' IN handle)) 
+         FROM handle 
+         ORDER BY handle_id DESC 
+         LIMIT 1),
+        '123456789'
+    ) || '/' || currval('handle_seq'),
+    3,
+    currval('collection_seq')
+);
 
 -- #### ITEM ######
 
@@ -179,7 +192,13 @@ FROM temp_funding;
 INSERT INTO "handle" ( "handle_id", "handle", "resource_type_id", "resource_id")
 SELECT
 	nextval('handle_seq') as "handle_id",
-	(select substring(handle from 0 for position('/' in handle)) from handle order by handle_id DESC limit 1) || '/' || currval('handle_seq') as "handle",
+	COALESCE(
+		(SELECT substring(handle FROM 0 FOR position('/' IN handle))
+		 FROM handle
+		 ORDER BY handle_id DESC
+		 LIMIT 1),
+		'123456789'
+	) || '/' || currval('handle_seq') as "handle",
 	2 as "resource_type_id",
 	item_id as "resource_id"
 FROM temp_funding;
