@@ -286,7 +286,7 @@ public class CollectionDAOImpl extends AbstractHibernateDSODAO<Collection> imple
         List<Object[]> list = query.getResultList();
         List<Map.Entry<Collection, Long>> returnList = new ArrayList<>(list.size());
         for (Object[] o : list) {
-            CriteriaQuery<> criteriaQuery = criteriaBuilder.createQuery(Collection.class);
+            CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(Collection.class);
             Root<Collection> collectionRoot = criteriaQuery.from(Collection.class);
             criteriaQuery.select(collectionRoot).where(criteriaBuilder.equal(collectionRoot.get("id"), (UUID) o[0]));
             Query collectionQuery = createQuery(context, criteriaQuery);
