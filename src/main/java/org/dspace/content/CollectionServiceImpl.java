@@ -13,13 +13,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.Objects;
+import java.util.Queue;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -31,7 +35,6 @@ import org.dspace.authorize.AuthorizeException;
 import org.dspace.authorize.ResourcePolicy;
 import org.dspace.authorize.service.AuthorizeService;
 import org.dspace.authorize.service.ResourcePolicyService;
-import org.dspace.browse.ItemCountException;
 import org.dspace.browse.ItemCounter;
 import org.dspace.content.dao.CollectionDAO;
 import org.dspace.content.service.BitstreamService;
@@ -121,6 +124,9 @@ public class CollectionServiceImpl extends DSpaceObjectServiceImpl<Collection> i
 
     @Autowired(required = true)
     protected ConfigurationService configurationService;
+
+    @Autowired
+    protected ItemCounter itemCounter;
 
     protected CollectionServiceImpl() {
         super();
@@ -837,6 +843,86 @@ public class CollectionServiceImpl extends DSpaceObjectServiceImpl<Collection> i
     }
 
     @Override
+    public List<Collection> findAuthorized(Context context, Community community, List<Integer> actions)
+        throws SQLException {
+
+        List<Collection> myCollections = new ArrayList<>();
+        EPerson eperson = context.getCurrentUser();
+
+        //If eperson is Administrator return all colls or if a community is not null only the community's collections
+        if (authorizeService.isAdmin(context, eperson)) {
+            if (community != null) {
+                return community.getCollections();
+            }
+            myCollections = this.findAll(context);
+            return myCollections;
+        }
+
+        //Get the collections of the eperson where is is admin of a community
+        List<Group> directGroups = new ArrayList<>(eperson.getGroups()); // direct membership
+        Queue<Group> queue = new LinkedList<>(directGroups);
+        while (!queue.isEmpty()) {
+            Group current = queue.poll();
+            List<Group> parents = current.getParentGroups();
+
+            for (Group parent : parents) {
+                if (directGroups.add(parent)) {
+                    queue.add(parent);
+                }
+            }
+        }
+
+        List<ResourcePolicy> resourcePolicies = resourcePolicyService
+                   .find(context, eperson, directGroups, Constants.ADMIN, Constants.COMMUNITY);
+        List<UUID> uuids = resourcePolicies.stream()
+            .map(policy -> policy.getdSpaceObject().getID())
+            .collect(Collectors.toList());
+
+        List<Community> communities = uuids.stream()
+            .map(uuid -> {
+                try {
+                    return communityService.find(context, uuid);
+                } catch (SQLException e) {
+                    return null;  //ignore that uuid
+                }
+            })
+            .filter(Objects::nonNull)
+            .collect(Collectors.toList());
+
+        Set<Community> allCommunities = new HashSet<>(communities);
+        Set<Collection> allCommAdminCollections = communities.stream()
+            .flatMap(cm -> cm.getCollections().stream())
+            .collect(Collectors.toSet());
+        Queue<Community> queueComm = new LinkedList<>(communities);
+
+        while (!queueComm.isEmpty()) {
+            Community com = queueComm.poll();
+            List<Community> childrenComms = com.getSubcommunities();
+            for (Community childComm : childrenComms) {
+                if (allCommunities.add(childComm)) {
+                    queueComm.add(childComm);
+                    allCommAdminCollections.addAll(childComm.getCollections());
+                }
+            }
+        }
+
+        //Now get the collection when the eperson can deposit or is admin or is in a group with those privileges
+        myCollections = collectionDAO.findAuthorizedByEPerson(context, eperson, actions);
+        Set<Collection> allCollections = new HashSet<>(myCollections);
+        //Join EPerson Community Admin Collections with Collection Admins
+        allCollections.addAll(allCommAdminCollections);
+
+        List<Collection> collsAllowed = new ArrayList<>(allCollections);
+
+        //A community is passed, only the community's collections will be used and existing in eperson Authorizations
+        if (community != null) {
+            collsAllowed.retainAll(community.getCollections());
+        }
+
+        return collsAllowed;
+    }
+
+    @Override
     public Collection findByGroup(Context context, Group group) throws SQLException {
         return collectionDAO.findByGroup(context, group);
     }
@@ -1019,7 +1105,8 @@ public class CollectionServiceImpl extends DSpaceObjectServiceImpl<Collection> i
         if (StringUtils.isNotBlank(q)) {
             StringBuilder buildQuery = new StringBuilder();
             String escapedQuery = ClientUtils.escapeQueryChars(q);
-            buildQuery.append("(").append(escapedQuery).append(" OR ").append(escapedQuery).append("*").append(")");
+            buildQuery.append("(").append(escapedQuery).append(" OR dc.title_sort:*")
+                .append(escapedQuery).append("*").append(")");
             discoverQuery.setQuery(buildQuery.toString());
         }
         DiscoverResult resp = searchService.search(context, discoverQuery);
@@ -1054,57 +1141,15 @@ public class CollectionServiceImpl extends DSpaceObjectServiceImpl<Collection> i
         return (int) resp.getTotalSearchResults();
     }
 
-
-    @Override
-    @SuppressWarnings("rawtypes")
-    public List<Collection> findAllCollectionsByEntityType(Context context, String entityType)
-            throws SQLException, SearchServiceException {
-        List<Collection> collectionList = new ArrayList<>();
-
-        // we need to turn off authorization to retrieve all
-        // collections, not only the ones for the user in session
-        context.turnOffAuthorisationSystem();
-
-        //calculate the total number of collections
-        int collectionsNumber = countCollectionsWithSubmit(null, context, null, entityType);
-
-        int calculatedPages = (collectionsNumber / SOLR_ROWS_PER_PAGE) + 1;
-
-        DiscoverQuery discoverQuery = new DiscoverQuery();
-        discoverQuery.setDSpaceObjectFilter(IndexableCollection.TYPE);
-        discoverQuery.setMaxResults(SOLR_ROWS_PER_PAGE);
-
-        for (int page = 1; page <= calculatedPages; page++) {
-
-            discoverQuery.setStart((page - 1) * SOLR_ROWS_PER_PAGE);
-
-            //retrieve the specific page with results
-            DiscoverResult discoverResult = retrieveCollectionsWithSubmit(context, discoverQuery,
-                        entityType, null, null);
-
-            List<IndexableObject> solrIndexableObjects = discoverResult.getIndexableObjects();
-
-            for (IndexableObject solrCollection : solrIndexableObjects) {
-                Collection c = ((IndexableCollection) solrCollection).getIndexedObject();
-                collectionList.add(c);
-            }
-        }
-
-        // Restore the authorization system state
-        context.restoreAuthSystemState();
-
-        return collectionList;
-    }
-
     /**
      * Returns total collection archived items
      *
+     * @param context          DSpace Context
      * @param collection       Collection
      * @return                 total collection archived items
-     * @throws ItemCountException
      */
     @Override
-    public int countArchivedItems(Collection collection) throws ItemCountException {
-        return ItemCounter.getInstance().getCount(collection);
+    public int countArchivedItems(Context context, Collection collection) {
+        return itemCounter.getCount(context, collection);
     }
 }
