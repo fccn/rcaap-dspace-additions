@@ -273,29 +273,18 @@ public class CollectionDAOImpl extends AbstractHibernateDSODAO<Collection> imple
         return count(createQuery(context, "SELECT count(*) FROM Collection"));
     }
 
-    @Override
+   	@Override
     @SuppressWarnings("unchecked")
     public List<Map.Entry<Collection, Long>> getCollectionsWithBitstreamSizesTotal(Context context)
         throws SQLException {
-        String q = "select col.id, sum(bit.sizeBytes) as totalBytes from Item i join i.collections col " +
-            "join i.bundles bun join bun.bitstreams bit group by col.id";
+        String q = "select col as collection, sum(bit.sizeBytes) as totalBytes from Item i join i.collections col " +
+            "join i.bundles bun join bun.bitstreams bit group by col";
         Query query = createQuery(context, q);
-
-        CriteriaBuilder criteriaBuilder = getCriteriaBuilder(context);
 
         List<Object[]> list = query.getResultList();
         List<Map.Entry<Collection, Long>> returnList = new ArrayList<>(list.size());
         for (Object[] o : list) {
-            CriteriaQuery<Collection> criteriaQuery = criteriaBuilder.createQuery(Collection.class);
-            Root<Collection> collectionRoot = criteriaQuery.from(Collection.class);
-            criteriaQuery.select(collectionRoot).where(criteriaBuilder.equal(collectionRoot.get("id"), (UUID) o[0]));
-            Query collectionQuery = createQuery(context, criteriaQuery);
-            Collection collection = (Collection) collectionQuery.getSingleResult();
-            if (collection != null) {
-                returnList.add(new AbstractMap.SimpleEntry<>(collection, (Long) o[1]));
-            } else {
-                log.warn("Unable to find Collection with UUID: {}", o[0]);
-            }
+            returnList.add(new AbstractMap.SimpleEntry<>((Collection) o[0], (Long) o[1]));
         }
         return returnList;
     }
