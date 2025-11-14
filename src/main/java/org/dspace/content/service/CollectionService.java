@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.dspace.authorize.AuthorizeException;
+import org.dspace.browse.ItemCountException;
 import org.dspace.content.Bitstream;
 import org.dspace.content.Collection;
 import org.dspace.content.Community;
@@ -37,6 +38,12 @@ public interface CollectionService
      * Field used to sort community and collection lists at solr
      */
     public static final String SOLR_SORT_FIELD = "dc.title_sort";
+
+    /**
+     * the number of collections to be returned by solr
+     * for each page result
+     */
+    public static final int SOLR_ROWS_PER_PAGE = 100;
 
     /**
      * Create a new collection with a new ID.
@@ -326,8 +333,8 @@ public interface CollectionService
      */
     public List<Collection> findAuthorized(Context context, Community community, int actionID)
         throws java.sql.SQLException;
-
-    /**
+		
+	 /**
      * return an array of collections that user has a given permission on
      *
      * @param context DSpace Context
@@ -467,5 +474,27 @@ public interface CollectionService
     public int countCollectionsWithSubmit(String q, Context context, Community community, String entityType)
         throws SQLException, SearchServiceException;
 
+    /**
+     * Returns a list of all collections for a specific entity type.
+     * NOTE: for better performance, this method retrieves its results from an index (cache)
+     *       and does not query the database directly.
+     *       This means that results may be stale or outdated until
+     *       https://github.com/DSpace/DSpace/issues/2853 is resolved."
+     *
+     * @param context          DSpace Context
+     * @param entityType       limit the returned collection to those related to given entity type
+     * @return                 list of collections found
+     * @throws SearchServiceException    if search error
+     */
+    public List<Collection> findAllCollectionsByEntityType(Context context, String entityType)
+        throws SQLException, SearchServiceException;
 
+    /**
+     * Returns total collection archived items
+     *
+     * @param collection       Collection
+     * @return                 total collection archived items
+     * @throws ItemCountException
+     */
+    int countArchivedItems(Collection collection) throws ItemCountException;
 }
