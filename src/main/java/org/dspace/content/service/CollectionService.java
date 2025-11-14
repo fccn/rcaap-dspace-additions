@@ -467,12 +467,5 @@ public interface CollectionService
     public int countCollectionsWithSubmit(String q, Context context, Community community, String entityType)
         throws SQLException, SearchServiceException;
 
-    /**
-     * Returns total collection archived items
-     *
-     * @param context          DSpace context
-     * @param collection       Collection
-     * @return                 total collection archived items
-     */
-    int countArchivedItems(Context context, Collection collection);
+
 }
