@@ -920,7 +920,7 @@ public class CollectionServiceImpl extends DSpaceObjectServiceImpl<Collection> i
         return collsAllowed;
     }
 
-    @Override
+	@Override
     public Collection findByGroup(Context context, Group group) throws SQLException {
         return collectionDAO.findByGroup(context, group);
     }
