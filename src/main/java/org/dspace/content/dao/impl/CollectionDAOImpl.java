@@ -225,7 +225,7 @@ public class CollectionDAOImpl extends AbstractHibernateDSODAO<Collection> imple
         }
 
         CriteriaBuilder cb = getCriteriaBuilder(context);
-        CriteriaQuery<Collection> cq = getCriteriaQuery(cb, Collection.class);
+        CriteriaQuery cq = getCriteriaQuery(cb, Collection.class);
         Root<Collection> collectionRoot = cq.from(Collection.class);
 
         // Join to ResourcePolicy using metamodel
