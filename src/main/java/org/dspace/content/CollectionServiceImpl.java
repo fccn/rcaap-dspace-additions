@@ -35,6 +35,7 @@ import org.dspace.authorize.AuthorizeException;
 import org.dspace.authorize.ResourcePolicy;
 import org.dspace.authorize.service.AuthorizeService;
 import org.dspace.authorize.service.ResourcePolicyService;
+import org.dspace.browse.ItemCountException;
 import org.dspace.browse.ItemCounter;
 import org.dspace.content.dao.CollectionDAO;
 import org.dspace.content.service.BitstreamService;
@@ -124,9 +125,6 @@ public class CollectionServiceImpl extends DSpaceObjectServiceImpl<Collection> i
 
     @Autowired(required = true)
     protected ConfigurationService configurationService;
-
-    @Autowired
-    protected ItemCounter itemCounter;
 
     protected CollectionServiceImpl() {
         super();
@@ -841,8 +839,8 @@ public class CollectionServiceImpl extends DSpaceObjectServiceImpl<Collection> i
         }
         return myResults;
     }
-
-    @Override
+	
+	@Override
     public List<Collection> findAuthorized(Context context, Community community, List<Integer> actions)
         throws SQLException {
 
@@ -1105,8 +1103,7 @@ public class CollectionServiceImpl extends DSpaceObjectServiceImpl<Collection> i
         if (StringUtils.isNotBlank(q)) {
             StringBuilder buildQuery = new StringBuilder();
             String escapedQuery = ClientUtils.escapeQueryChars(q);
-            buildQuery.append("(").append(escapedQuery).append(" OR dc.title_sort:*")
-                .append(escapedQuery).append("*").append(")");
+            buildQuery.append("(").append(escapedQuery).append(" OR ").append(escapedQuery).append("*").append(")");
             discoverQuery.setQuery(buildQuery.toString());
         }
         DiscoverResult resp = searchService.search(context, discoverQuery);
@@ -1141,15 +1138,57 @@ public class CollectionServiceImpl extends DSpaceObjectServiceImpl<Collection> i
         return (int) resp.getTotalSearchResults();
     }
 
+
+    @Override
+    @SuppressWarnings("rawtypes")
+    public List<Collection> findAllCollectionsByEntityType(Context context, String entityType)
+            throws SQLException, SearchServiceException {
+        List<Collection> collectionList = new ArrayList<>();
+
+        // we need to turn off authorization to retrieve all
+        // collections, not only the ones for the user in session
+        context.turnOffAuthorisationSystem();
+
+        //calculate the total number of collections
+        int collectionsNumber = countCollectionsWithSubmit(null, context, null, entityType);
+
+        int calculatedPages = (collectionsNumber / SOLR_ROWS_PER_PAGE) + 1;
+
+        DiscoverQuery discoverQuery = new DiscoverQuery();
+        discoverQuery.setDSpaceObjectFilter(IndexableCollection.TYPE);
+        discoverQuery.setMaxResults(SOLR_ROWS_PER_PAGE);
+
+        for (int page = 1; page <= calculatedPages; page++) {
+
+            discoverQuery.setStart((page - 1) * SOLR_ROWS_PER_PAGE);
+
+            //retrieve the specific page with results
+            DiscoverResult discoverResult = retrieveCollectionsWithSubmit(context, discoverQuery,
+                        entityType, null, null);
+
+            List<IndexableObject> solrIndexableObjects = discoverResult.getIndexableObjects();
+
+            for (IndexableObject solrCollection : solrIndexableObjects) {
+                Collection c = ((IndexableCollection) solrCollection).getIndexedObject();
+                collectionList.add(c);
+            }
+        }
+
+        // Restore the authorization system state
+        context.restoreAuthSystemState();
+
+        return collectionList;
+    }
+
     /**
      * Returns total collection archived items
      *
-     * @param context          DSpace Context
      * @param collection       Collection
      * @return                 total collection archived items
+     * @throws ItemCountException
      */
     @Override
-    public int countArchivedItems(Context context, Collection collection) {
-        return itemCounter.getCount(context, collection);
+    public int countArchivedItems(Collection collection) throws ItemCountException {
+        return ItemCounter.getInstance().getCount(collection);
     }
 }
