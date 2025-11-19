@@ -333,6 +333,18 @@ public interface CollectionService
      */
     public List<Collection> findAuthorized(Context context, Community community, int actionID)
         throws java.sql.SQLException;
+		
+	 /**
+     * return an array of collections that user has a given permission on
+     *
+     * @param context DSpace Context
+     * @param community (optional) restrict search to a community, else null
+     * @param actions  Listo of the of the action ADD, READ, ADMIN, etc.
+     * @return Collection [] of collections with matching permissions
+     * @throws SQLException if database error
+     */
+    public List<Collection> findAuthorized(Context context, Community community, List<Integer> actions)
+        throws java.sql.SQLException;
 
     /**
      *
