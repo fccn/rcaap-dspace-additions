@@ -1,0 +1,17 @@
+## E-mail sent to DSpace users when they register for an account
+##
+## Parameters: {0} is expanded to a special registration URL
+##
+## See org.dspace.core.Email for information on the format of this file.
+##
+#set($subject = "${config.get('dspace.name')} Account Registration")
+#set($phone = ${config.get('mail.message.helpdesk.telephone')})
+Para completar o registo para a conta no ${config.get('dspace.name')}, por favor, siga o seguinte link:
+  ${params[0]}
+
+Se precisar de assistência da sua conta, contacte o seguinte email ${config.get("mail.helpdesk")}
+#if( $phone )
+ou usar o telefone ${phone}.
+#end
+
+A equipa do repositório ${config.get('dspace.name')}.

@@ -1,0 +1,22 @@
+# E-mail sent to designated address when a harvest process fails
+#
+# Parameters: {0} Collection id
+#             {1} Date & time
+#             {2} Status flag
+#             {3} Exception message
+#             {4} Exception stack trace
+#
+# See org.dspace.core.Email for information on the format of this file.
+#
+Subject: Repositório: Erro de Recolha
+Coleção ${params[0]} falhou na recolha:
+
+Data:       	${params[1]}
+Valor: 	${params[2]}
+
+${params[3]}
+
+Exceção:
+${params[4]}
+
+A Equipa do Repositório ${config.get('dspace.name')}.

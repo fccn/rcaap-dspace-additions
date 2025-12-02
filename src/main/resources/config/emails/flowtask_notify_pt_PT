@@ -1,0 +1,23 @@
+# Workflow curation task notification email message
+#
+# {0}  Title of submission
+# {1}  Name of collection
+# {2}  Submitter's name
+# {3}  Name of task operating
+# {4}  Task result
+# {5}  Workflow action taken
+#
+Subject: Repositório: Relatório da tarefa de curadoria
+
+Título:          ${params[0]}
+Coleção:     ${params[1]}
+Submetido por:   ${params[2]}
+
+Tarefa de curadoria  ${params[3]} foi realizada
+com o seguinte resultado:
+
+ ${params[4]}
+
+Ação feita na submissão:  ${params[5]}
+
+A Equipa do Repositório ${config.get('dspace.name')}.

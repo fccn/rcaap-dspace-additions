@@ -1,0 +1,15 @@
+# E-mail sent to DSpace users when new items appear in collections they are
+# subscribed to
+#
+# Parameters: {0} is the details of the new collections and items
+# See org.dspace.core.Email for information on the format of this file.
+#
+Subject: Alerta de novos documentos
+Existem novos documentos nas colecções que subscreve:
+
+${params[0]}
+
+Obrigado,
+
+A Equipa do Repositório ${config.get('dspace.name')}.
+

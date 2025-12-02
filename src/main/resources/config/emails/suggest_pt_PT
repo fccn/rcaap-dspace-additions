@@ -1,0 +1,28 @@
+# E-mail sent with the information filled out in a suggest form.
+#
+# Parameters: {0} recipient name
+#             {1} sender name
+#             {2} repository name
+#             {3} item title
+#             {4} item handle URI
+#             {5} item local URL - may be used in lieu of {4} if not using handle server
+#             {6} collection name
+#             {7} sender message 
+# See org.dspace.core.Email for information on the format of this file.
+#
+Subject: Sugestão de um documento do Repositório
+
+Olá ${params[0]}:
+
+{1} pediu-nos para lhe sugerir um documento disponível em ${params[2]}.
+
+Título:   ${params[3]}
+Local:    ${params[5]}
+Colecção: ${params[6]}
+Mensagem: ${params[7]}
+
+Obrigado,
+
+A Equipa do Repositório ${config.get('dspace.name')}.
+
+
