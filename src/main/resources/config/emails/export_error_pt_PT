@@ -1,0 +1,19 @@
+# Email sent to DSpace users when they successfully export an item or collection.
+#
+# Parameters: {0} the export error
+#             {1} the URL to the feedback page
+#             
+#
+# See org.dspace.core.Email for information on the format of this file.
+#
+Subject: Repositório - A exportação do registo não foi finalizada.
+A exportação solicitada no repositório não foi finalizada devido a:
+
+ ${params[0]}
+
+Para mais informação, contacte o administrador:
+
+ ${params[1]}
+
+A Equipa do Repositório ${config.get('dspace.name')}.
+

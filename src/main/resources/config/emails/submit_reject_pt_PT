@@ -1,0 +1,26 @@
+# Rejection email message
+#
+# {0}  Title of submission
+# {1}  Name of collection
+# {2}  Name of the rejector
+# {3}  Reason for the rejection
+# {4}  Link to 'My DSpace' page
+#
+Subject: Depósito Rejeitado
+Você depositou: ${params[0]}
+
+Para a colecção: ${params[1]}
+
+O documento foi rejeitado por ${params[2]}
+com a seguinte explicação:
+
+${params[3]}
+
+O depósito não foi apagado, pode aceder ao depósito através
+ do menu "área Pessoal", onde poderá retomar o depósito e 
+ efectuar as devidas alterações.: ${params[4]}
+
+Obrigado,
+
+A Equipa do Repositório ${config.get('dspace.name')}.
+
