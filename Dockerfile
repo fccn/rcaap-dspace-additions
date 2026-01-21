@@ -114,7 +114,7 @@ COPY --chown=www-data:www-data --from=ant_build /dspace $DSPACE_INSTALL
 # Expose Tomcat port and AJP port
 EXPOSE 8080 8009
 # Give java extra memory (2GB)
-ENV JAVA_OPTS=-Xmx2000m
+#ENV JAVA_OPTS=-Xmx2000m
 
 # Link the DSpace 'server' webapp into Tomcat's webapps directory.
 # This ensures that when we start Tomcat, it runs from /server path (e.g. http://localhost:8080/server/)

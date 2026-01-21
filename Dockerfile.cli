@@ -124,9 +124,9 @@ RUN mkdir -p /var/www/.handle \
 RUN apt-get update && apt-get install -y wget gnupg && \
     # Adiciona a chave GPG oficial do PostgreSQL
     wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor -o /usr/share/keyrings/postgresql.gpg && \
-    # Usa o repositÃ³rio arquivado do PostgreSQL (Buster)
+    # Usa o repositorio arquivado do PostgreSQL (Buster)
     echo "deb [signed-by=/usr/share/keyrings/postgresql.gpg] https://apt-archive.postgresql.org/pub/repos/apt buster-pgdg main" > /etc/apt/sources.list.d/pgdg.list && \
-    # Desativa a verificaÃ§Ã£o de validade, pois o repositÃ³rio Ã© arquivado
+    # Desativa a verificacao de validade, pois o repositorio e arquivado
     echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99no-check-valid-until && \
     apt-get update && \
     apt-get install -y postgresql-client-12 && \
@@ -137,5 +137,5 @@ RUN apt-get update && apt-get install -y wget gnupg && \
 # Copy the /dspace directory from 'ant_build' container to /dspace in this container
 COPY --chown=www-data:www-data --from=ant_build /dspace $DSPACE_INSTALL
 # Give java extra memory (1GB)
-ENV JAVA_OPTS=-Xmx1000m
+#ENV JAVA_OPTS=-Xmx1000m
 USER www-data

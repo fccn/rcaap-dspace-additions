@@ -3,8 +3,6 @@
 # pgraca: paulo.graca@fccn.pt
 # this script executes embargo lifter by reindexing content
 
-# JAVA memory allocation
-export JAVA_OPTS="-Xmx2048M -Xms512M -Dfile.encoding=UTF-8"
 
 # Current script dir
 SCRIPTPATH=$(dirname "$0")
