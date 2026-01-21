@@ -1,0 +1,16 @@
+﻿# Registration notification email
+#
+# Parameters: {0} The name of the DSpace instance
+#             {1} The URL of the DSpace instance 
+#             {2} Name:
+#             {3} Email:
+#             {4} Registration Date:
+#
+# See org.dspace.core.Email for information on the format of this file.
+#
+Subject: Registo de Novo Utilizador
+Registou-se um novo utilizador no repositório:
+
+Nome:   ${params[2]}
+E-mail: ${params[3]}
+Data:   ${params[4]}

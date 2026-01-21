@@ -1,0 +1,34 @@
+﻿## E-mail sent to a restricted Item's author when a user requests a copy.
+##
+## Parameters: 0 requester's name
+##             1 requester's address
+##             2 name of a single bitstream, or "all"
+##             3 item Handle
+##             4 item title
+##             5 message from requester
+##             6 link back to DSpace for action
+##             7 corresponding author name
+##             8 corresponding author email
+##             9 configuration property "dspace.name"
+##             10 configuration property "mail.helpdesk"
+#set($subject = "${config.get('dspace.name')}: Request copy of document")
+
+Assunto: Pedido de cópia do documento
+
+Caro(a) ${params[7]},
+
+Um utilizador do ${params[9]}, chamado(a) ${params[0]} com o email ${params[1]}, soliciotu uma cópia do(s) ficheiro(s) referente(s) ao documento: "${params[4]}" (${params[3]}) submetido por si.
+
+O pedido foi acompanhado pela seguinte mensagem:
+
+"${params[5]}"
+
+Para responder, clicar em ${params[6]}. Aprovar ou rejeitar o pedido fica ao seu (vosso) critério, pensamos, no entanto, que é do seu (vosso) interesse responder.
+
+SE NÃO É AUTOR DESTE DOCUMENTO e apenas submeteu em nome do autor, REDIRECIONE ESTA MENSAGEM PARA O(S) AUTOR(ES).  Apenas o(s) autor(es) devem responder ao pedido de cópia.
+
+Obrigado pela sua cooperação!
+
+Se tem alguma questão em relação a este pedido, por favor contacte ${params[10]}.
+
+A Equipa do Repositório ${config.get('dspace.name')}.

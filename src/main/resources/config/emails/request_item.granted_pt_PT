@@ -1,0 +1,26 @@
+## Sent to the person requesting a copy of a restricted document when the
+## request is granted.
+##
+## Parameters:
+##  {0} name of the requestor
+##  {1} Handle URL of the requested Item
+##  {2} title of the requested Item
+##  {3} name of the grantor
+##  {4} email address of the grantor (unused)
+##  {5} custom message sent by the grantor.
+#set($subject = 'Request for Copy of Restricted Document is Granted')
+Caro ${params[0]}:
+
+O seu pedido de cópia para o(s) ficheiro(s) para o documento abaixo foi aprovado por ${params[3]}.  Poderá encontrar o(s) ficheiros(s) anexos.
+
+    ${params[2]}
+    ${params[1]} 
+#if( $params[5] )
+
+Uma mensagem adicional de ${params[3]} segue:
+
+${params[5]}
+#end
+
+Com os melhores cumprimentos,
+A Equipa do Repositório ${config.get('dspace.name')}.
