@@ -6,14 +6,14 @@
 # {3}  Description of task
 # {4}  link to 'my DSpace' page 
 #
-Subject: Repositório: Tem uma nova tarefa
+Assunto: Repositório: Tem uma nova tarefa
 Foi depositado um novo documento:
 
 Título: ${params[0]}
 Colecção: ${params[1]}
 Depositado por: ${params[2]}
 
- ${params[3]}
+Nova tarefa dispoível:
 
 Para iniciar esta tarefa, vá à sua área pessoal, 
 clicando: ${params[4]}

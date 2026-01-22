@@ -1,10 +1,4 @@
-# Item Archived email message
-#
-# {0}  Title of submission
-# {1}  Name of collection
-# {2}  handle 
-#
-Subject: Depósito de Documento aprovado! 
+Assunto: Depósito de Documento aprovado! 
 Você depositou:  ${params[0]}
 
 Para a colecção:  ${params[1]}
