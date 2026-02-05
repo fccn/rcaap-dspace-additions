@@ -152,8 +152,6 @@ WHERE m."short_id" = 'dc'
           AND f."element" = 'identifier'
     );
 
-COMMIT;
-
 -- dc.identifier.uri
 INSERT INTO "metadatafieldregistry" ("metadata_field_id", "metadata_schema_id", "element", "qualifier")
 SELECT 
