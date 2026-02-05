@@ -271,12 +271,12 @@ WHERE uri IS NOT NULL;
 -- FROM temp_funding
 -- WHERE funder_identifier IS NOT NULL;
 
--- Add metadatavalues oaire.awardNumber
+-- Add metadatavalues dc.identifier
 INSERT INTO metadatavalue (resource_id, resource_type_id, metadata_field_id, text_value, place)
 SELECT
   item_id as "resource_id",
   2 as "resource_type_id",
-  (select metadata_field_id from "metadatafieldregistry" WHERE metadata_schema_id = (SELECT metadata_schema_id FROM metadataschemaregistry WHERE "short_id" = 'oaire') and element = 'awardNumber' and qualifier IS NULL) as "metadata_field_id",
+  (select metadata_field_id from "metadatafieldregistry" WHERE metadata_schema_id = (SELECT metadata_schema_id FROM metadataschemaregistry WHERE "short_id" = 'dc') and element = 'identifier' and qualifier IS NULL) as "metadata_field_id",
   projectid as "text_value",
   1 as "place"
 FROM temp_funding

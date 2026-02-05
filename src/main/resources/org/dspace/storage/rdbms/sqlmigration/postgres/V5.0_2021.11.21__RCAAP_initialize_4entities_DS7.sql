@@ -137,6 +137,21 @@ WHERE m."short_id" = 'dc'
           AND f."qualifier" = 'provenance'
     );
 
+-- dc.identifier
+INSERT INTO "metadatafieldregistry" ("metadata_field_id", "metadata_schema_id", "element")
+SELECT 
+    nextval('metadatafieldregistry_seq'),
+    m."metadata_schema_id",
+    'identifier'
+FROM "metadataschemaregistry" m
+WHERE m."short_id" = 'dc'
+  AND NOT EXISTS (
+        SELECT 1
+        FROM "metadatafieldregistry" f
+        WHERE f."metadata_schema_id" = m."metadata_schema_id"
+          AND f."element" = 'identifier'
+    );
+
 -- dc.identifier.uri
 INSERT INTO "metadatafieldregistry" ("metadata_field_id", "metadata_schema_id", "element", "qualifier")
 SELECT 
