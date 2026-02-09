@@ -116,6 +116,14 @@ EXPOSE 8080 8009
 # Give java extra memory (2GB)
 #ENV JAVA_OPTS=-Xmx2000m
 
+# PG20260206: Adding Certificate Authority support for Sherpa - Open Policy Finder
+COPY ./src/main/resources/sherpa.pem /tmp/_ca.pem
+RUN openssl x509 -in /tmp/_ca.pem -inform pem -out /tmp/_ca.der -outform der
+RUN echo yes | keytool -importcert -alias startssl -keystore \
+    /opt/java/openjdk/lib/security/cacerts -storepass changeit -file /tmp/_ca.der
+RUN rm -f /tmp/_ca.pem
+RUN rm -f /tmp/_ca.der
+
 # Link the DSpace 'server' webapp into Tomcat's webapps directory.
 # This ensures that when we start Tomcat, it runs from /server path (e.g. http://localhost:8080/server/)
 RUN ln -s $DSPACE_INSTALL/webapps/server   /usr/local/tomcat/webapps/server
