@@ -85,6 +85,21 @@
        <!-- Form which defines the first page/section of the "TRADITIONAL" DSpace submission process, 
         often used when depositing normal Items (i.e. Items which are not Entities). -->
         <form name="traditionalpageone">
+
+            <!-- 18-02-2026 - RCAAP! New to use COAR Types --> 
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>type</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Tipo</label>
+                    <input-type value-pairs-name="openaire_types">dropdown</input-type>
+                    <hint>Indique o tipo de item que vai depositar</hint>
+                    <required>Tem que indicar o tipo de item que vai depositar!</required>
+                </field>
+            </row>
+            
             <row>
                 <field>
                     <dc-schema>dc</dc-schema>
@@ -97,6 +112,7 @@
                     <required>Tem que introduzir pelo menos um autor!</required>
                 </field>
             </row>
+            
             <row>
                 <field>
                     <dc-schema>dc</dc-schema>
@@ -164,19 +180,48 @@
                 </field>
             </row>
             
+            <!-- 26-02-2026 - CPLP! Addition -->
             <row>
                 <field>
-                    <dc-schema>dc</dc-schema>
-                    <dc-element>relation</dc-element>
-                    <dc-qualifier>ispartofseries</dc-qualifier>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>title</dc-qualifier>
                     <repeatable>false</repeatable>
-                    <label>Coleção / Série</label>
-                    <input-type>series</input-type>
-                    <hint>Se aplicável, introduza a referência da coleção e/ou série da publicação.</hint>
+                    <label>Título da revista, periódico, monografia ou evento</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o nome da revista, periódico, monografia ou evento na qual o item foi publicado ou apresentado.</hint>
                     <required></required>
                 </field>
             </row>
             
+            <row>
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>conferenceDate</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Data do evento/conferência</label>
+                    <input-type>date</input-type>
+                    <hint>Introduza a data em que o evento se realizou.</hint>
+                    <required></required>
+                    <type-bind>conference object,conference proceedings,conference paper,conference poster,conference paper not in proceedings,conference poster not in proceedings</type-bind>
+                </field>
+            
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>conferencePlace</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Local do evento/conferência</label>
+                    <style>col-sm-8</style>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o nome do local onde o evento se realizou. [Exemplo: "Braga, Portugal"]</hint>
+                    <required></required>
+                    <type-bind>conference object,conference proceedings,conference paper,conference poster,conference paper not in proceedings,conference poster not in proceedings</type-bind>
+                </field>
+            </row>
+
+            <!-- 20-02-2026 - CPLP! Change value-pairs-name to assume "cplp_identifiers" -->
             <row>
                 <field>
                     <dc-schema>dc</dc-schema>
@@ -185,7 +230,7 @@
                     <!-- An input-type of qualdrop_value MUST be marked as repeatable -->
                     <repeatable>true</repeatable> 
                     <label>Identificadores</label>
-                    <input-type value-pairs-name="common_identifiers">qualdrop_value</input-type>
+                    <input-type value-pairs-name="cplp_identifiers">qualdrop_value</input-type>
                     <hint>Se este item tiver identificador(es) associado(s), selecione(-os) e identifique(-os) na seguinte lista. &lt;b&gt;Nota importante&lt;/b&gt;: Sugerimos que nesta fase clique no botão 'Guardar' para que, quando aplicável, seja apresentada ajuda em contexto do serviço "Open Policy Finder"!</hint>
                     <required></required>
                 </field>
@@ -205,7 +250,69 @@
                 </field>
             </row>
 
-            <!-- 18-02-2026 - RCAAP! Hidden to use COAR Types (next) 
+            <!-- 26-02-2026 - RCAAP! ADD -->
+            <row>
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>volume</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Volume</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o número do volume da publicação.</hint>
+                    <required></required>
+                </field>
+            
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>issue</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Número</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza o número da edição ou fascículo da publicação. </hint>
+                    <required></required>
+                </field>
+            </row>
+
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>relation</dc-element>
+                    <dc-qualifier>ispartofseries</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Coleção / Série</label>
+                    <input-type>series</input-type>
+                    <hint>Se aplicável, introduza a referência da coleção e/ou série da publicação.</hint>
+                    <required></required>
+                </field>
+            </row>
+
+            <row>
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>startPage</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Primeira página</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza aqui (caso tenha) o número da primeira página associada a este item.</hint>
+                    <required></required>
+                </field>
+                
+                <field>
+                    <dc-schema>oaire</dc-schema>
+                    <dc-element>citation</dc-element>
+                    <dc-qualifier>endPage</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Última página</label>
+                    <input-type>onebox</input-type>
+                    <hint>Introduza aqui (caso tenha) o número da última página associada a este item.</hint>
+                    <required></required>
+                </field>
+            </row>
+
+            <!-- 18-02-2026 - RCAAP! Hidden to use COAR Types  
             <row>
                 <field>
                     <dc-schema>dc</dc-schema>
@@ -220,20 +327,6 @@
                 </field>
             </row>
             -->
-
-            <!-- 18-02-2026 - RCAAP! New to use COAR Types --> 
-            <row>
-                <field>
-                    <dc-schema>dc</dc-schema>
-                    <dc-element>type</dc-element>
-                    <dc-qualifier></dc-qualifier>
-                    <repeatable>false</repeatable>
-                    <label>Tipo</label>
-                    <input-type value-pairs-name="openaire_types">dropdown</input-type>
-                    <hint>Indique o tipo de item que vai depositar</hint>
-                    <required>Tem que indicar o tipo de item que vai depositar!</required>
-                </field>
-            </row>
 
             <row>
                 <field>
@@ -3784,6 +3877,139 @@
             <pair>
                 <displayed-value>N/A</displayed-value>
                 <stored-value>n/a</stored-value>
+            </pair>
+            
+        </value-pairs>
+
+        <!-- 20-02-2026 - CPLP change place! Simplification of other 'identifiers' -->  
+        <value-pairs value-pairs-name="cplp_identifiers" dc-term="identifier">
+            
+            <pair>
+                <displayed-value>ISSN</displayed-value>
+                <stored-value>issn</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>EISSN</displayed-value>
+                <stored-value>eissn</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>ISMN</displayed-value>
+                <stored-value>ismn</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>ISBN</displayed-value>
+                <stored-value>isbn</stored-value>
+            </pair>
+            
+            <pair>
+                <displayed-value>EISBN</displayed-value>
+                <stored-value>eisbn</stored-value>
+            </pair>
+
+            <!-- 20-02-2026 - Hidden for not use
+            <pair>
+                <displayed-value>PMC</displayed-value>
+                <stored-value>pmc</stored-value>
+            </pair>
+            -->
+            
+            <!-- 20-02-2026 - Hidden for not use
+            <pair>
+                <displayed-value>PMID</displayed-value>
+                <stored-value>pmid</stored-value>
+            </pair>
+            -->
+
+            <!-- 20-02-2026 - Hidden for not use
+            <pair>
+                <displayed-value>arXiv</displayed-value>
+                <stored-value>arxiv</stored-value>
+            </pair>
+            -->
+            
+            <!-- 20-02-2026 - Hidden for not use
+            <pair>
+                <displayed-value>URI</displayed-value>
+                <stored-value>uri</stored-value>
+            </pair>
+            -->
+            
+            <!-- 20-02-2026 - Hidden for not use
+            <pair>
+                <displayed-value>URN</displayed-value>
+                <stored-value>urn</stored-value>
+            </pair>
+            -->
+            
+            <!-- 20-02-2026 - Hidden for not use
+            <pair>
+                <displayed-value>Documento Governamental</displayed-value>
+                <stored-value>govdoc</stored-value>
+            </pair>
+            --> 
+            
+            <!-- 20-02-2026 - Hidden for not use
+            <pair>
+                <displayed-value>bibcode</displayed-value>
+                <stored-value>bibcode</stored-value>
+            </pair>
+            -->
+            
+            <!-- 20-02-2026 - Hidden for not use
+            <pair>
+                <displayed-value>ETHOS</displayed-value>
+                <stored-value>ethos</stored-value>
+            </pair>
+            -->
+            
+            <!-- 20-02-2026 - Hidden for not use
+            <pair>
+                <displayed-value>EID</displayed-value>
+                <stored-value>eid</stored-value>
+            </pair>
+            -->
+            
+            <!-- 20-02-2026 - Hidden for not use
+            <pair>
+                <displayed-value>WOS</displayed-value>
+                <stored-value>wos</stored-value>
+            </pair>
+            -->
+            
+            <!-- 20-02-2026 - Hidden for not use
+            <pair>
+                <displayed-value>CienciaVitae</displayed-value>
+                <stored-value>source-work-id</stored-value>
+            </pair>
+            -->
+            
+            <!-- 20-02-2026 - Hidden for not use
+            <pair>
+                <displayed-value>CienciaIUL</displayed-value>
+                <stored-value>cienciaiul</stored-value>
+            </pair>
+            --> 
+            
+            <!-- 20-02-2026 - Hidden for not use
+            <pair>
+                <displayed-value>Authenticus</displayed-value>
+                <stored-value>authenticusid</stored-value>
+            </pair>
+            -->
+            
+            <!-- 20-02-2026 - Hidden for not use
+            <pair>
+                <displayed-value>Identificador SWORD</displayed-value>
+                <stored-value>slug</stored-value>
+            </pair>
+            -->
+            
+            <pair>
+                <displayed-value>Other</displayed-value>
+                <stored-value>other</stored-value>
             </pair>
             
         </value-pairs>
