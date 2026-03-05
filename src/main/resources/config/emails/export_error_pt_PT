@@ -1,11 +1,16 @@
-Assunto: Repositório - A exportação do registo não foi finalizada.
-A exportação solicitada no repositório não foi finalizada devido a:
-
+## Email enviado aos utilizadores do DSpace quando a exportação de um item ou coleção falha.
+##
+## Parâmetros: {0} o erro de exportação
+##             {1} o URL para a página de contacto/feedback
+##
+##
+## Consulte org.dspace.core.Email para obter informações sobre o formato deste ficheiro.
+##
+#set($subject = "${config.get('dspace.name')}: A exportação do item que solicitou não foi concluída.")
+A exportação do item que solicitou não foi concluída devido ao seguinte motivo:
  ${params[0]}
 
-Para mais informação, contacte o administrador:
-
+Para mais informações, pode contactar o administrador do sistema:
  ${params[1]}
 
-A Equipa do Repositório ${config.get('dspace.name')}.
-
+A Equipa do ${config.get('dspace.name')}

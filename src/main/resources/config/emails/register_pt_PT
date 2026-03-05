@@ -1,10 +1,19 @@
+## Email enviado aos utilizadores do DSpace quando registam uma conta
+##
+## Parâmetros: {0} é expandido para um URL especial de registo
+##
+## Consulte org.dspace.core.Email para obter informações sobre o formato deste ficheiro.
+##
+#set($subject = "Registo de Conta no ${config.get('dspace.name')}")
+#set($phone = ${config.get('mail.message.helpdesk.telephone')})
 
-Para completar o registo para a conta no ${config.get('dspace.name')}, por favor, siga o seguinte link:
+Para concluir o registo de uma conta no ${config.get('dspace.name')}, por favor clique na ligação abaixo:
+
   ${params[0]}
 
-Se precisar de assistência da sua conta, contacte o seguinte email ${config.get("mail.helpdesk")}
+Se precisar de assistência com a sua conta, envie um email para ${config.get("mail.helpdesk")}
+#if( $phone )
+ou contacte-nos através do telefone ${phone}.
+#end
 
-ou usar o telefone ${phone}.
-
-
-A equipa do repositório ${config.get('dspace.name')}.
+A Equipa do ${config.get('dspace.name')}

@@ -1,6 +1,19 @@
-﻿Assunto: Registo de Novo Utilizador
-Registou-se um novo utilizador no repositório:
+## Email de notificação de registo
+##
+## Parâmetros: {0} Nome da instância DSpace
+##             {1} URL da instância DSpace
+##             {2} Nome:
+##             {3} Email:
+##             {4} Data de registo:
+##
+## Consulte org.dspace.core.Email para obter informações sobre o formato deste ficheiro.
+##
+#set($subject = "${config.get('dspace.name')}: Notificação de Registo")
 
-Nome:   ${params[2]}
-E-mail: ${params[3]}
-Data:   ${params[4]}
+Um novo utilizador registou-se no ${params[0]} em ${params[1]}:
+
+Nome:                   ${params[2]}
+Email:                  ${params[3]}
+Data de registo:        ${params[4]}
+
+A Equipa do ${config.get('dspace.name')}

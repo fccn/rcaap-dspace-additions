@@ -1,10 +1,22 @@
-Subject: Erro Interno do Servidor
-Assunto um erro interno no servidor em ${params[0]:
+## Email enviado para o endereço designado quando ocorre um erro interno do servidor
+##
+## Parâmetros: {0} URL do servidor DSpace
+##             {1} Data e hora
+##             {2} ID da sessão
+##             {3} URL + parâmetros HTTP, se existirem
+##             {4} Stack trace da exceção
+##             {5} Detalhes do utilizador
+##             {6} Endereço IP
+##
+## Consulte org.dspace.core.Email para obter informações sobre o formato deste ficheiro.
+##
+#set($subject = "${config.get('dspace.name')}: Erro Interno do Servidor")
+Ocorreu um erro interno do servidor em ${params[0]}:
 
-Data: ${params[1]}
-Session ID: ${params[2]}
-Sessão iniciada como: ${params[5]}
-Endereço IP: ${params[6]}
+Data:        ${params[1]}
+ID da sessão: ${params[2]}
+Utilizador:  ${params[5]}
+Endereço IP:  ${params[6]}
 
 ${params[3]}
 

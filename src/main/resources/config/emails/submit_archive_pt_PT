@@ -1,16 +1,21 @@
-Assunto: Depósito de Documento aprovado! 
-Você depositou:  ${params[0]}
+## Mensagem de email de item arquivado
+##
+## {0}  Título da submissão
+## {1}  Nome da coleção
+## {2}  identificador (handle)
+##
+#set($subject = "${config.get('dspace.name')}: Submissão aprovada e arquivada")
 
-Para a colecção:  ${params[1]}
+Submeteu: ${params[0]}
 
-O seu depósito foi aceite e arquivado no Repositório. Foi-lhe atribuído
- o seguinte identificador:
+Para a coleção: ${params[1]}
 
- ${params[2]}
+A sua submissão foi aceite e arquivada no ${config.get('dspace.name')},
+sendo-lhe atribuído o seguinte identificador:
+${params[2]}
 
-Utilize este identificador para referenciar o registo.
+Por favor, utilize este identificador ao citar a sua submissão.
 
-Obrigado,
+Muito obrigado!
 
-A Equipa do Repositório ${config.get('dspace.name')}.
-
+A Equipa do ${config.get('dspace.name')}

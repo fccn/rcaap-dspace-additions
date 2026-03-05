@@ -1,24 +1,24 @@
-# Workflow task email message
-#
-# {0}  Title of submission
-# {1}  Name of collection
-# {2}  submitter's name
-# {3}  Description of task
-# {4}  link to 'my DSpace' page 
-#
-Assunto: Repositório: Tem uma nova tarefa
-Foi depositado um novo documento:
+## Mensagem de email de tarefa de workflow
+##
+## {0}  Título da submissão
+## {1}  Nome da coleção
+## {2}  Nome do autor da submissão
+## {3}  Descrição da tarefa
+## {4}  ligação para a página "O meu DSpace"
+##
+#set($subject = "${config.get('dspace.name')}: Tem uma nova tarefa")
 
-Título: ${params[0]}
-Colecção: ${params[1]}
-Depositado por: ${params[2]}
+Um novo item foi submetido:
 
-Nova tarefa dispoível:
+Título:        ${params[0]}
+Coleção:       ${params[1]}
+Submetido por: ${params[2]}
 
-Para iniciar esta tarefa, vá à sua área pessoal, 
-clicando: ${params[4]}
+${params[3]}
 
-Obrigado!
+Para reclamar esta tarefa, por favor visite a sua página "O meu ${config.get('dspace.shortname')}":
+${params[4]}
 
-A Equipa do Repositório ${config.get('dspace.name')}.
+Muito obrigado!
 
+A Equipa do ${config.get('dspace.name')}
