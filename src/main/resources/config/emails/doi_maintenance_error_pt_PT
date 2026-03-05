@@ -1,0 +1,20 @@
+## Email enviado para o endereço designado quando uma atualização de metadados,
+## registo ou reserva de um DOI falha.
+##
+## Parâmetros: {0} ação (atualização de metadados, registo ou reserva)
+##             {1} Data e hora
+##             {2} tipo de recurso (texto)
+##             {3} ID do recurso
+##             {4} DOI
+##             {5} motivo
+##
+## Consulte org.dspace.core.Email para obter informações sobre o formato deste ficheiro.
+##
+#set($subject = "${config.get('dspace.name')}: Erro ao ${params[0]} DOI ${params[3]}")
+
+Data:    ${params[1]}
+
+Falha ao ${params[0]} o DOI ${params[4]} para ${params[2]} com o ID ${params[3]}:
+${params[5]}
+
+A Equipa do ${config.get('dspace.name')}

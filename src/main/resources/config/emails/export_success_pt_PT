@@ -1,12 +1,16 @@
-Assunto: Repositório - A exportação do Item está disponível para download
-A exportação do item solicitada através do repoistório já está disponível para descarregar.
+## Email enviado aos utilizadores do DSpace quando exportam com sucesso um item ou coleção.
+##
+## Parâmetros: {0} é expandido para um URL especial
+##             {1} tempo configurável (horas) durante o qual o ficheiro de exportação será mantido
+##
+## Consulte org.dspace.core.Email para informações sobre o formato deste ficheiro.
+##
+#set($subject = "${config.get('dspace.name')}: A exportação do item solicitada está pronta para download")
+A exportação do item que solicitou no repositório está agora pronta para download.
 
-Clique na seguinte hiperligação para descarregar o item:
+Pode descarregar o ficheiro comprimido através do seguinte link:
+${params[0]}
 
- ${params[0]}
+Este ficheiro permanecerá disponível durante pelo menos ${params[1]} horas.
 
-O ficheiro estará disponível para download nas próximas  ${params[1]} horas.  
-
-
-A Equipa do Repositório ${config.get('dspace.name')}.
-
+A Equipa do ${config.get('dspace.name')}

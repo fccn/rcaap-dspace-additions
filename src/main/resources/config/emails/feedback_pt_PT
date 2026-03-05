@@ -1,13 +1,27 @@
-Comentário:
+## Email enviado com a informação preenchida num formulário de feedback.
+##
+## Parâmetros: {0} data atual
+##             {1} endereço de email fornecido pelo utilizador
+##             {2} sessão do utilizador (logado como)
+##             {3} página onde o utilizador estava ao enviar o feedback
+##             {4} cabeçalho HTTP User-Agent
+##             {5} ID da sessão
+##             {6} comentários do utilizador
+##
+## Consulte org.dspace.core.Email para obter informações sobre o formato deste ficheiro.
+##
+#set($subject = "${config.get('dspace.name')}: Informação do Formulário de Feedback")
+
+Comentários:
 
 ${params[6]}
 
 
 Data: ${params[0]}
 Email: ${params[1]}
-Autenticado Como: ${params[2]}
-Página Referenciada: ${params[3]}
+Sessão: ${params[2]}
+Página de referência: ${params[3]}
 User Agent: ${params[4]}
-Sessão: ${params[5]}
+ID da Sessão: ${params[5]}
 
-A Equipa ${config.get('dspace.name')}
+A Equipa do ${config.get('dspace.name')}

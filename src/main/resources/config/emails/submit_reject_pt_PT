@@ -1,18 +1,22 @@
-Assunto: Depósito Rejeitado
-Você depositou: ${params[0]}
+## Mensagem de email de rejeição
+##
+## {0}  Título da submissão
+## {1}  Nome da coleção
+## {2}  Nome de quem rejeitou
+## {3}  Motivo da rejeição
+## {4}  Ligação para a página "O meu DSpace"
+##
+#set($subject = "${config.get('dspace.name')}: Submissão rejeitada")
 
-Para a colecção: ${params[1]}
+Submeteu: ${params[0]}
 
-O documento foi rejeitado por ${params[2]}
+Para a coleção: ${params[1]}
+
+A sua submissão foi rejeitada por ${params[2]}
 com a seguinte explicação:
 
 ${params[3]}
 
-O depósito não foi apagado, pode aceder ao depósito através
- do menu "área Pessoal", onde poderá retomar o depósito e 
- efectuar as devidas alterações.: ${params[4]}
+A sua submissão não foi eliminada. Pode aceder-lhe através da sua página "O meu ${config.get('dspace.shortname')}": ${params[4]}
 
-Obrigado,
-
-A Equipa do Repositório ${config.get('dspace.name')}.
-
+A Equipa do ${config.get('dspace.name')}

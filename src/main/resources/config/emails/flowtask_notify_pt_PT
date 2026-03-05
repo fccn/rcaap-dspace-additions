@@ -1,14 +1,23 @@
-Assunto: Repositório: Relatório da tarefa de curadoria
+## Mensagem de email de notificação de tarefa de curadoria no workflow
+##
+## {0}  Título da submissão
+## {1}  Nome da coleção
+## {2}  Nome do autor da submissão
+## {3}  Nome da tarefa de curadoria
+## {4}  Resultado da tarefa
+## {5}  Ação realizada no workflow
+##
+#set($subject = "${config.get('dspace.name')}: Relatório de Tarefa de Curadoria")
 
-Título:          ${params[0]}
-Coleção:     ${params[1]}
-Submetido por:   ${params[2]}
+Título:         ${params[0]}
+Coleção:        ${params[1]}
+Submetido por:  ${params[2]}
 
-Tarefa de curadoria  ${params[3]} foi realizada
+A tarefa de curadoria ${params[3]} foi executada
 com o seguinte resultado:
 
- ${params[4]}
+${params[4]}
 
-Ação feita na submissão:  ${params[5]}
+Ação realizada na submissão: ${params[5]}
 
-A Equipa do Repositório ${config.get('dspace.name')}.
+A Equipa do ${config.get('dspace.name')}

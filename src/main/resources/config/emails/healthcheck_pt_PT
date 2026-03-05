@@ -1,3 +1,9 @@
-O helthdcheck terminou com o seguitne resultado:
+## Email enviado pelo comando de verificação de saúde (healthcheck) para quem estiver definido no parâmetro -e.
+##
+## Parâmetros: {0} saída do comando healthcheck
+## Consulte org.dspace.core.Email para obter informações sobre o formato deste ficheiro.
+##
+#set($subject = "${config.get('dspace.name')}: Verificação de saúde do repositório")
+A verificação de saúde terminou com a seguinte saída:
 
 ${params[0]}

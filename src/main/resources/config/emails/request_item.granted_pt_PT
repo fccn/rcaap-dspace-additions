@@ -1,13 +1,27 @@
-Caro ${params[0]}:
+## Enviado à pessoa que solicitou uma cópia de um documento restrito quando o
+## pedido é concedido.
+##
+## Parâmetros:
+##  {0} nome do solicitante
+##  {1} URL do Handle do item solicitado
+##  {2} título do item solicitado
+##  {3} nome de quem concedeu
+##  {4} endereço de email de quem concedeu (não utilizado)
+##  {5} mensagem personalizada enviada por quem concedeu
+#set($subject = 'Pedido de Cópia de Documento Restrito Concedido')
 
-O seu pedido de cópia para o(s) ficheiro(s) para o documento abaixo foi aprovado por ${params[3]}.  Poderá encontrar o(s) ficheiros(s) anexos.
+Caro(a) ${params[0]}:
+
+O seu pedido de cópia do(s) ficheiro(s) do documento abaixo foi aprovado por ${params[3]}. Pode encontrar o(s) ficheiro(s) solicitado(s) em anexo.
 
     ${params[2]}
     ${params[1]} 
+#if( $params[5] )
 
-Uma mensagem adicional de ${params[3]} segue:
+Segue uma mensagem adicional de ${params[3]}:
 
 ${params[5]}
+#end
 
 Com os melhores cumprimentos,
-A Equipa do Repositório ${config.get('dspace.name')}.
+A Equipa do ${config.get('dspace.name')}

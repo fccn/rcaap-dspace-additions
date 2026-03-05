@@ -1,12 +1,22 @@
-Assunto: Repositório: Erro de Recolha
-Coleção ${params[0]} falhou na recolha:
+## Email enviado para o endereço designado quando um processo de harvesting falha
+##
+## Parâmetros: {0} ID da coleção
+##             {1} Data e hora
+##             {2} Flag de estado
+##             {3} Mensagem de exceção
+##             {4} Stack trace da exceção
+##
+## Consulte org.dspace.core.Email para obter informações sobre o formato deste ficheiro.
+##
+#set($subject = "${config.get('dspace.name')}: Erro de Harvesting")
+A coleção ${params[0]} falhou no processo de harvesting:
 
-Data:       	${params[1]}
-Valor: 	${params[2]}
+Data:         ${params[1]}
+Flag de Estado: ${params[2]}
 
 ${params[3]}
 
 Exceção:
 ${params[4]}
 
-A Equipa do Repositório ${config.get('dspace.name')}.
+A Equipa do ${config.get('dspace.name')}

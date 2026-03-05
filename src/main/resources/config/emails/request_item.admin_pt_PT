@@ -1,10 +1,20 @@
-Assunto: Pedido para Acesso Aberto
+## Email enviado quando alguém que aprova um pedido de item solicita que o Item
+## ou Bitstream seja disponibilizado em acesso aberto.
+##
+## Parâmetros: {0} Handle do bitstream solicitado, ou "todos"
+##             {1} Handle do item
+##             {2} token único que identifica o pedido do item
+##             {3} nome de quem aprovou
+##             {4} email de quem aprovou
+## Consulte org.dspace.core.Email para obter informações sobre o formato deste ficheiro.
+##
+#set($subject = "${config.get('dspace.name')}: Pedido de Acesso Aberto")
 
-{3}, com o email ${params[4]},
-pediu para que o documento/ficheiro esteja em acesso aberto: 
+${params[3]}, com o endereço ${params[4]},
+solicitou que o seguinte documento/ficheiro fosse disponibilizado em Acesso Aberto:
 
-Handle do Documento:${params[1]} 
-Identificador do Ficheiro: ${params[0]} 
-Token:${params[2]}
+Handle do Documento: ${params[1]}
+ID do Ficheiro: ${params[0]}
+Token: ${params[2]}
 
-A Equipa do Repositório ${config.get('dspace.name')}.
+A Equipa do ${config.get('dspace.name')}

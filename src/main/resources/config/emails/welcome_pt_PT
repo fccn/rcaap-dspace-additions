@@ -1,9 +1,15 @@
-Obrigado por registar a sua conta. Poderá usar a conta de imediato 
-para subscrever notificações de novos conteúdos depositados nas coleções de sua escolha.
+## Email enviado a um utilizador do DSpace após o registo de uma nova conta.
+##
+## Consulte org.dspace.core.Email para obter informações sobre o formato deste ficheiro.
+##
+#set($subject = "Bem-vindo(a) ao ${config.get('dspace.name')}!")
 
-A sua conta poderá ter privilégios para submeter novos conteúdos, ou para
+Obrigado por registar uma conta. A sua nova conta pode ser utilizada imediatamente
+para subscrever notificações de novos conteúdos adicionados às coleções da sua escolha.
+
+A sua nova conta também pode receber permissões para submeter novos conteúdos, ou para
 editar e/ou aprovar submissões.
 
-Se precisar de assistência da sua conta, contacte o seguinte email ${config.get("mail.helpdesk")}
+Se precisar de assistência com a sua conta, envie um email para ${config.get("mail.helpdesk")}.
 
-A Equipa do Repositório ${config.get('dspace.name')}.
+A Equipa do ${config.get('dspace.name')}

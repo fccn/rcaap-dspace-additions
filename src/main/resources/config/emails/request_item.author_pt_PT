@@ -1,19 +1,32 @@
-﻿Assunto: Pedido de cópia do documento
+## Email enviado ao autor de um Item restrito quando um utilizador solicita uma cópia.
+##
+## Parâmetros: 0 nome do solicitante
+##             1 email do solicitante
+##             2 nome de um único bitstream ou "todos"
+##             3 Handle do item
+##             4 título do item
+##             5 mensagem do solicitante
+##             6 ligação de retorno ao DSpace para ação
+##             7 nome do autor correspondente
+##             8 email do autor correspondente
+##             9 propriedade de configuração "dspace.name"
+##             10 propriedade de configuração "mail.helpdesk"
+#set($subject = "${config.get('dspace.name')}: Pedido de cópia de documento")
 
 Caro(a) ${params[7]},
 
-Um utilizador do ${params[9]}, chamado(a) ${params[0]} com o email ${params[1]}, soliciotu uma cópia do(s) ficheiro(s) referente(s) ao documento: "${params[4]}" (${params[3]}) submetido por si.
+Um utilizador do ${params[9]}, chamado ${params[0]} e com o email ${params[1]}, solicitou uma cópia do(s) ficheiro(s) associado(s) ao documento: "${params[4]}" (${params[3]}) submetido por si.
 
-O pedido foi acompanhado pela seguinte mensagem:
+Este pedido foi acompanhado pela seguinte mensagem:
 
 "${params[5]}"
 
-Para responder, clicar em ${params[6]}. Aprovar ou rejeitar o pedido fica ao seu (vosso) critério, pensamos, no entanto, que é do seu (vosso) interesse responder.
+Para responder, clique em ${params[6]}. Quer opte por conceder ou negar o pedido, é do seu interesse responder.
 
-SE NÃO É AUTOR DESTE DOCUMENTO e apenas submeteu em nome do autor, REDIRECIONE ESTA MENSAGEM PARA O(S) AUTOR(ES).  Apenas o(s) autor(es) devem responder ao pedido de cópia.
+SE NÃO É AUTOR DESTE DOCUMENTO e apenas submeteu o documento em nome do autor, POR FAVOR REDIRECIONE ESTA MENSAGEM PARA O(S) AUTOR(ES). Apenas o(s) autor(es) deve(m) responder ao pedido de envio de cópia.
 
-Obrigado pela sua cooperação!
+SE É AUTOR DO DOCUMENTO SOLICITADO, agradecemos a sua colaboração!
 
-Se tem alguma questão em relação a este pedido, por favor contacte ${params[10]}.
+Se tiver alguma questão relativa a este pedido, por favor contacte ${params[10]}.
 
-A Equipa do Repositório ${config.get('dspace.name')}.
+A Equipa do ${config.get('dspace.name')}
